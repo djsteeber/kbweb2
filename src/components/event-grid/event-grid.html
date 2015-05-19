@@ -1,0 +1,20 @@
+<div class="no-more-tables col-md-12">
+<table class="table table-bordered table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Information</th>
+            <th>Results</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach:events">
+        <tr>
+            <td data-title="Event" data-bind="text: name"></td>
+            <td data-title="Date" data-bind="text: schedule"></td>
+            <td data-title="Information">Flyer link</td>
+            <td data-title="Results">Results Link</td>
+        </tr>
+    </tbody>
+</table>
+</div>
