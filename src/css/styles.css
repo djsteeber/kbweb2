@@ -1,3 +1,4 @@
+
 #page {
 	margin-top: 80px;
 	font-size: 12pt;
@@ -62,4 +63,36 @@
 	Label the data
 	*/
 	.no-more-tables td:before { content: attr(data-title); }
+}
+
+.navbar-custom {
+	background-color:#225522;
+	color:#ffffff;
+	border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+	color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+	color: #22ff22;
+	background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+	color:#eeeeee;
+}
+
+.four-col-list  ul {
+	width: 760px;
+	margin-bottom: 20px;
+	overflow: hidden;
+	border-top: 1px solid #ccc;
+}
+
+.four-col-list  li {
+	line-height: 1.5em;
+	border-bottom: 1px solid #ccc;
+	float: left;
+	display: inline;
+	width: 25%;
 }

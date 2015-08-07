@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=defice-width, initial-scale=1">
 
+
     <title>kbweb</title>
     <!-- build:css -->
       <link href="bower_modules/components-bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,5 +22,8 @@
   <body>
     <nav-bar params="route: route"></nav-bar>
     <div id="page" class="container" data-bind="component: { name: route().page, params: route }"></div>
+    <!-- needs to be last because it checks if the user is logged in
+         and messages the other listening components -->
+    <auth></auth>
   </body>
 </html>

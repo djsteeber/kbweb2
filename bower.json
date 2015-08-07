@@ -9,7 +9,9 @@
     "requirejs": "~2.1.11",
     "requirejs-text": "~2.0.10",
     "knockout": "~3.3.0-alpha",
-    "knockout-projections": "~1.1.0"
+    "knockout-projections": "~1.1.0",
+    "tinymce": "~4.1.10",
+    "knockout-postbox": "~0.5.2"
   },
   "resolutions": {
     "knockout": "~3.3.0-alpha"

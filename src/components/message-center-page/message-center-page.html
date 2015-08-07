@@ -1,0 +1,28 @@
+<h2>Message Center</h2>
+
+<form data-bind="submit: onSubmit">
+    <div class="form-group" data-bind="visible: !messageSent()">
+        <div class="row">
+            <label class="col-md-2">To</label>
+            <select data-bind="options: toList, value:to, optionsCaption: 'Choose...'"></select>
+        </div>
+        <div class="row">
+            <label class="col-md-2">Subject</label>
+            <input class="col-md-10" data-bind="value: subject"/>
+        </div>
+        <div class="row">
+            <label class="col-md-2">Message</label>
+            <div class="editibleArea" data-bind="text: body"></div>
+        </div>
+        <div class="row">
+            <input type="submit" value="Send Message"/>
+        </div>
+    </div>
+</form>
+<div data-bind="visible: messageSent()">
+    <div class="row" data-bind="text: to"></div>
+    <div class="row" data-bind="text: subject"></div>
+    <div class="row" data-bind="text: body"></div>
+</div>
+<hr/>
+<div class="row" data-bind="text: response"></div>

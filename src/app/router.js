@@ -17,7 +17,11 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
             { url: 'lessons',     params: { page: 'lessons-page' } },
             { url: 'events',     params: { page: 'events-page' } },
             { url: 'membership',     params: { page: 'membership-page' } },
-            { url: 'directions',     params: { page: 'directions-page' } }
+            { url: 'directions',     params: { page: 'directions-page' } },
+            { url: 'members',     params: { page: 'members-page' } },
+            { url: 'message-center',     params: { page: 'message-center-page' } },
+            { url: 'user-admin-page',     params: { page: 'user-admin-page' } }
+
         ]
     });
 
@@ -31,7 +35,10 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
         });
 
         activateCrossroads();
+
+
     }
+
 
     function activateCrossroads() {
         function parseHash(newHash, oldHash) { crossroads.parse(newHash); }

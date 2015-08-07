@@ -1,4 +1,4 @@
-define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections'], function($, ko, router) {
+define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', 'knockout-postbox'], function($, ko, router) {
 
   // Components can be packaged as AMD modules, such as the following:
   ko.components.register('nav-bar', { require: 'components/nav-bar/nav-bar' });
@@ -20,6 +20,20 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections'], 
   ko.components.register('events-page', { require: 'components/events-page/events-page' });
 
   ko.components.register('directions-page', {template: { require: 'text!components/directions-page/directions-page.html' }});
+
+  ko.components.register('members-page', { require: 'components/members-page/members-page' });
+
+  ko.components.register('message-center', { require: 'components/message-center/message-center' });
+
+  ko.components.register('users-page', { require: 'components/users-page/users-page' });
+
+  ko.components.register('message-center-page', { require: 'components/message-center-page/message-center-page' });
+
+  ko.components.register('user-admin-page', { require: 'components/user-admin-page/user-admin-page' });
+
+  ko.components.register('login', { require: 'components/login/login' });
+
+  ko.components.register('auth', { require: 'components/auth/auth' });
 
   // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
 

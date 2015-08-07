@@ -6,12 +6,21 @@ var require = {
         "crossroads":           "bower_modules/crossroads/dist/crossroads.min",
         "hasher":               "bower_modules/hasher/dist/js/hasher.min",
         "jquery":               "bower_modules/jquery/dist/jquery",
-        "knockout":             "bower_modules/knockout/dist/knockout",
+        "knockout":             "bower_modules/knockout/dist/knockout.debug",
         "knockout-projections": "bower_modules/knockout-projections/dist/knockout-projections",
         "signals":              "bower_modules/js-signals/dist/signals.min",
-        "text":                 "bower_modules/requirejs-text/text"
+        "text":                 "bower_modules/requirejs-text/text",
+        "tinyMCE":              "bower_modules/tinymce/tinymce",
+        "knockout-postbox":     "bower_modules/knockout-postbox/build/knockout-postbox"
     },
     shim: {
-        "bootstrap": { deps: ["jquery"] }
+        "bootstrap": { deps: ["jquery"] },
+        "tinyMCE": {
+            exports: "tinyMCE",
+            init: function () {
+                this.tinyMCE.DOM.events.domLoaded = true;
+                return this.tinyMCE;
+            }
+        }
     }
 };
