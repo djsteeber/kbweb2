@@ -1,0 +1,38 @@
+<h2>club-event</h2>
+
+<h2>edit-event</h2>
+
+Event id
+<p data-bind="text: data['id']"></p>
+
+<form data-bind="submit: saveClubEvent">
+    <fieldset>
+        <table border="1" class="club-event-form">
+            <tr>
+                <td><label for="event_name"></label>Name</td>
+                <td><c2e-input id="event_name" data-bind="componentData: data.id" params="{defaultMessage: 'Name'}"></c2e-input></td>
+            </tr>
+            <tr>
+                <td><label for="event_type"></label>Event Type</td>
+                <td><c2e-input id="event_type" params="{defaultMessage: 'Event Type'}"></c2e-input></td>
+            </tr>
+            <tr>
+                <td><label for="event_description"></label>Description</td>
+                <td><c2e-input id="event_description" params="{defaultMessage: 'Description'}"></c2e-input></td>
+            </tr>
+            <tr>
+                <td><label for="event_location"></label>Location</td>
+                <td><c2e-input id="event_location" params="{defaultMessage: 'Location'}"></c2e-input></td>
+            </tr>
+            <tr>
+                <td><label for="event_schedule">Schedule</label></td>
+                <td><c2e-input id="event_schedule" params="{defaultMessage: 'Schedule'}"></c2e-input></td>
+            </tr>
+            <tr>
+                <td><label for="event_flyer">Flyer</label></td>
+                <td><c2e-input id="event_flyer" params="{defaultMessage: 'Flyer'}"></c2e-input></td>
+            </tr>
+        </table>
+    </fieldset>
+    <button type="submit" class="btn btn-primary"">Save</button>
+</form>

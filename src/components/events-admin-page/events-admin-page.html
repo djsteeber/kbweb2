@@ -1,0 +1,43 @@
+<h2>events-admin-page</h2>
+
+<p data-bind='text: message'></p>
+
+<h3>Events</h3>
+
+<!-- TODO: add searchability, change to DataTables -->
+<table class="table table-bordered table-striped table-condensed table-hover">
+    <thead>
+    <tr>
+        <th>Event Name</th>
+        <th>Event Type</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Information</th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach:eventsList">
+    <tr>
+        <td data-title="Event Name" data-bind="text: login"></td>
+        <td data-title="Event Type" data-bind="text: login"></td>
+        <td data-title="Description" data-bind="text: name().lastName"></td>
+        <td data-title="Date" data-bind="text: name().firstName"></td>
+        <td data-title="Information" data-bind="text: email"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div id="eventAdminActions">
+    <input data-bind="value: myeventId"/>
+
+    <a data-bind="attr: {href: '#club-event/' + myeventId()}" type="button" class="btn btn-primary btn-lg">
+        Add Event
+    </a>
+</div>
+<hr/>
+
+
+
+
+
+<hr/>
+

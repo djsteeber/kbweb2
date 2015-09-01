@@ -11,7 +11,12 @@ var require = {
         "signals":              "bower_modules/js-signals/dist/signals.min",
         "text":                 "bower_modules/requirejs-text/text",
         "tinyMCE":              "bower_modules/tinymce/tinymce",
-        "knockout-postbox":     "bower_modules/knockout-postbox/build/knockout-postbox"
+        "knockout-postbox":     "bower_modules/knockout-postbox/build/knockout-postbox",
+        "mapping":              "bower_modules/knockout-mapping/knockout.mapping"
+    },
+    deps: ['knockout', 'mapping'],
+    callback: function (ko, mapping) {
+        ko.mapping = mapping;
     },
     shim: {
         "bootstrap": { deps: ["jquery"] },
@@ -21,6 +26,7 @@ var require = {
                 this.tinyMCE.DOM.events.domLoaded = true;
                 return this.tinyMCE;
             }
-        }
+        },
     }
+
 };

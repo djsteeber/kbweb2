@@ -35,6 +35,14 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   ko.components.register('auth', { require: 'components/auth/auth' });
 
+  ko.components.register('events-admin-page', { require: 'components/events-admin-page/events-admin-page' });
+
+  ko.components.register('c2e-input', { require: 'components/c2e-input/c2e-input' });
+
+  ko.components.register('club-event', { require: 'components/club-event/club-event' });
+
+  ko.components.register('document-list', { require: 'components/document-list/document-list' });
+
   // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
 
   // Start the application

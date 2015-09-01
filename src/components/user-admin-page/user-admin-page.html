@@ -31,6 +31,7 @@
     Add User
 </button>
 
+<!-- TODO make this a component -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form data-bind="submit: submitChange">
@@ -40,15 +41,32 @@
                     <h4 class="modal-title" id="myModalLabel">Add/Edit User</h4>
                 </div>
                 <div class="modal-body">
-                    <label>Login</label><input type="text" data-bind="value: currentUser.login"/><br/>
-                    <label>First Name</label><input type="password" data-bind="value: currentUser.name.firstName"/><br/>
-                    <label>Last Name</label><input type="text" data-bind="value: currentUser.name.lastName"/><br/>
-                    <label>Email</label><input type="password" data-bind="value: currentUser.email"/><br/>
-                    <label>Roles</label><input type="text" data-bind="value: currentUser.roles"/>
+                    <table>
+                        <tr>
+                            <td style="width: 100px">Login</td>
+                            <td><input type="text" data-bind="value: currentUser.login"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px">First Name</td>
+                            <td><input type="text" data-bind="value: currentUser.name.firstName"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px">Last Name</td>
+                            <td><input type="text" data-bind="value: currentUser.name.lastName"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px">Email</td>
+                            <td><input type="password" data-bind="value: currentUser.email"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px">Roles</td>
+                            <td><input type="text" data-bind="value: currentUser.roles"/></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" onclick="$('.modal.in').modal('hide')">Login</button>
+                    <button type="submit" class="btn btn-primary" onclick="$('.modal.in').modal('hide')">Add</button>
                 </div>
             </div>
         </form>
