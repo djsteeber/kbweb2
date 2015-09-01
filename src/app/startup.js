@@ -43,6 +43,8 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   ko.components.register('document-list', { require: 'components/document-list/document-list' });
 
+  ko.components.register('event-list', { require: 'components/event-list/event-list' });
+
   // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
 
   // Start the application
