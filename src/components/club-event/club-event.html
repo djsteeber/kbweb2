@@ -2,37 +2,39 @@
 
 <h2>edit-event</h2>
 
-Event id
+Event id <span data-bind="text: data().name"/>
 <p data-bind="text: data['id']"></p>
 
-<form data-bind="submit: saveClubEvent">
+<form data-bind="submit: data().save">
     <fieldset>
         <table border="1" class="club-event-form">
             <tr>
                 <td><label for="event_name"></label>Name</td>
-                <td><c2e-input id="event_name" data-bind="componentData: data.id" params="{defaultMessage: 'Name'}"></c2e-input></td>
+                <td><input id="event_name" data-bind="value: data().name"/></td>
             </tr>
             <tr>
                 <td><label for="event_type"></label>Event Type</td>
-                <td><c2e-input id="event_type" params="{defaultMessage: 'Event Type'}"></c2e-input></td>
+                <td><input id="event_type" data-bind="value: data().event_type"/></td>
             </tr>
             <tr>
                 <td><label for="event_description"></label>Description</td>
-                <td><c2e-input id="event_description" params="{defaultMessage: 'Description'}"></c2e-input></td>
+                <td><input id="event_description" data-bind="value: data().description"/></td>
             </tr>
             <tr>
                 <td><label for="event_location"></label>Location</td>
-                <td><c2e-input id="event_location" params="{defaultMessage: 'Location'}"></c2e-input></td>
+                <td><input id="event_location" data-bind="value: data().location"/></td>
             </tr>
             <tr>
                 <td><label for="event_schedule">Schedule</label></td>
-                <td><c2e-input id="event_schedule" params="{defaultMessage: 'Schedule'}"></c2e-input></td>
+                <td><schedule params="schedule: data().schedule"/>
+                    <input id="event_schedule" data-bind="value: data().schedule().displayDates"/></td>
             </tr>
             <tr>
                 <td><label for="event_flyer">Flyer</label></td>
-                <td><c2e-input id="event_flyer" params="{defaultMessage: 'Flyer'}"></c2e-input></td>
+                <td><input id="event_flyer" data-bind="value: data().flyer"/></td>
             </tr>
         </table>
     </fieldset>
-    <button type="submit" class="btn btn-primary"">Save</button>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button data-bind="click: data().delete"  class="btn btn-primary">Delete</button>
 </form>

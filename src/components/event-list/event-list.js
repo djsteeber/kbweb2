@@ -3,6 +3,7 @@ define(['knockout', 'text!./event-list.html'], function(ko, templateMarkup) {
   function EventList(params) {
     var self = this;
 
+
 //    self.fileType = ko.observable(params.fileType);
 
     self.eventList = ko.observableArray();

@@ -45,8 +45,20 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   ko.components.register('event-list', { require: 'components/event-list/event-list' });
 
-  // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
+  ko.components.register('schedule', { require: 'components/schedule/schedule' });
 
+  // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
+/*
+  ko.bindingHandlers.dateString = {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+      var value = valueAccessor(),
+          allBindings = allBindingsAccessor();
+      var valueUnwrapped = ko.utils.unwrapObservable(value);
+      var pattern = allBindings.datePattern || 'MM/dd/yyyy';
+      $(element).text(valueUnwrapped.toString(pattern));
+    }
+  };
+  */
   // Start the application
   ko.applyBindings({ route: router.currentRoute });
 });

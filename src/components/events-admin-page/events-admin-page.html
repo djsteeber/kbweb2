@@ -4,7 +4,7 @@
 
 <h3>Events</h3>
 
-<!-- TODO: add searchability, change to DataTables -->
+<!-- TODO: add searchability, change to DataTables and add a component to do this-->
 <table class="table table-bordered table-striped table-condensed table-hover">
     <thead>
     <tr>
@@ -17,19 +17,21 @@
     </thead>
     <tbody data-bind="foreach:eventsList">
     <tr>
-        <td data-title="Event Name" data-bind="text: login"></td>
-        <td data-title="Event Type" data-bind="text: login"></td>
-        <td data-title="Description" data-bind="text: name().lastName"></td>
-        <td data-title="Date" data-bind="text: name().firstName"></td>
-        <td data-title="Information" data-bind="text: email"></td>
+        <td data-title="Event Name">
+            <a data-bind="attr: { href: '/#club-event/' + id(), title: name }, text: name">
+                Report
+            </a>
+        </td>
+        <td data-title="Event Type" data-bind="text: event_type"></td>
+        <td data-title="Description" data-bind="text: description"></td>
+        <td data-title="Date" data-bind="text: schedule().displayDates"></td>
+        <td data-title="Information" data-bind="text: flyer"></td>
     </tr>
     </tbody>
 </table>
 
 <div id="eventAdminActions">
-    <input data-bind="value: myeventId"/>
-
-    <a data-bind="attr: {href: '#club-event/' + myeventId()}" type="button" class="btn btn-primary btn-lg">
+    <a data-bind="attr: {href: '#club-event/new'}" type="button" class="btn btn-primary btn-lg">
         Add Event
     </a>
 </div>

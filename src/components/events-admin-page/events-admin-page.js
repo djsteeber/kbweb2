@@ -1,4 +1,4 @@
-define(['knockout', 'knockout-postbox', 'text!./events-admin-page.html'], function(ko, postbox, templateMarkup) {
+define(['knockout', 'text!./events-admin-page.html', '../data-objects/club-event-do.js'], function(ko, templateMarkup, ClubEventDO) {
 
   function EventsAdminPage(params) {
     var self = this;
@@ -8,8 +8,7 @@ define(['knockout', 'knockout-postbox', 'text!./events-admin-page.html'], functi
 
     self.eventsList = ko.observableArray();
 
-    self.myeventId = ko.observable();
-
+    self.eventsList = ClubEventDO.getList();
 
   }
 

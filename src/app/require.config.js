@@ -13,6 +13,7 @@ var require = {
         "tinyMCE":              "bower_modules/tinymce/tinymce",
         "knockout-postbox":     "bower_modules/knockout-postbox/build/knockout-postbox",
         "mapping":              "bower_modules/knockout-mapping/knockout.mapping"
+        //TODO move data object definitions here
     },
     deps: ['knockout', 'mapping'],
     callback: function (ko, mapping) {
