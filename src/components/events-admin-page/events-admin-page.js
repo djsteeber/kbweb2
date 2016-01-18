@@ -2,6 +2,21 @@ define(['knockout', 'text!./events-admin-page.html', '../data-objects/club-event
 
   function EventsAdminPage(params) {
     var self = this;
+
+    $.ajax({
+      url: "/auth/login",
+      type: "GET",
+      success: function (returnData) {
+        if (!returnData.authenticated) {
+          window.location.href = "/";
+        }
+      },
+      fail: function (ibx, returnData) {
+        window.location.href = "/";
+      }
+    });
+
+
     self.route = params.route;
 
     self.message = ko.observable('Hello from the events-admin-page component!');
@@ -10,7 +25,13 @@ define(['knockout', 'text!./events-admin-page.html', '../data-objects/club-event
 
     self.eventsList = ClubEventDO.getList();
 
+    //check login, if not logged in, then redirect
+
+    // check if logged in, use a observable with a subscribeTo
+
+
   }
+
 
   // This runs when the component is torn down. Put here any logic necessary to clean up,
   // for example cancelling setTimeouts or disposing Knockout subscriptions/computeds.

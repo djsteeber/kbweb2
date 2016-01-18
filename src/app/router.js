@@ -22,7 +22,8 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
             { url: 'message-center',     params: { page: 'message-center-page' } },
             { url: 'user-admin-page',     params: { page: 'user-admin-page' }},
             { url: 'events-admin-page',     params: { page: 'events-admin-page' } },
-            { url: 'club-event/{id}',     params: { page: 'club-event' } }
+            { url: 'club-event/{id}',     params: { page: 'club-event' } },
+            { url: 'profile',     params: { page: 'profile-page' } }
 
         ]
     });

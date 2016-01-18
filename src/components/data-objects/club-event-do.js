@@ -1,13 +1,5 @@
 define(['knockout'], function(ko) {
 
-    /*
-     var schedule = {
-     date: {isRequired:true, isDate:true}
-     ,start: {isRequired:true, isTime:true}
-     ,end: {isRequired:true, isTime:true}
-     };
-
-     */
     function DateTimeDo(dt) {
         var self = this;
         self.date = ko.observable(dt.date);
@@ -109,7 +101,7 @@ define(['knockout'], function(ko) {
 
             if (ko.unwrap(self.id)) {
                 $.ajax({
-                    url: "/rest/v1/events/" + self.id,
+                    url: "/rest/events/" + self.id,
                     type: "PUT",
                     data: data,
                     success: function (/* returnData */) {
@@ -125,7 +117,7 @@ define(['knockout'], function(ko) {
                 // this is an update, issue a put
             } else {
                 $.ajax({
-                    url: "/rest/v1/events",
+                    url: "/rest/events",
                     type: "POST",
                     data: data,
                     success: function (/* returnData */) {
@@ -146,7 +138,7 @@ define(['knockout'], function(ko) {
         self.load = function(id) {
             if (id) {
                 $.ajax({
-                    url: "/rest/v1/events/" + id,
+                    url: "/rest/events/" + id,
                     type: "GET",
                     //data: data,
                     success: function (returnData) {
@@ -161,7 +153,7 @@ define(['knockout'], function(ko) {
 
         self.delete = function() {
             $.ajax({
-                url: "/rest/v1/events/" + self.id(),
+                url: "/rest/events/" + self.id(),
                 type: "DELETE",
                 //data: data,
                 success: function (returnData) {
@@ -178,7 +170,7 @@ define(['knockout'], function(ko) {
     function getList() {
         var list = ko.observableArray();
         $.ajax({
-            url: "/rest/v1/events",
+            url: "/rest/events",
             type: "GET",
             async: false,
             //data: data,

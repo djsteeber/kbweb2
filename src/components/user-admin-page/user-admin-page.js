@@ -25,7 +25,7 @@ define(['knockout', 'text!./user-admin-page.html'], function(ko, templateMarkup)
 
     $.ajax({
       dataType: "json",
-      url: '/rest/v1/users',
+      url: '/rest/users',
       method: 'GET',
      // data: data,
       success: function(allData) {
@@ -45,7 +45,7 @@ define(['knockout', 'text!./user-admin-page.html'], function(ko, templateMarkup)
       //TODO:  Check here to see if this is an add or update
 
       $.ajax({
-        url: "/rest/v1/users",
+        url: "/rest/users",
         type: "POST",
         data: data,
         success: function (returnData) {

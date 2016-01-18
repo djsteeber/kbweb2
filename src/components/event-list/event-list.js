@@ -24,7 +24,7 @@ define(['knockout', 'text!./event-list.html'], function(ko, templateMarkup) {
     //TODO, nee to send down the filter to the rest call
     $.ajax({
       dataType: "json",
-      url: '/rest/v1/events',
+      url: '/rest/events',
       data: {},
       success: function(data) {
         // can tak this out if data filtering is working

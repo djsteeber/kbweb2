@@ -1,6 +1,11 @@
 <div>This is the schedule component</div>
 
-<select multiple="multiple" height="5" data-bind="options: schedule().dates(), optionText: displayDate(), optionId: date"></select>
+<select multiple="multiple" height="5" style="max-width:90%;" data-bind="options: schedule().dates, optionsText: 'date'"></select>
 <ul data-bind="foreach:schedule().dates()">
     <li data-bind="text: displayDate()"></li>
 </ul>
+<div>
+    <button>Add</button>
+    <button>Remove</button>
+    <button>Reset</button>
+</div>

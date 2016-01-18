@@ -14,7 +14,7 @@ define(['knockout','tinyMCE', 'text!./message-center-page.html'], function(ko, t
       var data = {to : ko.unwrap(self.to), subject: ko.unwrap(self.subject), body: ko.unwrap(self.body)};
 
       $.ajax({
-        url : "/rest/v1/messages",
+        url : "/rest/messages",
         type: "POST",
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",

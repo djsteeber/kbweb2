@@ -1,6 +1,6 @@
 
 #page {
-	margin-top: 80px;
+	margin-top: 10px;
 	font-size: 12pt;
 }
 
@@ -118,4 +118,36 @@ table.club-event-form td:nth-child(1) {
 
 table.club-event-form td:nth-child(2) {
 	min-width: 200px;
+}
+
+.spacer-40 {
+	margin-top: 40px;
+}
+
+/* not sure if needed for sticky footer */
+html {
+	position: relative;
+	min-height: 100%;
+}
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 40px;
+	background-color: #f5f5f5;
+	padding-top: 10px;
+}
+
+.fullwidth {
+	max-width: 100%;
+	width: 100%;
+}
+
+.form-group {
+	margin-top: 10px;
 }

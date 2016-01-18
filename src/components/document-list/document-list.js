@@ -19,7 +19,7 @@ define(['knockout', 'text!./document-list.html'], function(ko, templateMarkup) {
     //TODO, nee to send down the filter to the rest call
     $.ajax({
       dataType: "json",
-      url: '/rest/v1/documents',
+      url: '/rest/documents',
       data: {},
       success: function(data) {
         var filteredData = data.filter(function(d) {

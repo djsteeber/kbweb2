@@ -67,13 +67,18 @@ gulp.task('html', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('copyimg', function() {
+    gulp.src('./src/img/*.*')
+        .pipe(gulp.dest('./dist/img/'));
+});
+
 // Removes all files from ./dist/
 gulp.task('clean', function() {
     return gulp.src('./dist/**/*', { read: false })
         .pipe(clean());
 });
 
-gulp.task('default', ['html', 'js', 'css'], function(callback) {
+gulp.task('default', ['html', 'js', 'css', 'copyimg'], function(callback) {
     callback();
     console.log('\nPlaced optimized files in ' + chalk.magenta('dist/\n'));
 });

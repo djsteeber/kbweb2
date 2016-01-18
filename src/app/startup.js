@@ -47,6 +47,8 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   ko.components.register('schedule', { require: 'components/schedule/schedule' });
 
+  ko.components.register('profile-page', { require: 'components/profile-page/profile-page' });
+
   // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
 /*
   ko.bindingHandlers.dateString = {

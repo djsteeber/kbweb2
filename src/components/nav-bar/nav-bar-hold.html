@@ -3,24 +3,20 @@
   follows Bootstrap conventions. The only Knockout-specific parts are the data-bind
   attributes on the <li> elements.
 -->
-
-<nav role="navigation" class="navbar navbar-default">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="#" class="navbar-brand">Kenosha Bowmen</a>
+      <a class="navbar-brand" href="#">Kenosha Bowmen</a>
     </div>
-    <!-- Collection of nav links, forms, and other content for toggling -->
-    <div id="navbarCollapse" class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse">
+
       <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
-        <!-- CLUB INFORMATION MENU ITEM -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             Club Information<span class="caret"></span></a>
@@ -35,20 +31,23 @@
               <a href="#membership" class="navbar-item">Membership</a>
             </li>
           </ul>
+          </a>
         </li>
-        <!-- EVENTS AND RESULTS MENU ITEM -->
+
         <li data-bind="css: { active: route().page === 'events-page' }">
           <a href="#events" class="navbar-item">Events &amp; Results</a>
         </li>
-        <!-- LESSONS MENU ITEM -->
+
+
         <li data-bind="css: { active: route().page === 'lessons-page' }">
           <a href="#lessons" class="navbar-item">Lessons</a>
         </li>
-        <!-- BENEFITS PAGE MENU ITEM -->
+
+
         <li data-bind="css: { active: route().page === 'benefit-page' }">
           <a href="#benefit" class="navbar-item">Benefit</a>
         </li>
-        <!-- MEMBERS PAGE MENU ITEM -->
+
         <li class="dropdown" data-bind="visible: isLoggedIn()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             Members<span class="caret"></span></a>
@@ -62,7 +61,7 @@
           </ul>
           </a>
         </li>
-        <!-- SITE ADMIN PAGES -->
+
         <li class="dropdown" data-bind="visible: isLoggedIn()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             Admin<span class="caret"></span></a>
@@ -76,64 +75,14 @@
           </ul>
           </a>
         </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right" data-bind="visible: ! isAuthenticated()">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span data-bind="text: membersMenuTitle"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li>
-              <form data-bind="submit: submitLogin">
-                <div class="navbar-form">
-                  <!-- so, change the login component to be the for for the login -->
-                  <div class="form-group">
-                    <h4>Member's Login</h4>
-                  </div>
-                  <div class="form-group">
-                    <label for="loginEmail">Email address</label>
-                    <!-- type="email" -->
-                    <input type="text" class="form-control" id="loginEmail"
-                           placeholder="Email" data-bind="value: login">
-                  </div>
-                  <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" class="form-control" id="loginPassword"
-                           placeholder="Password" data-bind="value: password">
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-default">Submit</button>
-                  </div>
-                </div>
-              </form>
-            </li>
-            <li data-bind="css: { active: route().page === 'events-admin-page' }">
-              <a href="#" class="navbar-item">Forgot Password</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right" data-bind="visible: isAuthenticated()">
-        <li class="dropdown" id="login-form-dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span data-bind="text: membersMenuTitle"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li data-bind="css: { active: route().page === 'profile' }">
-              <a href="#profile" class="navbar-item">User Profile</a>
-            </li>
-            <li data-bind="css: { active: route().page === 'home-page' }">
-              <a href="#" class="navbar-item" data-bind="click: submitLogout">Logout</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <!--
         <li data-bind="css: { active: route().page === 'login-page' }">
           <a href="#benefit" class="navbar-item">Member Login</a>
         </li>
--->
+
       </ul>
+      
+
     </div>
   </div>
-</nav>
+</div>
+
