@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link href="/img/favicon.ico" rel="shortcut icon">
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=defice-width, initial-scale=1">
@@ -30,23 +32,21 @@
   <div >
     <nav-bar params="route: route"></nav-bar>
     <div id="page" class="container" data-bind="component: { name: route().page, params: route }"></div>
-    <!-- needs to be last because it checks if the user is logged in
-         and messages the other listening components -->
   </div>
 
     <footer class="footer">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-3 col-md-3 col-lg-3 col-sm-offset-2 col-md-offset-1">
-            <a href="#directions">Location</a>
-          </div>
-          <div class="col-sm-3 col-md-3 col-lg-3">
-            <a href="#membership">Membership</a>
-          </div>
-          <div class="col-sm-3 col-md-3 col-lg-3">
-            <a href="mailto:webmaster@kenoshabowmen.com">Email the Webmaster</a>
-          </div>
-        </div>
+        <ul class="list-unstyled list-inline">
+          <li class="col-sm-4 col-md-4 col-lg-4">
+            <a class="footer-link" href="#directions">Location</a>
+          </li>
+          <li class="col-sm-4 col-md-4 col-lg-4">
+            <a class="footer-link" href="#membership">Membership</a>
+          </li>
+          <li class="col-sm-4 col-md-4 col-lg-4">
+            <a class="footer-link" href="mailto:webmaster@kenoshabowmen.com">Email the Webmaster</a>
+          </li>
+        </ul>
       </div>
     </footer>
   </body>

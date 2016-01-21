@@ -54,6 +54,7 @@ define(['knockout'], function(ko) {
         self.schedule = ko.observable();
         self.flyer = ko.observable();
         self.url = ko.observable();
+        self.status = ko.observable();
 
         self.init = function(evt) {
             self.id(evt._id);
@@ -64,6 +65,11 @@ define(['knockout'], function(ko) {
             self.schedule(new ScheduleDO(evt.schedule));
             self.flyer(evt.flyer);
             self.url(evt.uri);
+            if (evt.status == null) {
+                self.status('PENDING');
+            } else {
+                self.status(evt.status);
+            }
         }
 
         if (evt) {
@@ -73,7 +79,7 @@ define(['knockout'], function(ko) {
         self.toJSON = function() {
             var obj = {};
             var temp = ko.mapping.toJS(self);
-            var fields = ['name', 'event_type', 'description', 'location', 'schedule', 'flyer'];
+            var fields = ['name', 'event_type', 'description', 'location', 'schedule', 'flyer', 'status'];
 
 
             fields.forEach(function(item) {

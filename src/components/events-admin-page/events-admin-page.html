@@ -13,6 +13,7 @@
         <th>Description</th>
         <th>Date</th>
         <th>Information</th>
+        <th>Status</th>
     </tr>
     </thead>
     <tbody data-bind="foreach:eventsList">
@@ -26,6 +27,7 @@
         <td data-title="Description" data-bind="text: description"></td>
         <td data-title="Date" data-bind="text: schedule().displayDates"></td>
         <td data-title="Information" data-bind="text: flyer"></td>
+        <td data-title="Status" data-bind="text: status"></td>
     </tr>
     </tbody>
 </table>

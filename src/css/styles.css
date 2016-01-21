@@ -11,10 +11,6 @@
 }
 
 
-.navbar-item {
-
-}
-
 
 @media only screen and (max-width: 760px) {
 
@@ -120,8 +116,8 @@ table.club-event-form td:nth-child(2) {
 	min-width: 200px;
 }
 
-.spacer-40 {
-	margin-top: 40px;
+.spacer-20 {
+	margin-top: 20px;
 }
 
 /* not sure if needed for sticky footer */
@@ -131,7 +127,7 @@ html {
 }
 body {
 	/* Margin bottom by footer height */
-	margin-bottom: 60px;
+	margin-bottom: 60px !important;
 }
 .footer {
 	position: absolute;
@@ -139,8 +135,17 @@ body {
 	width: 100%;
 	/* Set the fixed height of the footer here */
 	height: 40px;
-	background-color: #f5f5f5;
+	background-color: #203731;
 	padding-top: 10px;
+	color: #FFB612;
+}
+
+a.footer-link {
+	color: #ffffff;
+}
+
+a.footer-link:hover {
+	color: #FFB612;
 }
 
 .fullwidth {
@@ -150,4 +155,57 @@ body {
 
 .form-group {
 	margin-top: 10px;
+}
+
+.margin-10 {
+	margin: 10px;
+}
+
+.event-list-heading {
+	/* combine lead and strong */
+	font-size: 1em;
+	font-weight: 700;
+}
+
+.panel-primary {
+	border-color: #203731 !important;
+}
+
+.panel-primary > .panel-heading {
+	background: #203731 !important;
+	font-size: 1em;
+	font-weight: 700;
+}
+
+li.list-highlight:hover {
+	background-color: #FFB612;
+	cursor: pointer;
+}
+
+
+.navbar-custom {
+	background-color:#203731;
+	color: black;
+	border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+	color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+	color: #FFB612;
+	background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+	color:#FFB612;
+}
+
+.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus {
+	text-decoration: none;
+	background-color: #FFB612;
+}
+
+.col-centered{
+	float: none;
+	margin: 0 auto;
 }

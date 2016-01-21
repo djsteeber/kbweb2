@@ -2,14 +2,14 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   // Components can be packaged as AMD modules, such as the following:
   ko.components.register('nav-bar', { require: 'components/nav-bar/nav-bar' });
-  ko.components.register('home-page', { require: 'components/home-page/home' });
+  ko.components.register('home-page', { require: 'components/home-page/home-page' });
 
   // ... or for template-only components, you can just point to a .html file directly:
-  ko.components.register('about-page', {
-    template: { require: 'text!components/about-page/about.html' }
-  });
+  ko.components.register('about-page', { require: 'components/about-page/about-page'});
 
   ko.components.register('event-grid', { require: 'components/event-grid/event-grid' });
+
+  ko.components.register('announcements', { require: 'components/announcements/announcements' });
 
   ko.components.register('benefit-page', { template: { require: 'text!components/benefit-page/benefit.html' }});
 
@@ -31,9 +31,7 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   ko.components.register('user-admin-page', { require: 'components/user-admin-page/user-admin-page' });
 
-  ko.components.register('login', { require: 'components/login/login' });
-
-  ko.components.register('auth', { require: 'components/auth/auth' });
+  ko.components.register('club-board', { require: 'components/club-board/club-board' });
 
   ko.components.register('events-admin-page', { require: 'components/events-admin-page/events-admin-page' });
 
@@ -46,6 +44,8 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
   ko.components.register('event-list', { require: 'components/event-list/event-list' });
 
   ko.components.register('schedule', { require: 'components/schedule/schedule' });
+
+  ko.components.register('upcoming-events', { require: 'components/upcoming-events/upcoming-events' });
 
   ko.components.register('profile-page', { require: 'components/profile-page/profile-page' });
 

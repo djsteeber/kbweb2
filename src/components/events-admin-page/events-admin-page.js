@@ -3,20 +3,6 @@ define(['knockout', 'text!./events-admin-page.html', '../data-objects/club-event
   function EventsAdminPage(params) {
     var self = this;
 
-    $.ajax({
-      url: "/auth/login",
-      type: "GET",
-      success: function (returnData) {
-        if (!returnData.authenticated) {
-          window.location.href = "/";
-        }
-      },
-      fail: function (ibx, returnData) {
-        window.location.href = "/";
-      }
-    });
-
-
     self.route = params.route;
 
     self.message = ko.observable('Hello from the events-admin-page component!');
