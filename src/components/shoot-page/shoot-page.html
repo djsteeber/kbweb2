@@ -1,0 +1,7 @@
+<!-- ko if shoot().flyer != undefined -->
+<h1 data-bind="text: shoot().name"></h1>
+
+<span data-bind="text: shoot().flyer.url"/>
+
+<a data-bind="attr: {href: shoot().flyer.url}"><span data-bind="text: shoot().name"></span></a>
+<!-- /ko -->

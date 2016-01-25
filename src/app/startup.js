@@ -39,6 +39,8 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   ko.components.register('club-event', { require: 'components/club-event/club-event' });
 
+  ko.components.register('shoot-page', { require: 'components/shoot-page/shoot-page' });
+
   ko.components.register('document-list', { require: 'components/document-list/document-list' });
 
   ko.components.register('event-list', { require: 'components/event-list/event-list' });

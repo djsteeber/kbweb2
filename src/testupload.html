@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>Test Upload File calling into document rest end point</title>
+        <link href="bower_modules/components-bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    </head>
+    <body>
+    <!--
+    var shoot = {
+     name: reqString
+    ,description: reqString
+    ,dateText: reqString
+    ,timeText: reqString
+    ,shortDescription: reqString
+    ,shootType: {isArrayOf: [reqString, 1]}
+    ,schedule: {isArrayOf: [schedule, 1]}
+    ,flyer: {isRequired: false, isFile: true} // change to points to document
+    ,results: {isString:true}  // change to points to document
+};
+
+
+    -->
+        <h1>Create a Shoot</h1>
+        <div class="container">
+            <form method="post" action="/rest/shoots" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="name">Name of Shoot</label>
+                    <input type="text" id="name" name="name"/>
+                </div>
+                <div class="form-group">
+                    <label for="shortDescription">Short Description</label>
+                    <input type="text" id="shortDescription" name="shortDescription"/>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description"/>
+                </div>
+                <div class="form-group">
+                    <label for="shootType">Shoot Type</label>
+                    <input type="text" id="shootType" name="shootType"/>
+                </div>
+                <div class="form-group">
+                    <label for="dateText">DateText</label>
+                    <input type="text" id="dateText" name="dateText"/>
+                </div>
+                <div class="form-group">
+                    <label for="timeText">Time Text</label>
+                    <input type="text" id="timeText" name="timeText"/>
+                </div>
+                <div class="form-group">
+                    <label for="flyer">File</label>
+                    <input type="file" id="flyer" name="flyer"/>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
