@@ -24,6 +24,14 @@
 		display: block;
 	}
 
+	.no-more-tables table {
+		border: none;
+	}
+	.no-more-tables tr {
+		display: block;
+		margin-bottom: 20px;
+	}
+
 	/* Hide table headers (but not display: none;, for accessibility) */
 	.no-more-tables thead tr {
 		position: absolute;
@@ -71,9 +79,14 @@
 	color:#fff;
 }
 .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
-	color: #22ff22;
+	color: #FFB612;
 	background-color:transparent;
 }
+
+.navbar-custom  span.icon-bar {
+	background-color: #FFB612;
+}
+
 .navbar-custom .navbar-brand {
 	color:#eeeeee;
 }
@@ -208,4 +221,16 @@ li.list-highlight:hover {
 .col-centered{
 	float: none;
 	margin: 0 auto;
+}
+
+a.nostyle:link {
+	text-decoration: inherit;
+	color: inherit;
+	cursor: auto;
+}
+
+a.nostyle:visited {
+	text-decoration: inherit;
+	color: inherit;
+	cursor: auto;
 }

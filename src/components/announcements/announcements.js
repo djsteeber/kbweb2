@@ -1,31 +1,13 @@
-define(["knockout", "text!./announcements.html"], function(ko, templateMarkup) {
+define(["knockout", "text!./announcements.html", '../data-objects/announcement-do.js'], function(ko, templateMarkup, AnnouncemntDO) {
 
-    function Announcements(/* parameters */) {
+    function Announcements(params) {
         var self = this;
 
-        self.announcementList = ko.observableArray(
-            [
-//                {title: 'Lesson Classes Available', text: 'There are new lesson classes available. Please send an email to ??? for availabilty and reservation.'}
-            ]
-        );
+        self.announcementList = ko.observableArray();
 
-
-        self.loadAnnouncements= function() {
-            $.ajax({
-                dataType: "json",
-                url: '/rest/announcements',
-                data: {},
-                success: function(data) {
-                    // need to filter by date, so get the current date and parse out.
-                    // ideally we call the get function with the proper filter so the server does not return them
-                    self.announcementList(data);
-                }
-            });
-        };
-
-        self.loadAnnouncements();
+        AnnouncemntDO.loadList(self.announcementList, params);
     }
 
-        return { viewModel: Announcements, template: templateMarkup };
+    return { viewModel: Announcements, template: templateMarkup };
 
 });

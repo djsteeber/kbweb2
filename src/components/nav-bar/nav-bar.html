@@ -19,7 +19,9 @@
     <!-- Collection of nav links, forms, and other content for toggling -->
     <div id="navbarCollapse" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
+        <li  data-bind="css: { active: route().page === 'home' }">
+          <a href="#home" class="navbar-item">Home</a>
+        </li>
         <!-- CLUB INFORMATION MENU ITEM -->
         <li data-bind="css: { active: route().page === 'about-page' }">
           <a href="#about" class="navbar-item">About</a>
@@ -32,7 +34,7 @@
         </li>
         <!-- EVENTS AND RESULTS MENU ITEM -->
         <li data-bind="css: { active: route().page === 'events-page' }">
-          <a href="#events" class="navbar-item">Events &amp; Results</a>
+          <a href="#events" class="navbar-item">Shoots &amp; Results</a>
         </li>
         <!-- LESSONS MENU ITEM -->
         <li data-bind="css: { active: route().page === 'lessons-page' }">

@@ -1,26 +1,20 @@
-<h2>Events</h2>
+<h2>Shoots</h2>
 
-<h3>Shoots &amp; Events</h3>
-<div class="row">
-    <div class="col-sm-8 col-md-8 col-lg-8">
-        <event-grid params="{event_type: 'SHOOT'}"></event-grid>
-
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
-        <img src="/img/target-img.jpg" alt="[target]"  class="img-responsive">
-    </div>
-
+<div class="no-more-tables col-md-12">
+    <table class="table table-bordered table-striped table-condensed table-hover">
+        <thead>
+        <tr>
+            <th class="col-md-3">Shoot Name</th>
+            <th class="col-md-3">Date</th>
+            <th class="col-md-2">ShootType</th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach:shootsList()">
+        <tr>
+            <td data-title="Shoot Name"><a data-bind="attr: {href: '#shoot/' + id()}, text: name"></a></td>
+            <td data-title="Date" data-bind="text: dateText"></td>
+            <td data-title="Shoot Type" data-bind="text: shootType"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-
-<h3>Leagues</h3>
-
-<div class="row">
-    <div class="col-sm-8 col-md-8 col-lg-8">
-        <event-grid params="{event_type: 'LEAGUE'}"></event-grid>
-
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
-    </div>
-
-</div>
-

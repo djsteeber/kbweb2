@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Test Upload File calling into document rest end point</title>
+        <title>KBWeb - Create a shoot</title>
         <link href="bower_modules/components-bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     </head>
@@ -21,16 +21,19 @@
 
     -->
         <h1>Create a Shoot</h1>
+        <div class="panel">
+            This form is for creating a shoot.  You must be logged into the KBWeb site for your form submission to work.
+            This is a temporary fix until the admin screens are done in the application.
+            Might make a separate one page app to do this as well, not sure.
+            Would love to have a schedule component to add dates and times to the shoots.
+            Would also love to have which ranges are used.
+        </div>
         <div class="container">
             <form method="post" action="/rest/shoots" enctype="multipart/form-data">
 
                 <div class="form-group">
                     <label for="name">Name of Shoot</label>
                     <input type="text" id="name" name="name"/>
-                </div>
-                <div class="form-group">
-                    <label for="shortDescription">Short Description</label>
-                    <input type="text" id="shortDescription" name="shortDescription"/>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -41,16 +44,14 @@
                     <input type="text" id="shootType" name="shootType"/>
                 </div>
                 <div class="form-group">
-                    <label for="dateText">DateText</label>
-                    <input type="text" id="dateText" name="dateText"/>
-                </div>
-                <div class="form-group">
-                    <label for="timeText">Time Text</label>
-                    <input type="text" id="timeText" name="timeText"/>
-                </div>
-                <div class="form-group">
                     <label for="flyer">File</label>
                     <input type="file" id="flyer" name="flyer"/>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleStartDate">Schedule Start Date</label>
+                    <input type="input" id="scheduleStartDate" name="schedule"/>
+                    <span>This need to be in format [{"date": "yyyy-dd-mm", "start": "0800", "end": "1600"}]</span>
+                    <!-- [{"date": "2016-01-06", "start": "1600", "end": "2100"},{"date": "2016-01-13", "start": "1600", "end": "2100"},{"date": "2016-01-20", "start": "1600", "end": "2100"},{"date": "2016-01-27", "start": "1600", "end": "2100"},{"date": "2016-02-03", "start": "1600", "end": "2100"},{"date": "2016-02-10", "start": "1600", "end": "2100"},{"date": "2016-02-17", "start": "1600", "end": "2100"},{"date": "2016-02-24", "start": "1600", "end": "2100"},{"date": "2016-03-02", "start": "1600", "end": "2100"},{"date": "2016-03-09", "start": "1600", "end": "2100"},{"date": "2016-03-16", "start": "1600", "end": "2100"}] -->
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Submit</button>

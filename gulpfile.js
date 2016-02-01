@@ -20,7 +20,11 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'components/event-grid/event-grid',
             'components/upcoming-events/upcoming-events',
             'components/announcements/announcements',
-            'components/home-page/home-page'
+            'components/home-page/home-page',
+            'components/data-objects/announcement-do.js',
+            'components/data-objects/club-event-do.js',
+            'components/data-objects/schedule-do.js',
+            'components/data-objects/shoot-do.js'
         ],
         insertRequire: ['app/startup'],
         bundles: {

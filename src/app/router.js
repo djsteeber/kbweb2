@@ -12,6 +12,7 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
     return new Router({
         routes: [
             { url: '',          params: { page: 'home-page' } },
+            { url: 'home',          params: { page: 'home-page' } },
             { url: 'about',     params: { page: 'about-page' } },
             { url: 'benefit',     params: { page: 'benefit-page' } },
             { url: 'lessons',     params: { page: 'lessons-page' } },
@@ -22,8 +23,7 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
             { url: 'message-center',     params: { page: 'message-center-page' } },
             { url: 'user-admin-page',     params: { page: 'user-admin-page' }},
             { url: 'events-admin-page',     params: { page: 'events-admin-page' } },
-            { url: 'club-event/{id}',     params: { page: 'club-event' } },
-            { url: 'shoot-page/{id}',    params: {page: 'shoot-page'}},
+            { url: 'shoot/{id}',    params: {page: 'shoot-page'}},
             { url: 'profile',     params: { page: 'profile-page' } }
 
         ]

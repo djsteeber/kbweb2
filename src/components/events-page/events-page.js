@@ -1,7 +1,10 @@
-define(['knockout', 'text!./events-page.html'], function(ko, templateMarkup) {
+define(['knockout', 'text!./events-page.html', '../data-objects/shoot-do.js'], function(ko, templateMarkup, ShootDO) {
 
   function EventsPage(params) {
-    this.message = ko.observable('Hello from the events-page component!');
+    var self = this;
+
+    self.shootsList = ko.observableArray();
+    ShootDO.loadList(self.shootsList);
 
   }
 
