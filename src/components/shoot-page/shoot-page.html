@@ -1,0 +1,34 @@
+<h1 data-bind="text: shoot().name"></h1>
+<div class="row">
+    <div class="col-sm-12, col-md-12, col-sm-12" data-bind="text: shoot().description">
+    </div>
+</div>
+
+<div class="row spacer-20" data-bind="if: shoot().hasFlyer">
+    <img class="img-responsive table-bordered" data-bind="attr: {src: shoot().flyer().url}"/>
+</div>
+<div class="row spacer-20" data-bind="ifnot: shoot().hasFlyer">
+    No Flyer available
+</div>
+
+
+
+
+
+
+<!--
+    /*
+     var shoot = {
+     name: reqString
+     ,description: reqString
+     ,shootType: reqString
+     ,schedule: {isArrayOf: [schedule, 1]} //change to 1 once the ready to move to date times
+     ,flyer: {isRequired: false, isFile: true} // change to points to document
+     ,results: {isString:true}  // change to points to document
+     ,dateText: reqString  // ignored, computed from schedule
+     ,timeText: reqString  // ignored, will be computed from schedule
+     ,shortDescription: reqString // ignored, compute from first sentense of description
+     };
+
+     */
+-->

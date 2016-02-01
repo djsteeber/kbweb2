@@ -17,17 +17,27 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
         include: [
             'requireLib',
             'components/nav-bar/nav-bar',
-            'components/home-page/home',
-            'components/event-grid/event-grid'
+            'components/event-grid/event-grid',
+            'components/upcoming-events/upcoming-events',
+            'components/announcements/announcements',
+            'components/home-page/home-page',
+            'components/data-objects/announcement-do.js',
+            'components/data-objects/club-event-do.js',
+            'components/data-objects/schedule-do.js',
+            'components/data-objects/shoot-do.js'
         ],
         insertRequire: ['app/startup'],
         bundles: {
-            'about-stuff': ['text!components/about-page/about.html'],
+            'about-stuff': ['components/about-page/about-page', 'components/club-board/club-board'],
             'benefit-stuff': ['text!components/benefit-page/benefit.html'],
             'lessons-stuff': ['components/lessons-page/lessons-page'],
             'events-stuff': ['components/events-page/events-page'],
             'membership-stuff': ['components/membership-page/membership-page'],
-            'directions-stuff': ['text!components/directions-page/directions-page.html']
+            'directions-stuff': ['text!components/directions-page/directions-page.html'],
+            'members-stuff': ['components/membership-page/membership-page', 'components/message-center-page/message-center-page'],
+            'admin-stuff': ['components/user-admin-page/user-admin-page','components/events-admin-page/events-admin-page'],
+            'club-event-stuff': ['components/club-event/club-event'],
+            'shoot-page-stuff': ['components/shoot-page/shoot-page']
             // If you want parts of the site to load on demand, remove them from the 'include' list
             // above, and group them into bundles here.
             // 'bundle-name': [ 'some/module', 'another/module' ],
@@ -63,13 +73,20 @@ gulp.task('html', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('copy-static', function() {
+    gulp.src('./src/img/*.*')
+        .pipe(gulp.dest('./dist/img/'));
+    gulp.src('./src/misc_docs/*.*')
+        .pipe(gulp.dest('./dist/misc_docs/'));
+});
+
 // Removes all files from ./dist/
 gulp.task('clean', function() {
     return gulp.src('./dist/**/*', { read: false })
         .pipe(clean());
 });
 
-gulp.task('default', ['html', 'js', 'css'], function(callback) {
+gulp.task('default', ['html', 'js', 'css', 'copy-static'], function(callback) {
     callback();
     console.log('\nPlaced optimized files in ' + chalk.magenta('dist/\n'));
 });

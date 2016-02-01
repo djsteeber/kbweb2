@@ -12,12 +12,20 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
     return new Router({
         routes: [
             { url: '',          params: { page: 'home-page' } },
+            { url: 'home',          params: { page: 'home-page' } },
             { url: 'about',     params: { page: 'about-page' } },
             { url: 'benefit',     params: { page: 'benefit-page' } },
             { url: 'lessons',     params: { page: 'lessons-page' } },
             { url: 'events',     params: { page: 'events-page' } },
             { url: 'membership',     params: { page: 'membership-page' } },
-            { url: 'directions',     params: { page: 'directions-page' } }
+            { url: 'directions',     params: { page: 'directions-page' } },
+            { url: 'members',     params: { page: 'members-page' } },
+            { url: 'message-center',     params: { page: 'message-center-page' } },
+            { url: 'user-admin-page',     params: { page: 'user-admin-page' }},
+            { url: 'events-admin-page',     params: { page: 'events-admin-page' } },
+            { url: 'shoot/{id}',    params: {page: 'shoot-page'}},
+            { url: 'profile',     params: { page: 'profile-page' } }
+
         ]
     });
 
@@ -31,7 +39,10 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
         });
 
         activateCrossroads();
+
+
     }
+
 
     function activateCrossroads() {
         function parseHash(newHash, oldHash) { crossroads.parse(newHash); }

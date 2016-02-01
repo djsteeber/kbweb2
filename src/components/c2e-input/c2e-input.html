@@ -1,0 +1,6 @@
+<div class="c2e-input" data-bind="html: valueOrDefault(), click: editThis, visible: ! isEditing()">Some text field</div>
+<div data-bind="visible: isEditing()">
+    <input type="text" data-bind="value: inEditValue, visible: isEditing()" autofocus/>
+    <img src="img/checkmark.png" data-bind="click: updateValue"></img>
+    <img src="img/cancel.png" data-bind="click: cancelUpdate"></img>
+</div>

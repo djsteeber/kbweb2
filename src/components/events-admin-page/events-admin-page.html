@@ -1,0 +1,47 @@
+<h2>events-admin-page</h2>
+
+<p data-bind='text: message'></p>
+
+<h3>Events</h3>
+
+<!-- TODO: add searchability, change to DataTables and add a component to do this-->
+<table class="table table-bordered table-striped table-condensed table-hover">
+    <thead>
+    <tr>
+        <th>Event Name</th>
+        <th>Event Type</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Information</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach:eventsList">
+    <tr>
+        <td data-title="Event Name">
+            <a data-bind="attr: { href: '/#club-event/' + id(), title: name }, text: name">
+                Report
+            </a>
+        </td>
+        <td data-title="Event Type" data-bind="text: event_type"></td>
+        <td data-title="Description" data-bind="text: description"></td>
+        <td data-title="Date" data-bind="text: schedule().displayDates"></td>
+        <td data-title="Information" data-bind="text: flyer"></td>
+        <td data-title="Status" data-bind="text: status"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div id="eventAdminActions">
+    <a data-bind="attr: {href: '#club-event/new'}" type="button" class="btn btn-primary btn-lg">
+        Add Event
+    </a>
+</div>
+<hr/>
+
+
+
+
+
+<hr/>
+

@@ -1,0 +1,54 @@
+<h2>club-event</h2>
+
+<h2>edit-event</h2>
+
+Event id <span data-bind="text: data().name"/>
+<p data-bind="text: data['id']"></p>
+
+<form data-bind="submit: data().save">
+    <div class="form-group">
+        <label for="event_name">Name</label>
+        <!-- type="email" -->
+        <input type="text" class="form-control" id="event_name"
+               placeholder="Event Name" data-bind="value: data().name">
+    </div>
+    <div class="form-group">
+        <label for="event_type">Type</label>
+        <!-- type="email" -->
+        <input type="text" class="form-control" id="event_type"
+               placeholder="Event Type" data-bind="value: data().event_type">
+    </div>
+    <div class="form-group">
+        <label for="event_description">Type</label>
+        <!-- type="email" -->
+        <input type="text" class="form-control" id="event_description"
+               placeholder="Description" data-bind="value: data().description">
+    </div>
+    <div class="form-group">
+        <label for="event_location">Location</label>
+        <!-- type="email" -->
+        <input type="text" class="form-control" id="event_location"
+               placeholder="Description" data-bind="value: data().location">
+    </div>
+    <div class="form-group">
+        <label for="event_schedule">Schedule</label>
+        <schedule params="schedule: data().schedule" id="event_schedule"/>
+        <input id="event_schedule" data-bind="textInput: data().schedule().displayDates"/>
+    </div>
+    <div class="form-group">
+        <label for="event_flyer">Flyer</label>
+        <!-- type="email" -->
+        <input type="text" class="form-control" id="event_flyer"
+               placeholder="Description" data-bind="value: data().flyer">
+    </div>
+    <div class="form-group">
+        <label for="event_status">Status</label>
+        <!-- type="email" -->
+        <select data-bind="options: statusOptions, value: data().status" id="event_status"></select>
+
+    </div>
+    <div class="form-group form-inline">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button data-bind="click: data().delete"  class="btn btn-primary">Delete</button>
+    </div>
+</form>

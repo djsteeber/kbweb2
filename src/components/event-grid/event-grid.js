@@ -22,7 +22,7 @@ define(['knockout', 'text!./event-grid.html'], function(ko, templateMarkup) {
       // or a different end point, that is just futureEvents as opposed to all events
       $.ajax({
          dataType: "json",
-          url: '/rest/v1/events',
+          url: '/rest/events',
           data: data,
           success: function(allData) {
               var mappedEvents = $.map(allData, function(item) {

@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link href="/img/favicon.ico" rel="shortcut icon">
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=defice-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <title>kbweb</title>
     <!-- build:css -->
@@ -19,7 +22,26 @@
     <!-- endbuild -->
   </head>
   <body>
+
+  <div >
     <nav-bar params="route: route"></nav-bar>
     <div id="page" class="container" data-bind="component: { name: route().page, params: route }"></div>
+  </div>
+
+    <footer class="footer">
+      <div class="container">
+        <ul class="list-unstyled list-inline">
+          <li class="col-sm-4 col-md-4 col-lg-4">
+            <a class="footer-link" href="#directions">Location</a>
+          </li>
+          <li class="col-sm-4 col-md-4 col-lg-4">
+            <a class="footer-link" href="#membership">Membership</a>
+          </li>
+          <li class="col-sm-4 col-md-4 col-lg-4">
+            <a class="footer-link" href="mailto:webmaster@kenoshabowmen.com">Email the Webmaster</a>
+          </li>
+        </ul>
+      </div>
+    </footer>
   </body>
 </html>

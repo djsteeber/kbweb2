@@ -1,5 +1,6 @@
+
 #page {
-	margin-top: 80px;
+	margin-top: 10px;
 	font-size: 12pt;
 }
 
@@ -9,10 +10,6 @@
 	text-decoration: underline;
 }
 
-
-.navbar-item {
-
-}
 
 
 @media only screen and (max-width: 760px) {
@@ -25,6 +22,14 @@
 	.no-more-tables td,
 	.no-more-tables tr {
 		display: block;
+	}
+
+	.no-more-tables table {
+		border: none;
+	}
+	.no-more-tables tr {
+		display: block;
+		margin-bottom: 20px;
 	}
 
 	/* Hide table headers (but not display: none;, for accessibility) */
@@ -62,4 +67,170 @@
 	Label the data
 	*/
 	.no-more-tables td:before { content: attr(data-title); }
+}
+
+.navbar-custom {
+	background-color:#225522;
+	color:#ffffff;
+	border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+	color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+	color: #FFB612;
+	background-color:transparent;
+}
+
+.navbar-custom  span.icon-bar {
+	background-color: #FFB612;
+}
+
+.navbar-custom .navbar-brand {
+	color:#eeeeee;
+}
+
+.four-col-list  ul {
+	width: 760px;
+	margin-bottom: 20px;
+	overflow: hidden;
+	border-top: 1px solid #ccc;
+}
+
+.four-col-list  li {
+	line-height: 1.5em;
+	border-bottom: 1px solid #ccc;
+	float: left;
+	display: inline;
+	width: 25%;
+}
+
+div.c2e-input {
+	border-bottom: solid 1px black;
+}
+
+div.c2e-default {
+	color: grey;
+	text-align: center;
+	font-style: italic;
+}
+
+.c2efield-rpad {
+	padding-right: 20px;
+}
+
+
+table.club-event-form td:nth-child(1) {
+	padding-right: 20px;
+}
+
+table.club-event-form td:nth-child(2) {
+	min-width: 200px;
+}
+
+.spacer-20 {
+	margin-top: 20px;
+}
+
+/* not sure if needed for sticky footer */
+html {
+	position: relative;
+	min-height: 100%;
+}
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 60px !important;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 40px;
+	background-color: #203731;
+	padding-top: 10px;
+	color: #FFB612;
+}
+
+a.footer-link {
+	color: #ffffff;
+}
+
+a.footer-link:hover {
+	color: #FFB612;
+}
+
+.fullwidth {
+	max-width: 100%;
+	width: 100%;
+}
+
+.form-group {
+	margin-top: 10px;
+}
+
+.margin-10 {
+	margin: 10px;
+}
+
+.event-list-heading {
+	/* combine lead and strong */
+	font-size: 1em;
+	font-weight: 700;
+}
+
+.panel-primary {
+	border-color: #203731 !important;
+}
+
+.panel-primary > .panel-heading {
+	background: #203731 !important;
+	font-size: 1em;
+	font-weight: 700;
+}
+
+li.list-highlight:hover {
+	background-color: #FFB612;
+	cursor: pointer;
+}
+
+
+.navbar-custom {
+	background-color:#203731;
+	color: black;
+	border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+	color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+	color: #FFB612;
+	background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+	color:#FFB612;
+}
+
+.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus {
+	text-decoration: none;
+	background-color: #FFB612;
+}
+
+.col-centered{
+	float: none;
+	margin: 0 auto;
+}
+
+a.nostyle:link {
+	text-decoration: inherit;
+	color: inherit;
+	cursor: auto;
+}
+
+a.nostyle:visited {
+	text-decoration: inherit;
+	color: inherit;
+	cursor: auto;
 }
