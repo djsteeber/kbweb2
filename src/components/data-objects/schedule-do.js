@@ -22,6 +22,14 @@ define(['knockout'], function(ko) {
 
             return DAY_OF_WEEK[d.getDay()];
         });
+
+        self.toDate = ko.computed(function() {
+            var dt = new Date(self.date());
+            // when you only specify the date part, then you need to add in the offset
+            // when you specify Date(year, month, date) it seems to work.
+            dt.setTime( dt.getTime() + dt.getTimezoneOffset()*60*1000 );
+            return dt;
+        })
     }
 
     function ScheduleDO(sched) {
@@ -29,6 +37,7 @@ define(['knockout'], function(ko) {
 
         self.dates = ko.observableArray();
         if (sched) {
+            // assumed sorted.
             var oSched = $.map(sched, function(item) {
                 return new DateTimeDo(item);
             });
@@ -72,6 +81,34 @@ define(['knockout'], function(ko) {
 
             return str;
         });
+
+        self.today = function() {
+            var dt = new Date();
+            dt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
+
+            return dt;
+        };
+
+        self.inProgress = ko.computed(function() {
+            var inprogress = false;
+            var dateAry = self.dates();
+            if (dateAry) {
+                var now = self.today()
+                //now.setTime( now.getTime() + now.getTimezoneOffset()*60*1000 );
+
+                if (dateAry.length == 1) {
+                    var start =dateAry[0].toDate();
+                    inprogress = (now.getTime() == start.getTime());
+                } else if (dateAry.length > 1) {
+                    var start = dateAry[0].toDate();
+                    var end = dateAry[dateAry.length - 1].toDate();
+
+                    inprogress = ((start.getTime() <= now.getTime()) && (now.getTime() <= end.getTime()));
+                }
+            }
+            return inprogress;
+        });
+
     }
     // might just make all data objects part of this file and return a hash
     return {schedule: ScheduleDO, date: DateTimeDo};

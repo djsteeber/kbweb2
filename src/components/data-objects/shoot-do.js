@@ -60,6 +60,10 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
             return (! (typeof self.flyer() === 'undefined' || (typeof self.flyer().url() === 'undefined')));
         });
 
+        self.inProgress = ko.computed(function() {
+           return self.schedule() && self.schedule().inProgress();
+        });
+
 
         self.init = function(evt) {
             self.id(evt._id);
