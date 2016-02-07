@@ -121,7 +121,7 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
         if (params) {
             if (params.sort) {
                 // ignore and just load params with sort of date
-                reqData.sort = {schedule:{date: true}};
+                reqData.sort = {"schedule.date": 1};
             }
             if (params.limit) {
                 reqData.limit = params.limit;
@@ -140,7 +140,7 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
             }
         } else {
             //TODO, make this clickable / passed in as a param
-            reqData = {sort: {schedule:{date: false}}};
+            reqData = {sort: {"schedule.date": 1}};
         }
         $.ajax({
             dataType: "json",
