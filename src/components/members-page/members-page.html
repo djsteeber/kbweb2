@@ -8,17 +8,14 @@
                 Here is the remaining work party schedule.  Work starts at 8:00am and goes until approximately 12:00pm,
                 unless otherwise stated.
             </p>
-            <event-list params="eventType: 'WORKPARTY'"></event-list>
+
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <h3>Membership Documents</h3>
-            <document-list params="fileType:'MEMBERS'"></document-list>
+            <document-list params="documentType:'membership', title: 'Membership Documents'"></document-list>
 
-            <h3>Meeting Notes</h3>
-            <document-list params="fileType:'MEETING'"></document-list>
+            <document-list params="documentType:'meetings', title: 'Meeting Minutes'"></document-list>
 
-            <h3>News Letters</h3>
-            <document-list params="fileType:'NEWSLETTER'"></document-list>
+            <document-list params="documentType:'newsletters', title: 'News Letters'"></document-list>
         </div>
     </div>
 </div>

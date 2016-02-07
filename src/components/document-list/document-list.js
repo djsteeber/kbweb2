@@ -3,29 +3,20 @@ define(['knockout', 'text!./document-list.html'], function(ko, templateMarkup) {
   function DocumentList(params) {
     var self = this;
 
-//    self.fileType = ko.observable(params.fileType);
+    self.documentType = ko.observable(params.documentType);
+
+    self.title = ko.observable(params.title);
 
     self.documentList = ko.observableArray();
-
-/*
-    self.filteredDocumentList = self.documentList.filter(function (d) {
-      return ((! params) || (! params.fileType) || (d.fileType == params.fileType));
-    });
-*/
-    // wonder if this should be mapped
-
 
 
     //TODO, nee to send down the filter to the rest call
     $.ajax({
       dataType: "json",
-      url: '/rest/documents',
-      data: {},
+      url: '/secure-docs/' + self.documentType(),
+      type: 'GET',
       success: function(data) {
-        var filteredData = data.filter(function(d) {
-          return ((!params) || (!params.fileType) || (params.fileType == d.fileType));
-        });
-        self.documentList(filteredData);
+        self.documentList(data);
       }
     });
   }

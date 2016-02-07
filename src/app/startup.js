@@ -51,6 +51,8 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   ko.components.register('profile-page', { require: 'components/profile-page/profile-page' });
 
+  ko.components.register('forgot-password-page', { require: 'components/forgot-password-page/forgot-password-page' });
+
   // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
 /*
   ko.bindingHandlers.dateString = {

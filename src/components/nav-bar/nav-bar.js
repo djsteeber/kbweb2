@@ -6,35 +6,11 @@ define(['knockout', 'text!./nav-bar.html'], function(ko, template) {
 
         self.login = ko.observable();
         self.password = ko.observable(); // might want to figure out how to encrypt
-        self.isAuthenticated = ko.observable().syncWith("login.loggedin");
-        self.user = ko.observable({}).syncWith("auth.user");
+        self.isAuthenticated = ko.observable(false);
+        self.user = ko.observable({});
 
-        self.membersMenuTitle = ko.observable();
+        self.membersMenuTitle = ko.observable("Member's Login");
 
-
-
-/*
-        $.ajax({
-            url: "/auth/login",
-            type: "GET",
-            success: function (returnData) {
-                if (returnData.token) {
-                    self.isAuthenticated(true);
-                    self.password("");
-                    self.user(returnData.user);
-                    self.membersMenuTitle("Hello, " + returnData.user.name.firstName);
-                    // hide the form
-                    // old, used to refresh the page window.location.reload();
-                } else {
-                    self.isAuthenticated(false);
-                    self.membersMenuTitle("Member's Login");
-                }
-            }, fail: function( ibx, returnData) {
-                alert(JSON.stringify(returnData));
-            }
-
-        });
-*/
 
         // This viewmodel doesn't do anything except pass through the 'route' parameter to the view.
         // You could remove this viewmodel entirely, and define 'nav-bar' as a template-only component.
@@ -43,9 +19,6 @@ define(['knockout', 'text!./nav-bar.html'], function(ko, template) {
         self.route = params.route;
 
         self.authNavList = ko.observableArray();
-
-        self.isLoggedIn = ko.observable(false).subscribeTo("login.loggedin");
-        self.user = ko.observable({}).subscribeTo("auth.user");
 
         self.membersMenuTitle2 = ko.computed(function() {
             var title = "Member's Login";
@@ -82,7 +55,7 @@ define(['knockout', 'text!./nav-bar.html'], function(ko, template) {
 
 
         self.submitLogin = function () {
-            var data = {login: ko.unwrap(self.login), password: ko.unwrap(self.password)};
+            var data = {username: ko.unwrap(self.login), password: ko.unwrap(self.password)};
 
             $.ajax({
                 url: "/auth/login",
@@ -90,23 +63,15 @@ define(['knockout', 'text!./nav-bar.html'], function(ko, template) {
                 data: data,
                 success: function (returnData) {
                     self.loadUser();
-                    /*
-                    if (returnData.token) {
-                        self.isAuthenticated(true);
-                        self.password("");
-                        self.user(returnData.user);
-//                        self.membersMenuTitle("Hello, " + returnData.user.name.firstName);
-                        // hide the form
-                        // old, used to refresh the page window.location.reload();
-                    } else {
-                        self.isAuthenticated(false);
-                    }
-                    */
                 },
                 error: function (obj) {
                     self.isAuthenticated(false);
-                    alert(JSON.stringify(obj));
                     self.membersMenuTitle("Member's Login");
+                    if (obj.status == 401) {
+                        alert("Your email address and/or password is invalid.");
+                    } else {
+                        alert("The members login is not available at the present time.  Please try again later");
+                    }
                 }
             });
         };
@@ -121,6 +86,9 @@ define(['knockout', 'text!./nav-bar.html'], function(ko, template) {
                     self.user({});
                     //window.location.href = "/";
                     self.membersMenuTitle("Member's Login");
+                    // TODO could check href and parse to see if we are on a members page or not, then redirect
+                    // for now just redirect to home on logout, not sure anyone will logout
+                    window.location.href = "/#home";
                 }
             });
         };
@@ -141,8 +109,6 @@ define(['knockout', 'text!./nav-bar.html'], function(ko, template) {
                         self.isAuthenticated(false);
                         self.membersMenuTitle("Member's Login");
                     }
-                }, fail: function( ibx, returnData) {
-                    alert(JSON.stringify(returnData));
                 }
             });
 

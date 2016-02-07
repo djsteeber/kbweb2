@@ -78,10 +78,6 @@ define(['knockout'], function(ko) {
                     return new AnnouncementDO(item);
                 });
                 oa(returnData);
-            },
-            error: function (obj) {
-                alert('an error occurred');
-                alert(JSON.stringify(obj));
             }
         });
     }

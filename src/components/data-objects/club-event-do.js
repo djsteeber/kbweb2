@@ -185,10 +185,6 @@ define(['knockout'], function(ko) {
                     return new ClubEventDO(item);
                 });
                 list = ko.observableArray(returnData);
-            },
-            error: function (obj) {
-                alert('an error occurred');
-                alert(JSON.stringify(obj));
             }
         });
 

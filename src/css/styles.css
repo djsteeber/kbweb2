@@ -190,6 +190,22 @@ a.footer-link:hover {
 	font-weight: 700;
 }
 
+
+.panel-primary > .panel-footer {
+	background: #203731 !important;
+	font-size: 1em;
+	font-weight: 700;
+	color: white;
+}
+
+.panel-primary > .panel-footer > a {
+	display: block;
+}
+
+.panel-primary > .panel-footer > a:hover {
+	color:#FFB612;
+}
+
 li.list-highlight:hover {
 	background-color: #FFB612;
 	cursor: pointer;
@@ -233,4 +249,8 @@ a.nostyle:visited {
 	text-decoration: inherit;
 	color: inherit;
 	cursor: auto;
+}
+
+.red {
+	color: red;
 }
