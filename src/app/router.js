@@ -21,10 +21,9 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
             { url: 'directions',     params: { page: 'directions-page' } },
             { url: 'members',     params: { page: 'members-page' } },
             { url: 'message-center',     params: { page: 'message-center-page' } },
-            { url: 'user-admin-page',     params: { page: 'user-admin-page' }},
-            { url: 'events-admin-page',     params: { page: 'events-admin-page' } },
             { url: 'shoot/{id}',    params: {page: 'shoot-page'}},
-            { url: 'profile',     params: { page: 'profile-page' } }
+            { url: 'profile',     params: { page: 'profile-page' } },
+            { url: 'forgot',     params: { page: 'forgot-password-page' } }
 
         ]
     });

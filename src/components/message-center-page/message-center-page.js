@@ -29,14 +29,13 @@ define(['knockout','tinyMCE', 'text!./message-center-page.html'], function(ko, t
         }
       });
     }
-
+/*
     tinyMCE.init({
       selector: ".editibleArea"
 
     });
+    */
   }
-
-
 
   return { viewModel: MessageCenterPage, template: templateMarkup };
 

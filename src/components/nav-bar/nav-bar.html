@@ -19,7 +19,7 @@
     <!-- Collection of nav links, forms, and other content for toggling -->
     <div id="navbarCollapse" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li  data-bind="css: { active: route().page === 'home' }">
+        <li  data-bind="css: { active: ((route().page === 'home') || (route().page === '#') || (route().page === '')) }">
           <a href="#home" class="navbar-item">Home</a>
         </li>
         <!-- CLUB INFORMATION MENU ITEM -->
@@ -41,7 +41,7 @@
           <a href="#lessons" class="navbar-item">Lessons</a>
         </li>
         <!-- MEMBERS PAGE MENU ITEM -->
-        <li class="dropdown" data-bind="visible: isLoggedIn()">
+        <li class="dropdown" data-bind="visible: isAuthenticated()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             Members<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -50,20 +50,6 @@
             </li>
             <li data-bind="css: { active: route().page === 'message-center-page' }">
               <a href="#message-center" class="navbar-item">Message Center</a>
-            </li>
-          </ul>
-          </a>
-        </li>
-        <!-- SITE ADMIN PAGES -->
-        <li class="dropdown" data-bind="visible: isLoggedIn()">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Admin<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li data-bind="css: { active: route().page === 'user-admin-page' }">
-              <a href="#user-admin-page" class="navbar-item">User Admin</a>
-            </li>
-            <li data-bind="css: { active: route().page === 'events-admin-page' }">
-              <a href="#events-admin-page" class="navbar-item">Events Admin</a>
             </li>
           </ul>
           </a>
@@ -99,8 +85,8 @@
                 </div>
               </form>
             </li>
-            <li data-bind="css: { active: route().page === 'events-admin-page' }">
-              <a href="#" class="navbar-item">Forgot Password</a>
+            <li data-bind="css: { active: route().page === 'forgot' }">
+              <a href="#forgot" class="navbar-item">Forgot Password</a>
             </li>
           </ul>
         </li>

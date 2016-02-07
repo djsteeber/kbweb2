@@ -99,9 +99,6 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
                     //data: data,
                     success: function (returnData) {
                         self.init(returnData);
-                    },
-                    error: function (obj) {
-                        alert(JSON.stringify(obj));
                     }
                 });
             }
@@ -156,10 +153,6 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
                     return new ShootDO(item);
                 });
                 oa(returnData);
-            },
-            error: function (obj) {
-                alert('an error occurred');
-                alert(JSON.stringify(obj));
             }
         });
     }

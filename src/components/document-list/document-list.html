@@ -1,3 +1,18 @@
-<ul data-bind="foreach: documentList">
-    <li class="list-unstyled"><a data-bind="text: name, attr: {href: uri + '?binary=true'}"/></li>
-</ul>
+<div class="panel panel-primary">
+    <div class="panel-heading" data-bind="text: title"></div>
+
+    <ul class="list-unstyled list-group" data-bind="foreach: documentList">
+        <li class="list-group-item list-highlight">
+            <a class="nostyle" data-bind="attr: {href: '/secure-docs/' + $parent.documentType() + '/' + name}">
+                <div class="row list-group-item-text">
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <span class="pull-left"  data-bind="text: name"/>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <span class="pull-right small" data-bind="text: modified"></span>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -35,7 +35,6 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'membership-stuff': ['components/membership-page/membership-page'],
             'directions-stuff': ['text!components/directions-page/directions-page.html'],
             'members-stuff': ['components/membership-page/membership-page', 'components/message-center-page/message-center-page'],
-            'admin-stuff': ['components/user-admin-page/user-admin-page','components/events-admin-page/events-admin-page'],
             'club-event-stuff': ['components/club-event/club-event'],
             'shoot-page-stuff': ['components/shoot-page/shoot-page']
             // If you want parts of the site to load on demand, remove them from the 'include' list
