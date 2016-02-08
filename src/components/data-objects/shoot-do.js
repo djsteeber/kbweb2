@@ -22,10 +22,21 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
         self.description = ko.observable();
         //self.shortDescription = ko.observable();
         self.shootType = ko.observable();
+        self.ranges = ko.observableArray();
         self.schedule = ko.observable();
         self.flyer = ko.observable();
         self.results = ko.observable({url: ko.observable(), name: ko.observable()});
         self.status = ko.observable();
+
+        self.rangeStringList = ko.computed(function() {
+           var ary = self.ranges();
+
+            var rangeList = ary.map(function(item) {
+                return item();
+            });
+
+            return rangeList.join(",");
+        });
 
 
 
@@ -84,11 +95,18 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
             }
             if (evt.results) {
                 var obsResults = {};
-                for (var key in evt.flyer) {
+                for (var key in evt.results) {
                     obsResults[key] = ko.observable(evt.results[key]);
                 }
                 self.results(obsResults);
             }
+            if (evt.range) {
+                var list = evt.range.map(function(item) {
+                    return ko.observable(item);
+                });
+                self.ranges(list);
+            }
+
         };
 
         self.load = function(id) {

@@ -1,13 +1,17 @@
 <h1 data-bind="text: shoot().name"></h1>
 <div class="row">
-    <div class="col-sm-12, col-md-12, col-sm-12" data-bind="text: shoot().dateText">
+    <div class="col-sm-12, col-md-12, col-lg-12" data-bind="text: shoot().dateText">
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-12, col-md-12, col-sm-12" data-bind="text: shoot().description">
+    <div class="col-sm-12, col-md-12, col-lg-12" data-bind="text: shoot().description">
     </div>
 </div>
-
+<div class="row">
+    <div class="col-sm-12, col-md-12, col-lg-12">
+        Range(s): <span data-bind="text: shoot().rangeStringList"></span>
+    </div>
+</div>
 <div class="row spacer-20" data-bind="if: shoot().hasFlyer">
     <img class="img-responsive table-bordered" data-bind="attr: {src: shoot().flyer().url}"/>
 </div>

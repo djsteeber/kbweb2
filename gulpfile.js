@@ -17,7 +17,6 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
         include: [
             'requireLib',
             'components/nav-bar/nav-bar',
-            'components/event-grid/event-grid',
             'components/upcoming-events/upcoming-events',
             'components/announcements/announcements',
             'components/home-page/home-page',
@@ -77,6 +76,10 @@ gulp.task('copy-static', function() {
         .pipe(gulp.dest('./dist/img/'));
     gulp.src('./src/misc_docs/*.*')
         .pipe(gulp.dest('./dist/misc_docs/'));
+    gulp.src('./src/misc_docs/shoots/*.png')
+        .pipe(gulp.dest('./dist/misc_docs/shoots/'));
+    gulp.src('./src/misc_docs/shoots/*.jpg')
+        .pipe(gulp.dest('./dist/misc_docs/shoots/'));
 });
 
 // Removes all files from ./dist/
