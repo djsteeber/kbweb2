@@ -23,6 +23,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'components/data-objects/announcement-do.js',
             'components/data-objects/club-event-do.js',
             'components/data-objects/schedule-do.js',
+            'components/document-list/document-list',
             'components/data-objects/shoot-do.js'
         ],
         insertRequire: ['app/startup'],
@@ -33,7 +34,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'events-stuff': ['components/events-page/events-page'],
             'membership-stuff': ['components/membership-page/membership-page'],
             'directions-stuff': ['text!components/directions-page/directions-page.html'],
-            'members-stuff': ['components/membership-page/membership-page', 'components/message-center-page/message-center-page'],
+            'members-stuff': ['components/members-page/members-page', 'components/message-center-page/message-center-page'],
             'club-event-stuff': ['components/club-event/club-event'],
             'shoot-page-stuff': ['components/shoot-page/shoot-page']
             // If you want parts of the site to load on demand, remove them from the 'include' list
