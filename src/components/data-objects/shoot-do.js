@@ -27,6 +27,8 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
         self.flyer = ko.observable();
         self.results = ko.observable({url: ko.observable(), name: ko.observable()});
         self.status = ko.observable();
+        self.scheduleStartDate = ko.observable();
+        self.scheduleEndDate = ko.observable();
 
 
         /**
@@ -81,18 +83,27 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
 
         self.dateText = ko.computed(function () {
             var rtn = "";
-            if (self.schedule()) {
-                rtn = self.schedule().dateString();
+
+            var options =  { year: 'numeric', month: 'short', day: 'numeric' };
+            if (self.scheduleStartDate()) {
+                rtn = self.scheduleStartDate().toLocaleDateString('en-US', options);
+                if (self.scheduleEndDate()) {
+                    if (self.scheduleEndDate().getTime() > self.scheduleStartDate().getTime()) {
+                        rtn = rtn + ' - ' + self.scheduleEndDate().toLocaleDateString('en-US', options)
+                    }
+                }
             }
+
             return rtn;
         });
 
 
         self.timeText = ko.computed(function() {
             var rtn = '';
+            // really need to check if schedule, xschedule has a reoccurring, maybe
             if ((self.shootType() != null) && (self.shootType() == 'League')) {
-                if (self.schedule()) {
-                    rtn = self.schedule().getDayOfWeek();
+                if (self.scheduleStartDate()) {
+                    rtn = self.scheduleStartDate().toLocaleDateString('en-US', {weekday: 'long'});
                 }
             }
             return rtn;
@@ -122,6 +133,12 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
             self.description(evt.description);
             //self.shortDescription(evt.shortDescription);
             self.schedule(new ScheduleDO.schedule(evt.schedule));
+            if (evt.scheduleStartDate) {
+                self.scheduleStartDate(new Date(evt.scheduleStartDate));
+            }
+            if (evt.scheduleEndDate) {
+                self.scheduleEndDate(new Date(evt.scheduleEndDate));
+            }
 
             // for this we need to make sure every entity in flyer is observable as well
             // should use mapper, but oh well
@@ -194,6 +211,9 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
                 //reqData = { schedule: { "$elemMatch": {date: {"$gte": nowStr}}}};
 
                 reqData.q = { schedule: { "$elemMatch": {date: {"$gte": nowStr}}}};
+                //db.shoots.find({"xschedule": {"$elemMatch": {"finalDate": {"$gte": new ISODate()}}}}).sort({"xschedule.start": 1}
+                //db.shoots.find({"finalScheduleDate": {"$gte": new ISODate()}}).sort({"xschedule.start": -1})
+
             }
         } else {
             //TODO, make this clickable / passed in as a param

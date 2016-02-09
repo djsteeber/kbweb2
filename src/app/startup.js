@@ -72,7 +72,9 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
         editable: viewModel.editable,
         aspectRatio: 2,
         height: 'auto',
-        fixedWeekCount: false
+        fixedWeekCount: false,
+        minTime: "07:00:00",
+        maxTime: "22:00:00"
 
       });
       $(element).fullCalendar('gotoDate', ko.utils.unwrapObservable(viewModel.viewDate));

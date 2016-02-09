@@ -3,6 +3,12 @@ define(['knockout', 'text!./events-page.html', '../data-objects/shoot-do.js', 'f
   function EventsPage(/*params*/) {
     var self = this;
 
+    self.tabView = ko.observable('calendar');
+
+    self.switchView = function(view) {
+      self.tabView(view);
+    };
+
     self.shootsList = ko.observableArray();
     ShootDO.loadList(self.shootsList);
 
