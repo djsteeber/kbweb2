@@ -28,6 +28,45 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
         self.results = ko.observable({url: ko.observable(), name: ko.observable()});
         self.status = ko.observable();
 
+
+        /**
+         * fullCalendar integration:  This will return the schedule as elements for full calendar
+         * format of item
+         *         {
+         *         title: 'Lunch',
+         *         start: new Date(y, m, d, 12, 0),
+         *         end: new Date(y, m, d, 14, 0),
+         *         allDay: false},
+         *         url, backgroundColor
+         */
+        self.fullCalendar = ko.computed(function() {
+            var sched = self.schedule();
+            if (! sched) {
+                return [];
+            }
+            var dates = sched.dates();
+
+            var color = 'red';
+            if (self.shootType() === 'League') {
+                color = 'green';
+            }
+
+            var rtn = dates.map(function(item) {
+                var obj = {id: self.id()};
+                var dt = item.toDate();
+
+                obj.title = self.name();
+                obj.start = item.toStartDate();
+                obj.end = item.toEndDate();
+                obj.allDay = false;
+                obj.backgroundColor = color;
+                obj.url =  '/#shoot/' + self.id();
+                return obj;
+            });
+
+            return rtn;
+        });
+
         self.rangeStringList = ko.computed(function() {
            var ary = self.ranges();
 

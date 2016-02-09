@@ -29,7 +29,25 @@ define(['knockout'], function(ko) {
             // when you specify Date(year, month, date) it seems to work.
             dt.setTime( dt.getTime() + dt.getTimezoneOffset()*60*1000 );
             return dt;
-        })
+        });
+        self.toStartDate = ko.computed(function() {
+            var dt = self.toDate();
+            var time = parseInt(self.start());
+            var hr = time / 100;
+            var min = time % 100;
+            dt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), hr, min);
+            return dt;
+        });
+        self.toEndDate = ko.computed(function() {
+            var dt = self.toDate();
+            var time = parseInt(self.end());
+            var hr = time / 100;
+            var min = time % 100;
+            dt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), hr, min);
+            return dt;
+        });
+
+
     }
 
     function ScheduleDO(sched) {

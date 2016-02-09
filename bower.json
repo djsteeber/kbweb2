@@ -11,7 +11,8 @@
     "knockout": "~3.3.0-alpha",
     "knockout-projections": "~1.1.0",
     "tinymce": "~4.1.10",
-    "knockout-postbox": "~0.5.2"
+    "knockout-postbox": "~0.5.2",
+    "moment": "~2.11.2"
   },
   "resolutions": {
     "knockout": "~3.3.0-alpha"
