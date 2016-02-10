@@ -254,3 +254,29 @@ a.nostyle:visited {
 .red {
 	color: red;
 }
+
+/* fullCalender Time overrides*/
+/* removed fc-time from the month view */
+span.fc-time {
+	display: none !important;
+}
+.fc-toolbar {
+	font-size: 12px !important;
+	margin-bottom: 0.25em !important;
+}
+.fc-toolbar > .fc-center > h2 {
+	font-size: 20px !important;
+}
+
+.btn-custom {
+	background-color:#225522;
+	color: #fff;
+	border-color: #223322;
+}
+.btn-custom:hover {
+	color: #FFB612;
+}
+
+div.calendar-background {
+	background-color: #ffffc4;
+}

@@ -22,3 +22,6 @@ content editable
 TODO need to fix flyer link if no flyer exists.
 TODO need to fix the file upload as well, not sure why it is not posting coreectly on kbweb.steeber.net
 TODO found issue.  Need to parameterize the location of where to write the files.  right now hard coded in kbwebsvr.js file
+
+need to make sure this is only calling the same protocol as server
+http or https

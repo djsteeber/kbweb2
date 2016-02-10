@@ -1,4 +1,4 @@
-define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', 'knockout-postbox'], function($, ko, router) {
+define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', 'knockout-postbox', 'fullcalendar'], function($, ko, router) {
 
   // Components can be packaged as AMD modules, such as the following:
   ko.components.register('nav-bar', { require: 'components/nav-bar/nav-bar' });
@@ -6,8 +6,6 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   // ... or for template-only components, you can just point to a .html file directly:
   ko.components.register('about-page', { require: 'components/about-page/about-page'});
-
-  ko.components.register('event-grid', { require: 'components/event-grid/event-grid' });
 
   ko.components.register('announcements', { require: 'components/announcements/announcements' });
 
@@ -54,17 +52,35 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
   ko.components.register('forgot-password-page', { require: 'components/forgot-password-page/forgot-password-page' });
 
   // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
-/*
-  ko.bindingHandlers.dateString = {
-    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
-      var value = valueAccessor(),
-          allBindings = allBindingsAccessor();
-      var valueUnwrapped = ko.utils.unwrapObservable(value);
-      var pattern = allBindings.datePattern || 'MM/dd/yyyy';
-      $(element).text(valueUnwrapped.toString(pattern));
+
+  // add in a calendar binding
+  ko.bindingHandlers.fullCalendar = {
+    update: function(element, viewModelAccessor) {
+      var viewModel = viewModelAccessor();
+      viewModel = viewModel();
+
+      element.innerHTML = "";
+      // so, we need to make sure that the fullCalendar is loaded on and inner div, so it can be replaced
+      $(element).append("<div></div>");
+
+      var childElement = element.childNodes[0];
+
+
+      $(childElement).fullCalendar({
+        events: ko.utils.unwrapObservable(viewModel.events),
+        header: viewModel.header,
+        editable: viewModel.editable,
+        aspectRatio: 2,
+        height: 'auto',
+        fixedWeekCount: false,
+        minTime: "07:00:00",
+        maxTime: "22:00:00"
+
+      });
+      $(element).fullCalendar('gotoDate', ko.utils.unwrapObservable(viewModel.viewDate));
     }
   };
-  */
+
   // Start the application
   ko.applyBindings({ route: router.currentRoute });
 });

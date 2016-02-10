@@ -61,7 +61,7 @@ define(['knockout'], function(ko) {
                 // for now send as one struct until I can find the ajax call to send multiple parameters
                 //reqData = { schedule: { "$elemMatch": {date: {"$gte": nowStr}}}};
 
-                reqData.q = { end: {"$gte": nowStr}};
+                reqData.q = { end: {"$gte": "now()"}};
             }
         } else {
             //TODO, make this clickable / passed in as a param
@@ -72,13 +72,17 @@ define(['knockout'], function(ko) {
             url: "/rest/announcements",
             type: "GET",
             //async: false,
-            data: {q: JSON.stringify(reqData)},
+            //data: reqData,
             success: function (returnData) {
                 returnData = $.map(returnData, function(item, inx) {
                     return new AnnouncementDO(item);
                 });
                 oa(returnData);
+            },
+            fail: function (err) {
+                alert(err);
             }
+
         });
     }
 

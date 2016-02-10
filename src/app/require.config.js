@@ -12,7 +12,9 @@ var require = {
         "text":                 "bower_modules/requirejs-text/text",
         "tinyMCE":              "bower_modules/tinymce/tinymce",
         "knockout-postbox":     "bower_modules/knockout-postbox/build/knockout-postbox",
-        "mapping":              "bower_modules/knockout-mapping/knockout.mapping"
+        "mapping":              "bower_modules/knockout-mapping/knockout.mapping",
+        "moment":               "bower_modules/moment/moment",
+        "fullcalendar":         "bower_modules/fullcalendar/dist/fullcalendar"
         //TODO move data object definitions here
     },
     deps: ['knockout', 'mapping'],
@@ -21,6 +23,7 @@ var require = {
     },
     shim: {
         "bootstrap": { deps: ["jquery"] },
+        "fullcalendar": {deps: ["jquery", "moment"]},
         "tinyMCE": {
             exports: "tinyMCE",
             init: function () {
