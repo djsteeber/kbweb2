@@ -3,51 +3,33 @@ define(['knockout'], function(ko) {
     // need to move these to a date object
     var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var DAY_OF_WEEK = ['Sunday', 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var DATE_OPTIONS = { year: 'numeric', month: 'short', day: 'numeric' };
 
     function DateTimeDo(dt) {
         var self = this;
-        self.date = ko.observable(dt.date);
-        self.start = ko.observable(dt.start);
-        self.end = ko.observable(dt.end);
+        self.start = ko.observable((dt.start) ? new Date(dt.start) : undefined);
+        self.end = ko.observable((dt.end) ? new Date(dt.end) : undefined);
+        self.repeat = ko.observable((dt.repeat) ? dt.repeat : 'DAILY');
+        self.repeatCount = ko.observable((dt.repeatCount) ? dt.repeatCount : 1);
+
 
         self.displayDate = ko.computed(function() {
-            var dtParts = self.date().split('-');
-
-            return MONTH_NAMES[parseInt(dtParts[1])-1] + ' ' + parseInt(dtParts[2]) + ', ' + dtParts[0];
+            var rtn = '';
+            if (self.start()) {
+                rtn = self.start().toLocaleDateString('en-US', DATE_OPTIONS)
+            }
+            return rtn;
         });
 
+        // might not need this
         self.getDayOfWeek = ko.computed(function() {
-           var d = new Date(self.date());
-            d.setTime( d.getTime() + d.getTimezoneOffset()*60*1000 );
+            var rtn = '';
+            if (self.start()) {
+                rtn = self.start().toLocaleDateString('en-US', {weekday: 'long'});
+            }
 
-            return DAY_OF_WEEK[d.getDay()];
+            return rtn;
         });
-
-        self.toDate = ko.computed(function() {
-            var dt = new Date(self.date());
-            // when you only specify the date part, then you need to add in the offset
-            // when you specify Date(year, month, date) it seems to work.
-            dt.setTime( dt.getTime() + dt.getTimezoneOffset()*60*1000 );
-            return dt;
-        });
-        self.toStartDate = ko.computed(function() {
-            var dt = self.toDate();
-            var time = parseInt(self.start());
-            var hr = time / 100;
-            var min = time % 100;
-            dt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), hr, min);
-            return dt;
-        });
-        self.toEndDate = ko.computed(function() {
-            var dt = self.toDate();
-            var time = parseInt(self.end());
-            var hr = time / 100;
-            var min = time % 100;
-            dt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), hr, min);
-            return dt;
-        });
-
-
     }
 
     function ScheduleDO(sched) {
@@ -63,29 +45,7 @@ define(['knockout'], function(ko) {
         }
 
         self.displayDates = ko.computed(function() {
-            var dtList = $.map(self.dates(), function(item) {
-                return item.displayDate();
-            })
-
-            var txt = dtList.join(',');
-
-            return txt;
-        });
-
-        // TODO not computing correctly.  Error is cannot read property displayDate
-        // TODO need to debug
-        self.dateString = ko.computed(function() {
-            var dateAry = self.dates();
-            var str = '';
-            if (! dateAry) {
-                str = '';
-            } else if (dateAry.length == 1) {
-                str = dateAry[0].displayDate();
-            } else  if (dateAry.length > 1) {
-                str = dateAry[0].displayDate() + ' - ' + dateAry[dateAry.length - 1].displayDate();
-            }
-
-            return str;
+            return 'fix chedule-do:displayDates'
         });
 
         self.getDayOfWeek = ko.computed(function() {
@@ -107,25 +67,6 @@ define(['knockout'], function(ko) {
             return dt;
         };
 
-        self.inProgress = ko.computed(function() {
-            var inprogress = false;
-            var dateAry = self.dates();
-            if (dateAry) {
-                var now = self.today()
-                //now.setTime( now.getTime() + now.getTimezoneOffset()*60*1000 );
-
-                if (dateAry.length == 1) {
-                    var start =dateAry[0].toDate();
-                    inprogress = (now.getTime() == start.getTime());
-                } else if (dateAry.length > 1) {
-                    var start = dateAry[0].toDate();
-                    var end = dateAry[dateAry.length - 1].toDate();
-
-                    inprogress = ((start.getTime() <= now.getTime()) && (now.getTime() <= end.getTime()));
-                }
-            }
-            return inprogress;
-        });
 
     }
     // might just make all data objects part of this file and return a hash

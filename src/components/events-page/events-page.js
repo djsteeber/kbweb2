@@ -10,21 +10,32 @@ define(['knockout', 'text!./events-page.html', '../data-objects/shoot-do.js', 'f
     };
 
     self.shootsList = ko.observableArray();
-    ShootDO.loadList(self.shootsList);
+    ShootDO.loadList(self.shootsList, {sort: {scheduleStartDate: 1}});
 
+
+    var flatten = function(ary) {
+      var ret = [];
+      for (var i = 0; i < ary.length; i++) {
+        if (Array.isArray(ary[i])) {
+          ret = ret.concat(flatten(ary[i]));
+        } else {
+          ret.push(ary[i]);
+        }
+      }
+      return ret;
+    };
 
     self.fcShootsList = ko.computed(function() {
       var shootsList = self.shootsList();
       var items = shootsList.map(function(item) {
         return item.fullCalendar();
       });
-      var list = [];
-      for (var key in items) {
-        list = list.concat(items[key]);
-      }
+      var list = flatten(items);
+
       return list;
 
     });
+
 
 //    self.calendarViewDate = ko.observable(Date.now());
 

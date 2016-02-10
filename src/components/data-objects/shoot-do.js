@@ -1,4 +1,4 @@
-define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) {
+define(['knockout', '../data-objects/schedule-do.js', 'moment'], function(ko, ScheduleDO, moment) {
     /*
      var shoot = {
      name: reqString
@@ -42,6 +42,7 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
          *         url, backgroundColor
          */
         self.fullCalendar = ko.computed(function() {
+
             var sched = self.schedule();
             if (! sched) {
                 return [];
@@ -54,16 +55,24 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
             }
 
             var rtn = dates.map(function(item) {
+                var ary = [];
                 var obj = {id: self.id()};
-                var dt = item.toDate();
+                var dtStart = item.start();
+                var dtEnd = item.end();
+                var dayInc = (item.repeat() === 'WEEKLY' ? 7 : 1);
 
-                obj.title = self.name();
-                obj.start = item.toStartDate();
-                obj.end = item.toEndDate();
-                obj.allDay = false;
-                obj.backgroundColor = color;
-                obj.url =  '/#shoot/' + self.id();
-                return obj;
+                for (var i = 0; i < item.repeatCount(); i++ ) {
+                    var obj = {title: self.name(), id: self.id(), start: dtStart, end: dtEnd,
+                        allDay: false,
+                        kgroundColor: color,
+                        url: '/#shoot/' + self.id()};
+                    ary.push(obj);
+
+                    dtStart = moment(dtStart).add(dayInc, 'days').toDate();
+                    dtEnd = moment(dtEnd).add(dayInc, 'days').toDate();
+                }
+
+                return ary;
             });
 
             return rtn;
@@ -122,7 +131,16 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
         });
 
         self.inProgress = ko.computed(function() {
-           return self.schedule() && self.schedule().inProgress();
+            var inprogress = false;
+            var now = Date.now();
+            var start = self.scheduleStartDate();
+            var end = self.scheduleEndDate()
+
+
+            if (start && end) {
+                inprogress = ((start.getTime() <= now) && (now <= end.getTime()));
+            }
+            return inprogress;
         });
 
 
@@ -133,12 +151,8 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
             self.description(evt.description);
             //self.shortDescription(evt.shortDescription);
             self.schedule(new ScheduleDO.schedule(evt.schedule));
-            if (evt.scheduleStartDate) {
-                self.scheduleStartDate(new Date(evt.scheduleStartDate));
-            }
-            if (evt.scheduleEndDate) {
-                self.scheduleEndDate(new Date(evt.scheduleEndDate));
-            }
+            self.scheduleStartDate((evt.scheduleStartDate)? new Date(evt.scheduleStartDate) : undefined);
+            self.scheduleEndDate((evt.scheduleEndDate)? new Date(evt.scheduleEndDate) : undefined);
 
             // for this we need to make sure every entity in flyer is observable as well
             // should use mapper, but oh well
@@ -187,46 +201,35 @@ define(['knockout', '../data-objects/schedule-do.js'], function(ko, ScheduleDO) 
         }
     }
 
-
-
     //might also want to return and arr
     function loadList(oa, params) {
         var reqData = {};
         if (params) {
             if (params.sort) {
                 // ignore and just load params with sort of date
-                reqData.sort = {"schedule.date": 1};
+                reqData.sort = {"scheduleStartDate": 1};
             }
             if (params.limit) {
-                reqData.limit = params.limit;
+                reqData.limit = (typeof params.limit == 'string') ? parseInt(params.limit) : params.limit;
             }
             if (params.skip) {
                 reqData.skip = params.skip;
             }
             if (params.current) {
-                var now = new Date();
-
-                var nowStr = now.toJSON().split('T')[0];
-                // for now send as one struct until I can find the ajax call to send multiple parameters
-                //reqData = { schedule: { "$elemMatch": {date: {"$gte": nowStr}}}};
-
-                reqData.q = { schedule: { "$elemMatch": {date: {"$gte": nowStr}}}};
-                //db.shoots.find({"xschedule": {"$elemMatch": {"finalDate": {"$gte": new ISODate()}}}}).sort({"xschedule.start": 1}
-                //db.shoots.find({"finalScheduleDate": {"$gte": new ISODate()}}).sort({"xschedule.start": -1})
-
+                reqData.q = { scheduleEndDate: {"$gte": "now()"}};
             }
         } else {
             //TODO, make this clickable / passed in as a param
-            reqData = {sort: {"schedule.date": 1}};
+            //reqData = {sort: {"schedule.date": 1}};
         }
         $.ajax({
             dataType: "json",
             url: "/rest/shoots",
             type: "GET",
             //async: false,
-            data: {q: JSON.stringify(reqData)},
+            data: reqData,                            //{q: JSON.stringify(reqData)},
             success: function (returnData) {
-                returnData = $.map(returnData, function(item, inx) {
+                returnData = $.map(returnData, function(item) {
                     return new ShootDO(item);
                 });
                 oa(returnData);

@@ -8,7 +8,7 @@
 
 <div class="row" data-bind="if: tabView() == 'calendar'">
     <div class="col-sm-12 col-md-9 col-lg-8">
-        <div data-bind="fullCalendar: calendarViewModel"></div>
+        <div data-bind="fullCalendar: calendarViewModel" class="calendar-background"></div>
     </div>
 </div>
 <div class="no-more-tables col-md-12" data-bind="if: tabView() == 'list'">
