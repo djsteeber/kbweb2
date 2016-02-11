@@ -69,27 +69,110 @@
 	.no-more-tables td:before { content: attr(data-title); }
 }
 
+/* start reskinning of nav bar */
 .navbar-custom {
-	background-color:#225522;
-	color:#ffffff;
-	border-radius:0;
+	background-color: #203731;
+	border-color: #203731;
 }
-
-.navbar-custom .navbar-nav > li > a {
-	color:#fff;
-}
-.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
-	color: #FFB612;
-	background-color:transparent;
-}
-
-.navbar-custom  span.icon-bar {
-	background-color: #FFB612;
-}
-
 .navbar-custom .navbar-brand {
-	color:#eeeeee;
+	color: #ffffff;
 }
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus {
+	color: #ffb612;
+}
+.navbar-custom .navbar-text {
+	color: #ffffff;
+}
+.navbar-custom .navbar-nav > li > a {
+	color: #ffffff;
+}
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus {
+	color: #ffb612;
+}
+.navbar-custom .navbar-nav > li > .dropdown-menu {
+	background-color: #203731;
+}
+.navbar-custom .navbar-nav > li > .dropdown-menu > li > a {
+	color: #ffffff;
+}
+.navbar-custom .navbar-nav > li > .dropdown-menu > li > a:hover,
+.navbar-custom .navbar-nav > li > .dropdown-menu > li > a:focus {
+	color: #ffb612;
+	background-color: #203731;
+}
+.navbar-custom .navbar-nav > li > .dropdown-menu > li > .divider {
+	background-color: #203731;
+}
+.navbar-custom .navbar-nav .open .dropdown-menu > .active > a,
+.navbar-custom .navbar-nav .open .dropdown-menu > .active > a:hover,
+.navbar-custom .navbar-nav .open .dropdown-menu > .active > a:focus {
+	color: #ffb612;
+	background-color: #203731;
+}
+.navbar-custom .navbar-nav > .active > a,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus,
+.navbar-custom .navbar-item:focus,
+.navbar-custom .navbar-item:hover {
+	color: #ffb612;
+	background-color: #203731;
+	border-color: #ffb612;
+}
+
+.navbar-custom .navbar-nav > .open > a,
+.navbar-custom .navbar-nav > .open > a:hover,
+.navbar-custom .navbar-nav > .open > a:focus {
+	color: #ffb612;
+	background-color: #203731;
+}
+.navbar-custom .navbar-toggle {
+	border-color: #203731;
+}
+.navbar-custom .navbar-toggle:hover,
+.navbar-custom .navbar-toggle:focus {
+	background-color: #203731;
+}
+/* I changed this one by hand */
+.navbar-custom .navbar-toggle .icon-bar {
+	background-color: #ffb612;
+}
+.navbar-custom .navbar-collapse,
+.navbar-custom .navbar-form {
+	border-color: #ffffff;
+}
+.navbar-custom .navbar-link {
+	color: #ffffff;
+}
+.navbar-custom .navbar-link:hover {
+	color: #ffb612;
+}
+
+.navbar-custom .dropdown-menu > li > form > .navbar-form > .form-group  {
+	color: #fff;
+}
+
+@media (max-width: 767px) {
+	.navbar-custom .navbar-nav .open .dropdown-menu > li > a {
+		color: #ffffff;
+	}
+	.navbar-custom .navbar-nav .open .dropdown-menu > li > a:hover,
+	.navbar-custom .navbar-nav .open .dropdown-menu > li > a:focus {
+		color: #ffb612;
+	}
+	.navbar-custom .navbar-nav .open .dropdown-menu > .active > a,
+	.navbar-custom .navbar-nav .open .dropdown-menu > .active > a:hover,
+	.navbar-custom .navbar-nav .open .dropdown-menu > .active > a:focus {
+		color: #ffb612;
+		background-color: #203731;
+	}
+
+
+
+}
+
+/* end reskinning of nav bar */
 
 .four-col-list  ul {
 	width: 760px;
@@ -211,29 +294,6 @@ li.list-highlight:hover {
 	cursor: pointer;
 }
 
-
-.navbar-custom {
-	background-color:#203731;
-	color: black;
-	border-radius:0;
-}
-
-.navbar-custom .navbar-nav > li > a {
-	color:#fff;
-}
-.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
-	color: #FFB612;
-	background-color:transparent;
-}
-.navbar-custom .navbar-brand {
-	color:#FFB612;
-}
-
-.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus {
-	text-decoration: none;
-	background-color: #FFB612;
-}
-
 .col-centered{
 	float: none;
 	margin: 0 auto;
@@ -269,9 +329,9 @@ span.fc-time {
 }
 
 .btn-custom {
-	background-color:#225522;
+	background-color:#203731;
 	color: #fff;
-	border-color: #223322;
+	border-color: #203731;
 }
 .btn-custom:hover {
 	color: #FFB612;

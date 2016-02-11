@@ -34,7 +34,8 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'events-stuff': ['components/events-page/events-page'],
             'membership-stuff': ['components/membership-page/membership-page'],
             'directions-stuff': ['text!components/directions-page/directions-page.html'],
-            'members-stuff': ['components/members-page/members-page', 'components/message-center-page/message-center-page'],
+            'members-stuff': ['components/members-page/members-page', 'components/message-center-page/message-center-page',
+            'components/forgot-password-page/forgot-password-page', 'components/profile-page/profile-page'],
             'club-event-stuff': ['components/club-event/club-event'],
             'shoot-page-stuff': ['components/shoot-page/shoot-page']
             // If you want parts of the site to load on demand, remove them from the 'include' list
@@ -86,11 +87,85 @@ gulp.task('copy-static', function() {
 
 // Removes all files from ./dist/
 gulp.task('clean', function() {
-    return gulp.src('./dist/**/*', { read: false })
-        .pipe(clean());
+    gulp.src('./dist/**/*', { read: false })
+        .pipe(clean({force: true}));
+    gulp.src('./stage/*', { read: false })
+        .pipe(clean({force: true}));
 });
+
+
 
 gulp.task('default', ['html', 'js', 'css', 'copy-static'], function(callback) {
     callback();
     console.log('\nPlaced optimized files in ' + chalk.magenta('dist/\n'));
 });
+
+gulp.task('package', ['html', 'js', 'css', 'copy-static'], function(callback) {
+    var tar = require('gulp-tar');
+    var gzip = require('gulp-gzip');
+
+  	gulp.src('./dist/**/*')
+	.pipe(tar('kbweb.tar'))
+	.pipe(gzip())
+	.pipe(gulp.dest('./stage/'));
+});
+
+
+
+
+//add dependency here on package, maybe
+gulp.task('ship', function(callback) {
+    var GulpSSH = require('gulp-ssh')
+    var privateKeyPath = process.env["HOME"] + '/.ssh/id_rsa';
+
+    var config = {
+        host: 'kbweb.steeber.net',
+        port: 22,
+        username: 'deployweb',
+        privateKey: fs.readFileSync(privateKeyPath)
+    };
+
+
+    var gulpSSH = new GulpSSH({
+        ignoreErrors: false,
+        sshConfig: config
+    });
+
+    return gulp.src('./stage/kbweb.tar.gz')
+        .pipe(gulpSSH.sftp('write', '/var/web/stage/kbweb.tar.gz'));
+
+});
+
+// TODO:  Make a deploy script and ship it up to the server
+// TODO:    can do more granular checking if the file exists, before blowing away kbweb directory
+
+gulp.task('deploy', function(callback) {
+    var GulpSSH = require('gulp-ssh')
+    var privateKeyPath = process.env["HOME"] + '/.ssh/id_rsa';
+
+    var config = {
+        host: 'kbweb.steeber.net',
+        port: 22,
+        username: 'deployweb',
+        privateKey: fs.readFileSync(privateKeyPath)
+    };
+
+
+    var gulpSSH = new GulpSSH({
+        ignoreErrors: false,
+        sshConfig: config
+    });
+
+    // change this to execute a tar -xzf command from the directory
+    return gulpSSH.shell([
+        'cd /var/web/kbweb',
+        'tar -czf ../stage/kbweb-bak.$(date +%Y%m%d%H%M).tar.gz *',
+        'rm -rf *',
+        'tar -xzf ../stage/kbweb.tar.gz'],
+        {filePath: 'deploy.log'})
+        .pipe(gulp.dest('./stage'));
+
+});
+
+
+

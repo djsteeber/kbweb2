@@ -40,26 +40,12 @@
         <li data-bind="css: { active: route().page === 'lessons-page' }">
           <a href="#lessons" class="navbar-item">Lessons</a>
         </li>
-        <!-- MEMBERS PAGE MENU ITEM -->
-        <li class="dropdown" data-bind="visible: isAuthenticated()">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Members<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li data-bind="css: { active: route().page === 'members-page' }">
-              <a href="#members" class="navbar-item">Member's Page</a>
-            </li>
-            <li data-bind="css: { active: route().page === 'message-center-page' }">
-              <a href="#message-center" class="navbar-item">Message Center</a>
-            </li>
-          </ul>
-          </a>
-        </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right" data-bind="visible: ! isAuthenticated()">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span data-bind="text: membersMenuTitle"></span></a>
+            <span data-bind="text: membersMenuTitle"></span><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li>
               <form data-bind="submit: submitLogin">
@@ -85,6 +71,7 @@
                 </div>
               </form>
             </li>
+            <li class="nav-divider"></li>
             <li data-bind="css: { active: route().page === 'forgot' }">
               <a href="#forgot" class="navbar-item">Forgot Password</a>
             </li>
@@ -95,14 +82,22 @@
       <ul class="nav navbar-nav navbar-right" data-bind="visible: isAuthenticated()">
         <li class="dropdown" id="login-form-dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span data-bind="text: membersMenuTitle"></span></a>
+            <span data-bind="text: membersMenuTitle"></span><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li data-bind="css: { active: route().page === 'profile' }">
               <a href="#profile" class="navbar-item">User Profile</a>
             </li>
+            <li data-bind="css: { active: route().page === 'members-page' }">
+              <a href="#members" class="navbar-item">Member's Page</a>
+            </li>
+            <li data-bind="css: { active: route().page === 'message-center-page' }">
+              <a href="#message-center" class="navbar-item">Message Center</a>
+            </li>
+            <li class="nav-divider"></li>
             <li data-bind="css: { active: route().page === 'home-page' }">
               <a href="#" class="navbar-item" data-bind="click: submitLogout">Logout</a>
             </li>
+
           </ul>
         </li>
       </ul>
