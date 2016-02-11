@@ -4,5 +4,6 @@ bower_modules/
 
 # Don't track build output
 dist/
+stage/
 .idea/
 kbweb.iml
