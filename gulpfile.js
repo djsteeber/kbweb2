@@ -119,9 +119,9 @@ gulp.task('ship', function(callback) {
     var privateKeyPath = process.env["HOME"] + '/.ssh/id_rsa';
 
     var config = {
-        host: 'kbweb.steeber.net',
+        host: 'new.kenoshabowmen.com',
         port: 22,
-        username: 'deployweb',
+        username: 'kbweb',
         privateKey: fs.readFileSync(privateKeyPath)
     };
 
@@ -132,7 +132,7 @@ gulp.task('ship', function(callback) {
     });
 
     return gulp.src('./stage/kbweb.tar.gz')
-        .pipe(gulpSSH.sftp('write', '/var/web/stage/kbweb.tar.gz'));
+        .pipe(gulpSSH.sftp('write', '/opt/web/stage/kbweb.tar.gz'));
 
 });
 
@@ -144,9 +144,9 @@ gulp.task('deploy', function(callback) {
     var privateKeyPath = process.env["HOME"] + '/.ssh/id_rsa';
 
     var config = {
-        host: 'kbweb.steeber.net',
+        host: 'new.kenoshabowmen.com',
         port: 22,
-        username: 'deployweb',
+        username: 'kbweb',
         privateKey: fs.readFileSync(privateKeyPath)
     };
 
@@ -158,7 +158,7 @@ gulp.task('deploy', function(callback) {
 
     // change this to execute a tar -xzf command from the directory
     return gulpSSH.shell([
-        'cd /var/web/kbweb',
+        'cd /opt/web/kbweb',
         'tar -czf ../stage/kbweb-bak.$(date +%Y%m%d%H%M).tar.gz *',
         'rm -rf *',
         'tar -xzf ../stage/kbweb.tar.gz'],
