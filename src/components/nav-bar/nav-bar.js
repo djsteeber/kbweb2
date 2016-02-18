@@ -63,6 +63,7 @@ define(['knockout', 'text!./nav-bar.html'], function(ko, template) {
                 data: data,
                 success: function (returnData) {
                     self.loadUser();
+                    window.location.assign('/#members');
                 },
                 error: function (obj) {
                     self.isAuthenticated(false);

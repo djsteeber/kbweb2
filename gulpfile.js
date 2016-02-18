@@ -5,6 +5,13 @@ var fs = require('fs'), vm = require('vm'), merge = require('deeply'), chalk = r
 var gulp = require('gulp'), rjs = require('gulp-requirejs-bundler'), concat = require('gulp-concat'), clean = require('gulp-clean'),
     replace = require('gulp-replace'), uglify = require('gulp-uglify'), htmlreplace = require('gulp-html-replace');
 
+var SSH_CONFIG = {
+    host: 'new.kenoshabowmen.com',
+    port: 22,
+    username: 'kbweb',
+    privateKey: fs.readFileSync(process.env["HOME"] + '/.ssh/id_rsa')
+};
+
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require.config.js') + '; require;');
     requireJsOptimizerConfig = merge(requireJsRuntimeConfig, {
@@ -116,19 +123,10 @@ gulp.task('package', ['html', 'js', 'css', 'copy-static'], function(callback) {
 //add dependency here on package, maybe
 gulp.task('ship', function(callback) {
     var GulpSSH = require('gulp-ssh')
-    var privateKeyPath = process.env["HOME"] + '/.ssh/id_rsa';
-
-    var config = {
-        host: 'new.kenoshabowmen.com',
-        port: 22,
-        username: 'kbweb',
-        privateKey: fs.readFileSync(privateKeyPath)
-    };
-
 
     var gulpSSH = new GulpSSH({
         ignoreErrors: false,
-        sshConfig: config
+        sshConfig: SSH_CONFIG
     });
 
     return gulp.src('./stage/kbweb.tar.gz')
@@ -141,19 +139,10 @@ gulp.task('ship', function(callback) {
 
 gulp.task('deploy', function(callback) {
     var GulpSSH = require('gulp-ssh')
-    var privateKeyPath = process.env["HOME"] + '/.ssh/id_rsa';
-
-    var config = {
-        host: 'new.kenoshabowmen.com',
-        port: 22,
-        username: 'kbweb',
-        privateKey: fs.readFileSync(privateKeyPath)
-    };
-
 
     var gulpSSH = new GulpSSH({
         ignoreErrors: false,
-        sshConfig: config
+        sshConfig: SSH_CONFIG
     });
 
     // change this to execute a tar -xzf command from the directory
@@ -164,7 +153,6 @@ gulp.task('deploy', function(callback) {
         'tar -xzf ../stage/kbweb.tar.gz'],
         {filePath: 'deploy.log'})
         .pipe(gulp.dest('./stage'));
-
 });
 
 
