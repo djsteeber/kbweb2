@@ -9,7 +9,7 @@ define(["knockout", "text!./upcoming-events.html", '../data-objects/shoot-do.js'
         params.current = true;
         /* need to incorporate this in */
         self.shootsList = ko.observableArray();
-        ShootDO.loadList(self.shootsList, params);
+        new ShootDO().loadList(self.shootsList, params);
 
         self.evt = function(flyer) {
             if (flyer() && flyer().url) {

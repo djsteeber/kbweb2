@@ -10,7 +10,7 @@ define(['knockout', 'text!./events-page.html', '../data-objects/shoot-do.js', 'f
     };
 
     self.shootsList = ko.observableArray();
-    ShootDO.loadList(self.shootsList, {sort: {scheduleStartDate: 1}});
+    new ShootDO().loadList(self.shootsList, {sort: {scheduleStartDate: 1}});
 
 
     var flatten = function(ary) {
