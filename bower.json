@@ -12,7 +12,9 @@
     "knockout-projections": "~1.1.0",
     "tinymce": "~4.1.10",
     "knockout-postbox": "~0.5.2",
-    "moment": "~2.11.2"
+    "moment": "~2.11.2",
+    "knockout-mapping": "~2.4.1",
+    "fullcalendar": "~2.6.0"
   },
   "resolutions": {
     "knockout": "~3.3.0-alpha"

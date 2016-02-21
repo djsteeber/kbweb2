@@ -15,16 +15,16 @@
     <table class="table table-bordered table-striped table-condensed table-hover">
         <thead>
         <tr>
-            <th class="col-md-3">Shoot Name</th>
+            <th class="col-md-3">Name</th>
             <th class="col-md-3">Date</th>
-            <th class="col-md-2">Shoot Type</th>
+            <th class="col-md-2">Type</th>
         </tr>
         </thead>
         <tbody data-bind="foreach:shootsList()">
         <tr>
-            <td data-title="Shoot Name"><a data-bind="attr: {href: '#shoot/' + id()}, text: name"></a></td>
+            <td data-title="Name"><a data-bind="attr: {href: '#shoot/' + id()}, text: name"></a></td>
             <td data-title="Date" data-bind="text: dateText"></td>
-            <td data-title="Shoot Type" data-bind="text: shootType"></td>
+            <td data-title="Type" data-bind="text: shootType"></td>
         </tr>
         </tbody>
     </table>

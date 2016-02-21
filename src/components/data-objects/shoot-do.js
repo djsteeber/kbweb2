@@ -88,17 +88,16 @@ define(['knockout', '../data-objects/schedule-do.js', 'moment'], function(ko, Sc
             return rangeList.join(",");
         });
 
-
-
         self.dateText = ko.computed(function () {
             var rtn = "";
 
-            var options =  { year: 'numeric', month: 'short', day: 'numeric' };
+            var options =  { year: '2-digit', month: '2-digit', day: '2-digit' };
             if (self.scheduleStartDate()) {
-                rtn = self.scheduleStartDate().toLocaleDateString('en-US', options);
+                rtn = moment(self.scheduleStartDate()).format("MM/DD/YY");
                 if (self.scheduleEndDate()) {
-                    if (self.scheduleEndDate().getTime() > self.scheduleStartDate().getTime()) {
-                        rtn = rtn + ' - ' + self.scheduleEndDate().toLocaleDateString('en-US', options)
+                    var edt = moment(self.scheduleEndDate()).format("MM/DD/YY");
+                    if (rtn != edt) {
+                        rtn = rtn + ' - ' + edt;
                     }
                 }
             }
@@ -109,10 +108,9 @@ define(['knockout', '../data-objects/schedule-do.js', 'moment'], function(ko, Sc
 
         self.timeText = ko.computed(function() {
             var rtn = '';
-            // really need to check if schedule, xschedule has a reoccurring, maybe
             if ((self.shootType() != null) && (self.shootType() == 'League')) {
                 if (self.scheduleStartDate()) {
-                    rtn = self.scheduleStartDate().toLocaleDateString('en-US', {weekday: 'long'});
+                    rtn = moment(self.scheduleStartDate()).format('dddd');
                 }
             }
             return rtn;
