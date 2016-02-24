@@ -1,9 +1,18 @@
 // Node modules
-var fs = require('fs'), vm = require('vm'), merge = require('deeply'), chalk = require('chalk'), es = require('event-stream');
+var fs = require('fs'),
+    vm = require('vm'),
+    merge = require('deeply'),
+    chalk = require('chalk'),
+    es = require('event-stream');
 
 // Gulp and plugins
-var gulp = require('gulp'), rjs = require('gulp-requirejs-bundler'), concat = require('gulp-concat'), clean = require('gulp-clean'),
-    replace = require('gulp-replace'), uglify = require('gulp-uglify'), htmlreplace = require('gulp-html-replace');
+var gulp = require('gulp'),
+    rjs = require('gulp-requirejs-bundler'),
+    concat = require('gulp-concat'),
+    clean = require('gulp-clean'),
+    replace = require('gulp-replace'),
+    uglify = require('gulp-uglify'),
+    htmlreplace = require('gulp-html-replace');
 
 var SSH_CONFIG = {
     host: 'new.kenoshabowmen.com',
@@ -27,11 +36,15 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'components/upcoming-events/upcoming-events',
             'components/announcements/announcements',
             'components/home-page/home-page',
-            'components/data-objects/announcement-do.js',
-            'components/data-objects/club-event-do.js',
-            'components/data-objects/schedule-do.js',
             'components/document-list/document-list',
-            'components/data-objects/shoot-do.js'
+            'components/data-objects/data-object.js',
+            'components/data-objects/announcement-do.js',
+            'components/data-objects/date-time-do.js',
+            'components/data-objects/schedule-do.js',
+            'components/data-objects/event-do.js',
+            'components/data-objects/shoot-do.js',
+            'components/data-objects/meeting-do.js',
+            'components/data-objects/work-party-do.js'
         ],
         insertRequire: ['app/startup'],
         bundles: {
@@ -42,9 +55,10 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'membership-stuff': ['components/membership-page/membership-page'],
             'directions-stuff': ['text!components/directions-page/directions-page.html'],
             'members-stuff': ['components/members-page/members-page', 'components/message-center-page/message-center-page',
-            'components/forgot-password-page/forgot-password-page', 'components/profile-page/profile-page'],
-            'club-event-stuff': ['components/club-event/club-event'],
-            'shoot-page-stuff': ['components/shoot-page/shoot-page']
+                'components/forgot-password-page/forgot-password-page', 'components/profile-page/profile-page'],
+            //'club-event-stuff': ['components/club-event/club-event'],
+            'shoot-page-stuff': ['components/shoot-page/shoot-page'],
+            'viewer-page-stuff': ['components/viewer-page/viewer-page']
             // If you want parts of the site to load on demand, remove them from the 'include' list
             // above, and group them into bundles here.
             // 'bundle-name': [ 'some/module', 'another/module' ],
@@ -112,9 +126,9 @@ gulp.task('package', ['html', 'js', 'css', 'copy-static'], function(callback) {
     var gzip = require('gulp-gzip');
 
   	gulp.src('./dist/**/*')
-	.pipe(tar('kbweb.tar'))
-	.pipe(gzip())
-	.pipe(gulp.dest('./stage/'));
+        .pipe(tar('kbweb.tar'))
+        .pipe(gzip())
+        .pipe(gulp.dest('./stage/'));
 });
 
 
@@ -122,7 +136,7 @@ gulp.task('package', ['html', 'js', 'css', 'copy-static'], function(callback) {
 
 //add dependency here on package, maybe
 gulp.task('ship', function(callback) {
-    var GulpSSH = require('gulp-ssh')
+    var GulpSSH = require('gulp-ssh');
 
     var gulpSSH = new GulpSSH({
         ignoreErrors: false,
@@ -138,7 +152,7 @@ gulp.task('ship', function(callback) {
 // TODO:    can do more granular checking if the file exists, before blowing away kbweb directory
 
 gulp.task('deploy', function(callback) {
-    var GulpSSH = require('gulp-ssh')
+    var GulpSSH = require('gulp-ssh');
 
     var gulpSSH = new GulpSSH({
         ignoreErrors: false,

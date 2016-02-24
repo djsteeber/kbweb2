@@ -91,7 +91,7 @@ define(['knockout', '../data-objects/data-object.js', '../data-objects/schedule-
 
         self.name(evt.name);
         self.description(evt.description);
-        self.schedule(new ScheduleDO.schedule(evt.schedule));
+        self.schedule(new ScheduleDO(evt.schedule));
         self.scheduleStartDate((evt.scheduleStartDate)? new Date(evt.scheduleStartDate) : undefined);
         self.scheduleEndDate((evt.scheduleEndDate)? new Date(evt.scheduleEndDate) : undefined);
     };

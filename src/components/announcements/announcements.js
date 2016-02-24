@@ -5,7 +5,7 @@ define(["knockout", "text!./announcements.html", '../data-objects/announcement-d
 
         self.announcementList = ko.observableArray();
 
-        AnnouncemntDO.loadList(self.announcementList, params);
+        new AnnouncemntDO().loadList(self.announcementList, params);
     }
 
     return { viewModel: Announcements, template: templateMarkup };

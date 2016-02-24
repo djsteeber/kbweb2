@@ -1,46 +1,29 @@
-define(['knockout'], function(ko) {
+define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) {
 
     // need to move these to a date object
-    function AnnouncementDO(announcement) {
+    function AnnouncementDO() {
+        DataObject.call(this);
+
         var self = this;
+        self.restEndPoint = '/rest/announcements';
 
         self.title = ko.observable();
         self.text = ko.observable();
         self.start = ko.observable();
         self.end = ko.observable();
 
-
-        self.init = function(announcement) {
-            self.title(announcement.title);
-            self.text(announcement.text);
-            self.start(announcement.shootType);
-            self.end(announcement.description);
-        }
-
-        if (announcement) {
-            self.init(announcement);
-        }
-
-        self.load = function(id) {
-            if (id) {
-                $.ajax({
-                    url: "/rest/announcements/" + id,
-                    type: "GET",
-                    //data: data,
-                    success: function (returnData) {
-                        self.init(returnData);
-                    },
-                    error: function (obj) {
-                        alert(JSON.stringify(obj));
-                    }
-                });
-            }
-        };
     }
+    AnnouncementDO.inheritsFrom(DataObject);
 
-    //might also want to return and arr
-    //TODO: this could be generic, would need to know which object and endpoint to load
-    function loadList(oa, params) {
+    AnnouncementDO.prototype.init = function (announcement) {
+        var self = this;
+        self.title(announcement.title);
+        self.text(announcement.text);
+        self.start(announcement.shootType);
+        self.end(announcement.description);
+    };
+
+    AnnouncementDO.prototype.createQuery = function (params) {
         var reqData = {};
         if (params) {
             if (params.sort) {
@@ -61,31 +44,18 @@ define(['knockout'], function(ko) {
                 // for now send as one struct until I can find the ajax call to send multiple parameters
                 //reqData = { schedule: { "$elemMatch": {date: {"$gte": nowStr}}}};
 
-                reqData.q = { end: {"$gte": "now()"}};
+                reqData.q = {end: {"$gte": "now()"}};
             }
         } else {
             //TODO, make this clickable / passed in as a param
-            reqData = {sort: {schedule:{date: false}}};
+            reqData = {sort: {schedule: {date: false}}};
         }
-        $.ajax({
-            dataType: "json",
-            url: "/rest/announcements",
-            type: "GET",
-            //async: false,
-            //data: reqData,
-            success: function (returnData) {
-                returnData = $.map(returnData, function(item, inx) {
-                    return new AnnouncementDO(item);
-                });
-                oa(returnData);
-            },
-            fail: function (err) {
-                alert(err);
-            }
 
-        });
-    }
+        return reqData;
+    };
+
 
 
     // might just make all data objects part of this file and return a hash
-    return {item: AnnouncementDO, loadList: loadList}});
+    return AnnouncementDO;
+});

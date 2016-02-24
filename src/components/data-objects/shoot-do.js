@@ -1,4 +1,4 @@
-define(['knockout', '../data-objects/event-do.js'], function(ko, EventDO) {
+define(['knockout', 'moment', '../data-objects/event-do.js'], function(ko, moment, EventDO) {
 
     function ShootDO() {
         EventDO.call(this);
@@ -19,6 +19,18 @@ define(['knockout', '../data-objects/event-do.js'], function(ko, EventDO) {
 
             return rangeList.join(",");
         });
+
+        self.timeText = ko.computed(function() {
+            var rtn = '';
+            if ((self.shootType() != null) && (self.shootType() == 'League')) {
+                if (self.scheduleStartDate()) {
+                    rtn = moment(self.scheduleStartDate()).format('dddd');
+                }
+            }
+            return rtn;
+        });
+
+
     }
     ShootDO.inheritsFrom(EventDO);
 

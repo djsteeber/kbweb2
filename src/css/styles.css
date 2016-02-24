@@ -1,6 +1,6 @@
 
 #page {
-	margin-top: 10px;
+	margin-top: 0px;
 	font-size: 12pt;
 }
 
@@ -339,4 +339,21 @@ span.fc-time {
 
 div.calendar-background {
 	background-color: #ffffc4;
+}
+
+object.full {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+div.full {
+	border: 1px solid black;
+	width: 100%;
+	/* forces a height */
+	padding: 36%;
+	box-sizing: border-box;
+	position: relative;
 }
