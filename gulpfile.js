@@ -55,7 +55,8 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'membership-stuff': ['components/membership-page/membership-page'],
             'directions-stuff': ['text!components/directions-page/directions-page.html'],
             'members-stuff': ['components/members-page/members-page', 'components/message-center-page/message-center-page',
-                'components/forgot-password-page/forgot-password-page', 'components/profile-page/profile-page'],
+                'components/forgot-password-page/forgot-password-page', 'components/profile-page/profile-page',
+                'components/change-password/change-password'],
             //'club-event-stuff': ['components/club-event/club-event'],
             'shoot-page-stuff': ['components/shoot-page/shoot-page'],
             'viewer-page-stuff': ['components/viewer-page/viewer-page']

@@ -1,3 +1,31 @@
 <h2>Profile Page</h2>
-Not filled in yet!  Coming soon
+<div class="container">
+<div class="row">
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-12" data-bind="text: user().name.fullName"></div>
+            <div class="col-sm-12" data-bind="text: user().address.address"></div>
+            <div class="col-sm-12">
+                <span data-bind="text: user().address.city"></span>,
+                <span data-bind="text: user().address.state"></span>
+                <span data-bind="text: user().address.zip"></span>
+            </div>
+            <div class="col-sm-12" data-bind="text: user().phone"></div>
+            <div class="col-sm-12" data-bind="text: user().email"></div>
+            <div class="col-sm-12" data-bind="if: user().spouse()">
+                Spouse's Name
+                <span data-bind="text: user().spouse"></span>
+            </div>
+        </div>
+        <div class="row spacer-20">
+            <span class="col-sm-6">Work Hours</span>
+            <span class="col-sm-6" data-bind="text: user().workHours"></span>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <change-password></change-password>
+    </div>
+</div>
+</div>
+
 

@@ -1,38 +1,44 @@
 <div class="panel panel-primary" data-bind="visible: shootsList().length > 0">
-    <div class="panel-heading">Shoots @ Kenosha Bowmen</div>
+    <div class="panel-heading" data-toggle="collapse" data-target="#upcoming-events-panel-body">
+        <h4 class="panel-title carot">
+            Shoots @ Kenosha Bowmen
+        </h4>
+    </div>
 
-    <ul class="list-unstyled list-group" data-bind="foreach: shootsList">
-        <li class="list-group-item list-highlight">
-            <a class="nostyle" data-bind="attr: {href: '#shoot/' + id()}">
-            <div class="list-group-item-text">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-heading event-list-heading">
-                        <span class="pull-left"  data-bind="text: name"/>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-text">
-                        <span class="pull-right" data-bind="text: dateText"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-text">
-                        <span class="small pull-left">
-                            <span data-bind="if: inProgress" class="red">In Progress:</span>
-                            <span data-bind="text: timeText"></span>
-                        </span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-text">
-                        <span class="small pull-right" data-bind="text: shortDescription"/>
-                    </div>
-                </div>
-            </div>
-            </a>
-        </li>
-    </ul>
+    <div id="upcoming-events-panel-body" class=" no-padding panel-collapse collapse in">
+        <div class="panel-body no-margin no-padding">
 
-
-
-    <div class="panel-footer">
-        <a href="#events" class="nostyle">More Shoots ...</a>
+            <ul class="list-unstyled list-group no-margin" data-bind="foreach: shootsList">
+                <li class="list-group-item list-highlight">
+                    <a class="nostyle" data-bind="attr: {href: '#shoot/' + id()}">
+                    <div class="list-group-item-text">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-heading event-list-heading">
+                                <span class="pull-left"  data-bind="text: name"/>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-text">
+                                <span class="pull-right" data-bind="text: dateText"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-text">
+                                <span class="small pull-left">
+                                    <span data-bind="if: inProgress" class="red">In Progress:</span>
+                                    <span data-bind="text: timeText"></span>
+                                </span>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-text">
+                                <span class="small pull-right" data-bind="text: shortDescription"/>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="panel-footer">
+            <a href="#events" class="nostyle">More Shoots ...</a>
+        </div>
     </div>
 
 

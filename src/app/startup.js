@@ -35,6 +35,8 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   ko.components.register('c2e-input', { require: 'components/c2e-input/c2e-input' });
 
+  ko.components.register('change-password', { require: 'components/change-password/change-password' });
+
   ko.components.register('club-event', { require: 'components/club-event/club-event' });
 
   ko.components.register('shoot-page', { require: 'components/shoot-page/shoot-page' });

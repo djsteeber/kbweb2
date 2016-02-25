@@ -257,6 +257,13 @@ a.footer-link:hover {
 	margin: 10px;
 }
 
+.no-margin {
+	margin: 0px;
+}
+.no-padding {
+	padding: 0px;
+}
+
 .event-list-heading {
 	/* combine lead and strong */
 	font-size: 1em;
@@ -274,7 +281,9 @@ a.footer-link:hover {
 }
 
 
-.panel-primary > .panel-footer {
+.panel-primary > .panel-footer,
+.panel-primary .panel-collapse > .panel-footer
+{
 	background: #203731 !important;
 	font-size: 1em;
 	font-weight: 700;
@@ -288,6 +297,14 @@ a.footer-link:hover {
 .panel-primary > .panel-footer > a:hover {
 	color:#FFB612;
 }
+
+.carot:after {
+	font-family:'Glyphicons Halflings';
+	content:"\e114";
+	float: right;
+	color: white;
+}
+
 
 li.list-highlight:hover {
 	background-color: #FFB612;
