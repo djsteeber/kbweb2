@@ -3,7 +3,7 @@
 
     <ul class="list-unstyled list-group" data-bind="foreach: documentList">
         <li class="list-group-item list-highlight">
-            <a class="nostyle" data-bind="attr: {href: '/#viewer-page/secure-docs/' + $parent.documentType() + '/' + name}">
+            <a class="nostyle" data-bind="attr: {href: '/secure-docs/' + $parent.documentType() + '/' + name}">
                 <div class="row list-group-item-text">
                     <div class="col-lg-8 col-md-8 col-sm-8">
                         <span class="pull-left"  data-bind="text: name"/>
