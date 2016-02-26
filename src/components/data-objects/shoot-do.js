@@ -30,6 +30,10 @@ define(['knockout', 'moment', '../data-objects/event-do.js'], function(ko, momen
             return rtn;
         });
 
+        self.hasFlyer = ko.computed(function() {
+           return (self.flyer());
+        });
+
 
     }
     ShootDO.inheritsFrom(EventDO);
@@ -62,8 +66,8 @@ define(['knockout', 'moment', '../data-objects/event-do.js'], function(ko, momen
             });
             this.ranges(list);
         }
-
     };
+
 
     ShootDO.prototype.fullCalendarBackgroundColor = function() {
         var self = this;
