@@ -31,7 +31,7 @@ define(['knockout', 'text!./change-password.html'], function(ko, templateMarkup)
             return;
         }
 
-        var data = {currentPassword: currentPassword, newPassword: self.newPassword};
+        var data = {currentPassword: currentPassword, newPassword: newPassword};
 
         $.ajax({
             url: "/auth/changePassword",

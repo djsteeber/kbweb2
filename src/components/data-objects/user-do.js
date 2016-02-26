@@ -21,16 +21,20 @@ define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) 
         var self = this;
 
         self.login = ko.observable(userData.login);
-        self.name.firstName(userData.name.firstName);
-        self.name.lastName(userData.name.lastName);
-        self.name.fullName(userData.name.fullName);
+        if (userData.name) {
+            self.name.firstName(userData.name.firstName);
+            self.name.lastName(userData.name.lastName);
+            self.name.fullName(userData.name.fullName);
+        }
         self.email(userData.email);
         self.roles(userData.roles);
         self.spouse(userData.spouse);
-        self.address.address(userData.address.address);
-        self.address.city(userData.address.city);
-        self.address.state(userData.address.state);
-        self.address.zip(userData.address.zip);
+        if (userData.address) {
+            self.address.address(userData.address.address);
+            self.address.city(userData.address.city);
+            self.address.state(userData.address.state);
+            self.address.zip(userData.address.zip);
+        }
         self.phone(userData.phone);
         self.workHours(userData.hours);  // may need to convert to int
         self.exempt(userData.exempt); // may need to convert to boolean
