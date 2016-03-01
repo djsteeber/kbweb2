@@ -4,7 +4,7 @@ define(['knockout','tinyMCE', 'text!./message-center-page.html'], function(ko, t
     var self = this;
     self.to = ko.observable();
     self.subject = ko.observable();
-    self.body = ko.observable('sometext');
+    self.body = ko.observable();
     self.toList = ko.observableArray(['ALL MEMBERS', 'BOARD MEMBERS', 'RANGE OFFICERS']);
     self.response = ko.observable();
     self.messageSent = ko.observable(false);
@@ -16,26 +16,27 @@ define(['knockout','tinyMCE', 'text!./message-center-page.html'], function(ko, t
       $.ajax({
         url : "/rest/messages",
         type: "POST",
-        data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        //dataType   : "json",
-        processData: false,
+        data: data,
+        //contentType: "application/json; charset=utf-8",
         success    : function(returnData){
-          self.response(JSON.stringify(returnData));
+          self.response("Message successfully sent");
           self.messageSent(true);
         },
-        fail: function(jx, returnData) {
-          self.response(JSON.stringify(returnData));
+        error: function(jx, returnData) {
+          self.response("Error sending message");
         }
       });
-    }
-/*
-    tinyMCE.init({
-      selector: ".editibleArea"
+    };
+    this.newMessage = function() {
+      self.to('');
+      self.subject('');
+      self.body('');
+      self.response('');
+      self.messageSent(false);
+    };
 
-    });
-    */
   }
+
 
   return { viewModel: MessageCenterPage, template: templateMarkup };
 

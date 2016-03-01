@@ -1,3 +1,45 @@
 <h2>Message Center</h2>
 
-This is still under development
+<div data-bind="text: response()">
+
+</div>
+<div data-bind="if: messageSent">
+    <form data-bind="submit: newMessage">
+        <button type="submit" class="btn btn-custom">New Message</button>
+    </form>
+</div>
+<div data-bind="ifnot: messageSent">
+    <form data-bind="submit: onSubmit">
+        <div class="row spacer-10">
+            <div class="col-sm-12">
+                <fieldset>
+                    <label for="to" class="form-control-label">To:</label>
+                    <select id="to" class="form-control" data-bind="options: toList, value: to"></select>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row spacer-10">
+            <div class="col-sm-12">
+                <fieldset>
+                    <label for="subject" class="form-control-label">Subject:</label>
+                    <input class="form-control" id="subject" type="text" data-bind="value: subject" placeholder="Subject"/>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row spacer-10">
+            <div class="col-sm-12">
+                <fieldset>
+                    <label for="body" class="form-control-label">Message:</label>
+                    <div id="body" class="form-control" data-bind="summernote: body" placeholder="Type message here"></div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row spacer-10">
+            <div class="col-sm-12">
+                <fieldset>
+                    <button type="submit" class="btn btn-custom">Send a Message</button>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+</div>

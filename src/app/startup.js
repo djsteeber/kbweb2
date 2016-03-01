@@ -1,4 +1,4 @@
-define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', 'knockout-postbox', 'fullcalendar'], function($, ko, router) {
+define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', 'knockout-postbox', 'fullcalendar', 'summernote'], function($, ko, router) {
 
   // Components can be packaged as AMD modules, such as the following:
   ko.components.register('nav-bar', { require: 'components/nav-bar/nav-bar' });
@@ -84,7 +84,65 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
       $(element).fullCalendar('gotoDate', ko.utils.unwrapObservable(viewModel.viewDate));
     }
   };
+  ko.bindingHandlers.summernotex = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+      var value = ko.unwrap(valueAccessor());
+      var allBindings = ko.unwrap(allBindingsAccessor())
+      var optionsBinding = allBindings.wysiwygOptions || {};
+      var $element = $(element);
+      var options = {};//$.extend({}, optionsBinding);
+
+      var updateObservable = function (e) {
+        valueAccessor($element.summernote('code'));
+        return true;
+      };
+
+      options.callbacks = {};
+      options.callbacks.onKeyup = options.callbacks.onFocus = options.callbacks.onBlur = options.callbacks.onChange = updateObservable;
+
+      $element.summernote(options);
+    },
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+      console.log('updatecalled')
+      var value = ko.unwrap(valueAccessor());
+      $(element).summernote('code', value);
+    }
+  };
+
+  ko.bindingHandlers.summernote = new function () {
+
+    this.init = function (element, valueAccessor, allBindings) {
+      var value = valueAccessor();
+      var options = {
+        height: 200,
+        toolbar: [
+          ["style", ["bold", "italic", "underline", "clear"]],
+          ["fontstyle", ["style"]],
+          ["fontsize", ["fontsize"]],
+          ["lists", ["ul", "ol", "paragraph"]],
+          ["links", ["link", "picture"]],
+          ["misc", ["fullscreen", "codeview"]]
+        ],
+        callbacks: {
+          onBlur: function() {
+            value($(element).summernote('code'));
+            return true;
+          }
+        }
+      };
+      $.extend(options, allBindings.get("summerOptions"));
+      return $(element).summernote(options);
+    };
+    this.update = function (element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $(element).summernote('code', value);
+    };
+  };
+
 
   // Start the application
   ko.applyBindings({ route: router.currentRoute });
 });
+
+
+

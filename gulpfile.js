@@ -3,6 +3,7 @@ var fs = require('fs'),
     vm = require('vm'),
     merge = require('deeply'),
     chalk = require('chalk'),
+    async = require('async'),
     es = require('event-stream');
 
 // Gulp and plugins
@@ -80,9 +81,12 @@ gulp.task('css', function () {
             .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
         appCss = gulp.src('src/css/*.css'),
         fcCSS = gulp.src('src/bower_modules/fullcalendar/dist/fullcalendar.css'),
-        combinedCss = es.concat(bowerCss, fcCSS, appCss).pipe(concat('css.css')),
+        snCSS = gulp.src('src/bower_modules/summernote/dist/summernote.css')
+            .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1font/')),
+        combinedCss = es.concat(bowerCss, fcCSS, snCSS, appCss).pipe(concat('css.css')),
+        snFontFiles = gulp.src('./src/bower_modules/summernote/dist/font/*', { base: './src/bower_modules/summernote/dist/' }),
         fontFiles = gulp.src('./src/bower_modules/components-bootstrap/fonts/*', { base: './src/bower_modules/components-bootstrap/' });
-    return es.concat(combinedCss, fontFiles)
+    return es.concat(combinedCss, fontFiles, snFontFiles)
         .pipe(gulp.dest('./dist/'));
 });
 
@@ -96,29 +100,42 @@ gulp.task('html', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('copy-static', function() {
-    gulp.src('./src/img/*.*')
+gulp.task('copy-img', function() {
+    return gulp.src('./src/img/*.*')
         .pipe(gulp.dest('./dist/img/'));
-    gulp.src('./src/misc_docs/*.*')
+});
+
+gulp.task('copy-docs', function() {
+    return gulp.src('./src/misc_docs/*.*')
         .pipe(gulp.dest('./dist/misc_docs/'));
-    gulp.src('./src/misc_docs/shoots/*.png')
-        .pipe(gulp.dest('./dist/misc_docs/shoots/'));
-    gulp.src('./src/misc_docs/shoots/*.jpg')
+});
+
+gulp.task('copy-shoots-png', function() {
+    return gulp.src('./src/misc_docs/shoots/*.png')
         .pipe(gulp.dest('./dist/misc_docs/shoots/'));
 });
 
+gulp.task('copy-shoots-jpg', function() {
+    return gulp.src('./src/misc_docs/shoots/*.jpg')
+        .pipe(gulp.dest('./dist/misc_docs/shoots/'));
+});
+
+gulp.task('copy-static', ['copy-img', 'copy-docs', 'copy-shoots-png', 'copy-shoots-jpg'], function(callback) {
+    return callback();
+});
+
+
+
 // Removes all files from ./dist/
-gulp.task('clean', function() {
-    gulp.src('./dist/**/*', { read: false })
-        .pipe(clean({force: true}));
-    gulp.src('./stage/*', { read: false })
-        .pipe(clean({force: true}));
+gulp.task('clean',  function() {
+    return gulp.src(['./dist/*', './stage/*'], {read: false})
+        .pipe(clean({force:true}));
 });
 
 
 
 gulp.task('default', ['html', 'js', 'css', 'copy-static'], function(callback) {
-    callback();
+    return callback();
     console.log('\nPlaced optimized files in ' + chalk.magenta('dist/\n'));
 });
 
@@ -126,7 +143,7 @@ gulp.task('package', ['html', 'js', 'css', 'copy-static'], function(callback) {
     var tar = require('gulp-tar');
     var gzip = require('gulp-gzip');
 
-  	gulp.src('./dist/**/*')
+  	return gulp.src('./dist/**/*')
         .pipe(tar('kbweb.tar'))
         .pipe(gzip())
         .pipe(gulp.dest('./stage/'));
@@ -151,7 +168,6 @@ gulp.task('ship', function(callback) {
 
 // TODO:  Make a deploy script and ship it up to the server
 // TODO:    can do more granular checking if the file exists, before blowing away kbweb directory
-
 gulp.task('deploy', function(callback) {
     var GulpSSH = require('gulp-ssh');
 

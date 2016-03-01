@@ -217,6 +217,10 @@ table.club-event-form td:nth-child(2) {
 	margin-top: 20px;
 }
 
+.spacer-10 {
+	margin-top: 10px;
+}
+
 /* not sure if needed for sticky footer */
 html {
 	position: relative;
@@ -352,6 +356,9 @@ span.fc-time {
 	border-color: #203731;
 }
 .btn-custom:hover {
+	color: #FFB612;
+}
+.btn-custom:focus {
 	color: #FFB612;
 }
 
