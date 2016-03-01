@@ -5,7 +5,7 @@ define(['knockout','tinyMCE', 'text!./message-center-page.html'], function(ko, t
     self.to = ko.observable();
     self.subject = ko.observable();
     self.body = ko.observable();
-    self.toList = ko.observableArray(['ALL MEMBERS', 'BOARD MEMBERS', 'RANGE OFFICERS']);
+    self.toList = ko.observableArray(['ALL MEMBERS', 'BOARD MEMBERS', 'OFFICERS', 'RANGE OFFICERS']);
     self.response = ko.observable();
     self.messageSent = ko.observable(false);
 
