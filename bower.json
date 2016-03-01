@@ -14,7 +14,8 @@
     "knockout-postbox": "~0.5.2",
     "moment": "~2.11.2",
     "knockout-mapping": "~2.4.1",
-    "fullcalendar": "~2.6.0"
+    "fullcalendar": "~2.6.0",
+    "fontawesome": "~4.5.0"
   },
   "resolutions": {
     "knockout": "~3.3.0-alpha"

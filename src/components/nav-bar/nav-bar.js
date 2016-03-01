@@ -63,6 +63,15 @@ define(['knockout', 'text!./nav-bar.html'], function(ko, template) {
                 data: data,
                 success: function (returnData) {
                     self.loadUser();
+                    // check the data here, if the changePassword is set, we need to direct the user to the profile
+
+                    //   page to change his or her password.
+                    if (returnData.changePassword) {
+                        window.location.assign('/#profile');
+                    } else {
+                        window.location.assign('/#members');
+                    }
+
                 },
                 error: function (obj) {
                     self.isAuthenticated(false);

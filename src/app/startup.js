@@ -35,6 +35,8 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
 
   ko.components.register('c2e-input', { require: 'components/c2e-input/c2e-input' });
 
+  ko.components.register('change-password', { require: 'components/change-password/change-password' });
+
   ko.components.register('club-event', { require: 'components/club-event/club-event' });
 
   ko.components.register('shoot-page', { require: 'components/shoot-page/shoot-page' });
@@ -50,6 +52,8 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
   ko.components.register('profile-page', { require: 'components/profile-page/profile-page' });
 
   ko.components.register('forgot-password-page', { require: 'components/forgot-password-page/forgot-password-page' });
+
+  ko.components.register('viewer-page', { require: 'components/viewer-page/viewer-page' });
 
   // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
 

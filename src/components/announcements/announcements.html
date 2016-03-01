@@ -1,15 +1,25 @@
 <div class="panel panel-primary" data-bind="visible: announcementList().length > 0">
-    <div class="panel-heading">Announcements</div>
-    <ul class="list-group" data-bind="foreach: announcementList">
-        <li class="list-group-item">
-            <div class="list-group-item-text">
-                <div class="row"><div class="col-lg-12 col-md-12 col-sm-12 list-group-item-heading event-list-heading" data-bind="text: title"></div></div>
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 list-group-item-text" data-bind="html: text">
+    <div class="panel-heading" data-toggle="collapse" data-target="#announcement-panel-body">
+        <h4 class="panel-title carot">
+            Announcements
+        </h4>
+    </div>
+
+    <div id="announcement-panel-body" class=" no-padding panel-collapse collapse in">
+        <div class="panel-body no-margin no-padding">
+
+            <ul class="list-group no-margin" data-bind="foreach: announcementList">
+                <li class="list-group-item">
+                    <div class="list-group-item-text">
+                        <div class="row"><div class="col-lg-12 col-md-12 col-sm-12 list-group-item-heading event-list-heading" data-bind="text: title"></div></div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 list-group-item-text" data-bind="html: text">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </li>
-    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 

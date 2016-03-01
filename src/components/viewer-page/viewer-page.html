@@ -1,0 +1,22 @@
+
+<div class="container-fluid">
+
+    <div data-bind="ifnot: hasSource">
+        Sorry, but you did not request a document
+    </div>
+    <div data-bind="if: hasSource">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="full">
+                    <object class="full" data-bind="attr: {data: src()}"></object>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 spacer-20">
+                If for some reason the document does not display, please click this link
+                <a href data-bind="attr: {href: src()}, text:src()"></a>
+            </div>
+        </div>
+    </div>
+</div>

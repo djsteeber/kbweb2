@@ -6,7 +6,9 @@ define(["knockout", "text!./shoot-page.html", '../data-objects/shoot-do.js'], fu
         var self = this;
 
         self.id = params.id;
-        self.shoot = ko.observable(new ShootDO.item(self.id));
+        var shootDO = new ShootDO();
+        self.shoot = ko.observable(shootDO);
+        shootDO.load(self.id);
     }
 
     return { viewModel: ShootPage, template: templateMarkup };
