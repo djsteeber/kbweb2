@@ -2,24 +2,22 @@
 <div class="container">
     This utility will allow you to send an email to different groups of members at Kenosha Bowmen.
     It is limited to groups.  If you need to send an email directly to a member or a few members, please use the Members List
-    and you personal email account.
+    and your personal email account.
 </div>
+<hr/>
 
-<div data-bind="text: response()">
-
-</div>
-<div data-bind="if: messageSent">
-    <form data-bind="submit: newMessage">
-        <button type="submit" class="btn btn-custom">New Message</button>
-    </form>
-</div>
-<div data-bind="ifnot: messageSent">
-    <form data-bind="submit: onSubmit">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" data-bind="text: status()"></div>
+    </div>
+    <!-- Step 1 Creation Form -->
+    <!-- ko if: firstStep -->
+    <form data-bind="submit: verifyMessage">
         <div class="row spacer-10">
             <div class="col-sm-12">
                 <fieldset>
                     <label for="to" class="form-control-label">To:</label>
-                    <select id="to" class="form-control" data-bind="options: toList, value: to"></select>
+                    <select id="to" class="form-control" data-bind="options: toList, value: message().to"></select>
                 </fieldset>
             </div>
         </div>
@@ -27,7 +25,7 @@
             <div class="col-sm-12">
                 <fieldset>
                     <label for="subject" class="form-control-label">Subject:</label>
-                    <input class="form-control" id="subject" type="text" data-bind="value: subject" placeholder="Subject"/>
+                    <input class="form-control" id="subject" type="text" data-bind="value: message().subject" placeholder="Subject"/>
                 </fieldset>
             </div>
         </div>
@@ -35,16 +33,43 @@
             <div class="col-sm-12">
                 <fieldset>
                     <label for="body" class="form-control-label">Message:</label>
-                    <div id="body" class="form-control" data-bind="summernote: body" placeholder="Type message here"></div>
+                    <div id="body" class="form-control" data-bind="wysiwyg: message().body" placeholder="Type message here"></div>
                 </fieldset>
             </div>
         </div>
         <div class="row spacer-10">
             <div class="col-sm-12">
                 <fieldset>
-                    <button type="submit" class="btn btn-custom">Send a Message</button>
+                    <button type="submit" class="btn btn-custom">Send</button>
                 </fieldset>
             </div>
         </div>
     </form>
+    <!-- /ko -->
+    <!-- Step 2 Verify Message before send -->
+    <!-- ko if: secondStep -->
+    <div class="row spacer-20">
+        <div class="col-sm-12">
+            The following message will be sent to <span data-bind="text: message().to()"></span>
+        </div>
+    </div>
+    <div class="row spacer-10">
+        <div class="col-sm-12">Subject: <span data-bind="text: message().subject()"></span></div>
+    </div>
+    <div class="row spacer-10">
+        <div class="col-sm-12" data-bind="html: message().body()"></div>
+    </div>
+    <div class="row spacer-10">
+        <form data-bind="submit: sendMessage">
+            <button type="submit" class="btn btn-custom">Send</button>
+        </form>
+    </div>
+
+    <!-- /ko -->
+    <!-- Step 3 Send messaage to the server -->
+    <!-- ko if: thirdStep -->
+    <div>
+        Send the message
+    </div>
+    <!-- /ko -->
 </div>

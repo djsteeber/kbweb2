@@ -1,4 +1,4 @@
-define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', 'knockout-postbox', 'fullcalendar', 'summernote'], function($, ko, router) {
+define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-projections', 'knockout-postbox', 'fullcalendar', 'summernote'], function($, ko, router, tinymce) {
 
   // Components can be packaged as AMD modules, such as the following:
   ko.components.register('nav-bar', { require: 'components/nav-bar/nav-bar' });
@@ -138,6 +138,50 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
         $(element).summernote('code', value);
     };
   };
+
+  ko.bindingHandlers.wysiwyg = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+      var value = valueAccessor();
+      var valueUnwrapped = ko.unwrap(value);
+      var allBindings = allBindingsAccessor();
+      var $element = $(element);
+      $element.attr('id', 'wysiwyg_' + Date.now());
+      if (ko.isObservable(value)) {
+        var isSubscriberChange = false;
+        var isEditorChange = true;
+        $element.html(value());
+        isEditorChange = false;
+
+        tinymce.init({
+          selector: '#' + $element.attr('id'),
+          //inline: true,
+          plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+          ],
+          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+          setup: function (editor) {
+            editor.on('change', function () {
+              if (!isSubscriberChange) {
+                isEditorChange = true;
+                value($element.html());
+                isEditorChange = false;
+              }
+            });
+          }
+        });
+        value.subscribe(function (newValue) {
+          if (!isEditorChange) {
+            isSubscriberChange = true;
+            $element.html(newValue);
+            isSubscriberChange = false;
+          }
+        });
+      }
+    }
+  };
+
 
 
   // Start the application

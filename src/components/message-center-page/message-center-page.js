@@ -1,40 +1,50 @@
-define(['knockout','tinyMCE', 'text!./message-center-page.html'], function(ko, tinyMCE, templateMarkup) {
+define(['knockout', 'text!./message-center-page.html', 'tinymce','../data-objects/message-do.js'], function(ko, templateMarkup, tinymce, MessageDO) {
 
   function MessageCenterPage(params) {
     var self = this;
+
+    self.message = ko.observable(new MessageDO());
+    /*
     self.to = ko.observable();
     self.subject = ko.observable();
     self.body = ko.observable();
+    */
     self.toList = ko.observableArray(['ALL MEMBERS', 'BOARD MEMBERS', 'OFFICERS', 'RANGE OFFICERS']);
-    self.response = ko.observable();
-    self.messageSent = ko.observable(false);
+    self.status = ko.observable();
+    self.step = ko.observable(1);
 
+    self.firstStep = ko.computed(function() {
+      return self.step()==1;
+    });
 
-    this.onSubmit = function() {
-      var data = {to : ko.unwrap(self.to), subject: ko.unwrap(self.subject), body: ko.unwrap(self.body)};
+    self.secondStep = ko.computed(function() {
+      return self.step()==2;
+    });
 
-      $.ajax({
-        url : "/rest/messages",
-        type: "POST",
-        data: data,
-        //contentType: "application/json; charset=utf-8",
-        success    : function(returnData){
-          self.response("Message successfully sent");
-          self.messageSent(true);
-        },
-        error: function(jx, returnData) {
-          self.response("Error sending message");
-        }
-      });
-    };
-    this.newMessage = function() {
-      self.to('');
-      self.subject('');
-      self.body('');
-      self.response('');
-      self.messageSent(false);
+    self.thirdStep = ko.computed(function() {
+      return self.step()==3;
+    });
+
+    self.verifyMessage = function() {
+      self.step(self.step()+1);
     };
 
+    self.sendMessage = function() {
+      self.message().save(
+          function() {
+            self.status("Message successfully sent");
+            self.step(self.step()+1);
+          },
+          function() {
+            self.status("Error sending message");
+          });
+    };
+
+    self.newMessage = function() {
+      self.message().init();
+      self.status('');
+      self.step(1);
+    };
   }
 
 

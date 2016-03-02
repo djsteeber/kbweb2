@@ -10,7 +10,7 @@ var require = {
         "knockout-projections": "bower_modules/knockout-projections/dist/knockout-projections",
         "signals":              "bower_modules/js-signals/dist/signals.min",
         "text":                 "bower_modules/requirejs-text/text",
-        "tinyMCE":              "bower_modules/tinymce/tinymce",
+        "tinymce":              "bower_modules/tinymce/tinymce",
         "knockout-postbox":     "bower_modules/knockout-postbox/build/knockout-postbox",
         "mapping":              "bower_modules/knockout-mapping/knockout.mapping",
         "moment":               "bower_modules/moment/moment",
@@ -27,11 +27,11 @@ var require = {
         "bootstrap": { deps: ["jquery"] },
         "fullcalendar": {deps: ["jquery", "moment"]},
         "summernote": {deps: ["jquery", "codemirror"]},
-        "tinyMCE": {
-            exports: "tinyMCE",
+        "tinymce": {
+            exports: "tinymce",
             init: function () {
-                this.tinyMCE.DOM.events.domLoaded = true;
-                return this.tinyMCE;
+                this.tinymce.DOM.events.domLoaded = true;
+                return this.tinymce;
             }
         },
     }

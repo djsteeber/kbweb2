@@ -19,14 +19,16 @@ define(['knockout'], function(ko) {
 
     function DataObject() {
         var self = this;
-        this.id = ko.observable();
+        self.id = ko.observable();
     }
 
     DataObject.prototype.init = function(obj) {
+        var self = this;
+
         if (obj.hasOwnProperty('_id')) {
-            this.id(obj._id);
+            self.id(obj._id);
         } else if (obj.hasOwnProperty('id')) {
-            this.id(obj.id);
+            self.id(obj.id);
         }
     }
 
@@ -44,6 +46,34 @@ define(['knockout'], function(ko) {
             });
         }
     };
+
+    DataObject.prototype.toJSON = function() {
+        var self = this;
+        return {id: self.id()};
+    };
+
+    DataObject.prototype.save = function(success, error) {
+        var self = this;
+        var data = self.toJSON();
+
+        $.ajax({
+            url : self.restEndPoint,
+            type: "POST",
+            data: data,
+            success    : function(returnData){
+                self.init(returnData);
+                if (success) {
+                    success(returnData);
+                }
+            },
+            error: function(jx, returnData) {
+                if (error) {
+                    error(jx, returnData);
+                }
+            }
+        });
+    };
+
 
     DataObject.prototype.toString = function() {
         return '[DataObject: ' + this.id + ']';
