@@ -17,7 +17,8 @@
     "fullcalendar": "~2.6.0",
     "fontawesome": "~4.5.0",
     "summernote": "^0.8.1",
-    "codemirror": "^5.12.0"
+    "codemirror": "^5.12.0",
+    "knockout-pickadate-tinymce": "knockout-tinymce-binding#^0.1.2"
   },
   "resolutions": {
     "knockout": "~3.3.0-alpha"

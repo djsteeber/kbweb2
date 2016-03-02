@@ -19,9 +19,15 @@ define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) 
         var self = this;
         DataObject.prototype.init.call(this, message);
 
-        self.to = ko.observable(message.to);
-        self.subject = ko.observable(message.subject);
-        self.body = ko.observable(message.body);
+        self.to('');
+        self.subject('');
+        self.body('');
+        if (message) {
+            self.to(message.to);
+            self.subject(message.subject);
+            self.body(message.body);
+        }
+
     };
 
     MessageDO.prototype.toJSON = function() {

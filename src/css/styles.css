@@ -229,6 +229,8 @@ html {
 body {
 	/* Margin bottom by footer height */
 	margin-bottom: 60px !important;
+	font-size: 14px !important;
+
 }
 .footer {
 	position: absolute;
@@ -381,4 +383,8 @@ div.full {
 	padding: 36%;
 	box-sizing: border-box;
 	position: relative;
+}
+
+.border {
+	border: solid 1px grey;
 }

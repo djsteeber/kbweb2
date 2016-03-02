@@ -45,6 +45,10 @@ define(['knockout', 'text!./message-center-page.html', 'tinymce','../data-object
       self.status('');
       self.step(1);
     };
+    self.editMessage = function() {
+      self.status('');
+      self.step(1);
+    };
   }
 
 

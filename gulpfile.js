@@ -22,6 +22,8 @@ var SSH_CONFIG = {
     privateKey: fs.readFileSync(process.env["HOME"] + '/.ssh/id_rsa')
 };
 
+//TODO: read the tinymce plugins from a directory scan
+
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require.config.js') + '; require;');
     requireJsOptimizerConfig = merge(requireJsRuntimeConfig, {
@@ -29,10 +31,45 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
         baseUrl: './src',
         name: 'app/startup',
         paths: {
-            requireLib: 'bower_modules/requirejs/require'
+            requireLib: 'bower_modules/requirejs/require',
+            "tinymce-themes":       "bower_modules/tinymce/themes/modern/theme",
+            "tinymce-advlist":      "bower_modules/tinymce/plugins/advlist/plugin",
+            "tinymce-autolink":     "bower_modules/tinymce/plugins/autolink/plugin",
+            "tinymce-lists":        "bower_modules/tinymce/plugins/lists/plugin",
+            "tinymce-link":         "bower_modules/tinymce/plugins/link/plugin",
+            "tinymce-image":        "bower_modules/tinymce/plugins/image/plugin",
+            "tinymce-charmap":      "bower_modules/tinymce/plugins/charmap/plugin",
+            "tinymce-preview":      "bower_modules/tinymce/plugins/preview/plugin",
+            "tinymce-anchor":       "bower_modules/tinymce/plugins/anchor/plugin",
+            "tinymce-sr":           "bower_modules/tinymce/plugins/searchreplace/plugin",
+            "tinymce-vb":           "bower_modules/tinymce/plugins/visualblocks/plugin",
+            "tinymce-code":         "bower_modules/tinymce/plugins/code/plugin",
+            "tinymce-fullscreen":   "bower_modules/tinymce/plugins/fullscreen/plugin",
+            "tinymce-insertdt":     "bower_modules/tinymce/plugins/insertdatetime/plugin",
+            "tinymce-table":        "bower_modules/tinymce/plugins/table/plugin",
+            "tinymce-contextmenu":  "bower_modules/tinymce/plugins/contextmenu/plugin",
+            "tinymce-paste":        "bower_modules/tinymce/plugins/paste/plugin"
+
         },
         include: [
             'requireLib',
+            "tinymce-themes",
+            "tinymce-advlist",
+            "tinymce-autolink",
+            "tinymce-lists",
+            "tinymce-link",
+            "tinymce-image",
+            "tinymce-charmap",
+            "tinymce-preview",
+            "tinymce-anchor",
+            "tinymce-sr",
+            "tinymce-vb",
+            "tinymce-code",
+            "tinymce-fullscreen",
+            "tinymce-insertdt",
+            "tinymce-table",
+            "tinymce-contextmenu",
+            "tinymce-paste",
             'components/nav-bar/nav-bar',
             'components/upcoming-events/upcoming-events',
             'components/announcements/announcements',
@@ -58,13 +95,8 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'members-stuff': ['components/members-page/members-page', 'components/message-center-page/message-center-page',
                 'components/forgot-password-page/forgot-password-page', 'components/profile-page/profile-page',
                 'components/change-password/change-password'],
-            //'club-event-stuff': ['components/club-event/club-event'],
             'shoot-page-stuff': ['components/shoot-page/shoot-page'],
             'viewer-page-stuff': ['components/viewer-page/viewer-page']
-            // If you want parts of the site to load on demand, remove them from the 'include' list
-            // above, and group them into bundles here.
-            // 'bundle-name': [ 'some/module', 'another/module' ],
-            // 'another-bundle-name': [ 'yet-another-module' ]
         }
     });
 
@@ -81,12 +113,12 @@ gulp.task('css', function () {
             .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
         appCss = gulp.src('src/css/*.css'),
         fcCSS = gulp.src('src/bower_modules/fullcalendar/dist/fullcalendar.css'),
-        snCSS = gulp.src('src/bower_modules/summernote/dist/summernote.css')
-            .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1font/')),
-        combinedCss = es.concat(bowerCss, fcCSS, snCSS, appCss).pipe(concat('css.css')),
-        snFontFiles = gulp.src('./src/bower_modules/summernote/dist/font/*', { base: './src/bower_modules/summernote/dist/' }),
+        tmcCSS = gulp.src('src/bower_modules/tinymce/skins/lightgray/*.css')
+            .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
+        combinedCss = es.concat(tmcCSS, bowerCss, fcCSS, appCss).pipe(concat('css.css')),
+        tmFontFiles = gulp.src('./src/bower_modules/tinymce/skins/lightgray/fonts/*', { base: './src/bower_modules/tinymce/skins/lightgray/' }),
         fontFiles = gulp.src('./src/bower_modules/components-bootstrap/fonts/*', { base: './src/bower_modules/components-bootstrap/' });
-    return es.concat(combinedCss, fontFiles, snFontFiles)
+    return es.concat(combinedCss, fontFiles, tmFontFiles)
         .pipe(gulp.dest('./dist/'));
 });
 

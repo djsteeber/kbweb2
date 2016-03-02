@@ -1,4 +1,4 @@
-define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-projections', 'knockout-postbox', 'fullcalendar', 'summernote'], function($, ko, router, tinymce) {
+define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-projections', 'knockout-postbox', 'fullcalendar'], function($, ko, router, tinymce) {
 
   // Components can be packaged as AMD modules, such as the following:
   ko.components.register('nav-bar', { require: 'components/nav-bar/nav-bar' });
@@ -84,61 +84,8 @@ define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-proj
       $(element).fullCalendar('gotoDate', ko.utils.unwrapObservable(viewModel.viewDate));
     }
   };
-  ko.bindingHandlers.summernotex = {
-    init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-      var value = ko.unwrap(valueAccessor());
-      var allBindings = ko.unwrap(allBindingsAccessor())
-      var optionsBinding = allBindings.wysiwygOptions || {};
-      var $element = $(element);
-      var options = {};//$.extend({}, optionsBinding);
 
-      var updateObservable = function (e) {
-        valueAccessor($element.summernote('code'));
-        return true;
-      };
-
-      options.callbacks = {};
-      options.callbacks.onKeyup = options.callbacks.onFocus = options.callbacks.onBlur = options.callbacks.onChange = updateObservable;
-
-      $element.summernote(options);
-    },
-    update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-      console.log('updatecalled')
-      var value = ko.unwrap(valueAccessor());
-      $(element).summernote('code', value);
-    }
-  };
-
-  ko.bindingHandlers.summernote = new function () {
-
-    this.init = function (element, valueAccessor, allBindings) {
-      var value = valueAccessor();
-      var options = {
-        height: 200,
-        toolbar: [
-          ["style", ["bold", "italic", "underline", "clear"]],
-          ["fontstyle", ["style"]],
-          ["fontsize", ["fontsize"]],
-          ["lists", ["ul", "ol", "paragraph"]],
-          ["links", ["link", "picture"]],
-          ["misc", ["fullscreen", "codeview"]]
-        ],
-        callbacks: {
-          onBlur: function() {
-            value($(element).summernote('code'));
-            return true;
-          }
-        }
-      };
-      $.extend(options, allBindings.get("summerOptions"));
-      return $(element).summernote(options);
-    };
-    this.update = function (element, valueAccessor) {
-        var value = ko.utils.unwrapObservable(valueAccessor());
-        $(element).summernote('code', value);
-    };
-  };
-
+  // tinymce binding, put in a new file
   ko.bindingHandlers.wysiwyg = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
       var value = valueAccessor();
@@ -152,20 +99,22 @@ define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-proj
         $element.html(value());
         isEditorChange = false;
 
+        //TODO:  Might want to override the plugins / toolbars
         tinymce.init({
           selector: '#' + $element.attr('id'),
-          //inline: true,
+          //inline: true, // Is weird as the div control does not auto height expand
           plugins: [
-            "advlist autolink lists link image charmap print preview anchor",
+            "advlist autolink lists link image charmap preview anchor",
             "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table contextmenu paste"
+            "insertdatetime table contextmenu paste"
           ],
           toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
           setup: function (editor) {
             editor.on('change', function () {
               if (!isSubscriberChange) {
                 isEditorChange = true;
-                value($element.html());
+                var data = tinymce.get($element.attr('id')).getContent();
+                value(data);
                 isEditorChange = false;
               }
             });
@@ -174,7 +123,8 @@ define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-proj
         value.subscribe(function (newValue) {
           if (!isEditorChange) {
             isSubscriberChange = true;
-            $element.html(newValue);
+            tinymce.get($element.attr('id')).setContent(newValue);
+            //$element.html(newValue);
             isSubscriberChange = false;
           }
         });

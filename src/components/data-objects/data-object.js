@@ -25,10 +25,12 @@ define(['knockout'], function(ko) {
     DataObject.prototype.init = function(obj) {
         var self = this;
 
-        if (obj.hasOwnProperty('_id')) {
-            self.id(obj._id);
-        } else if (obj.hasOwnProperty('id')) {
-            self.id(obj.id);
+        if (obj) {
+            if (obj.hasOwnProperty('_id')) {
+                self.id(obj._id);
+            } else if (obj.hasOwnProperty('id')) {
+                self.id(obj.id);
+            }
         }
     }
 

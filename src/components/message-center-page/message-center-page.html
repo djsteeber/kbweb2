@@ -12,7 +12,6 @@
     </div>
     <!-- Step 1 Creation Form -->
     <!-- ko if: firstStep -->
-    <form data-bind="submit: verifyMessage">
         <div class="row spacer-10">
             <div class="col-sm-12">
                 <fieldset>
@@ -37,39 +36,43 @@
                 </fieldset>
             </div>
         </div>
-        <div class="row spacer-10">
-            <div class="col-sm-12">
-                <fieldset>
-                    <button type="submit" class="btn btn-custom">Send</button>
-                </fieldset>
-            </div>
+    <div class="row spacer-10">
+        <div class="col-sm-12">
+            <fieldset>
+                <button type="submit" class="btn btn-custom" data-bind="click: verifyMessage">Next</button>
+            </fieldset>
         </div>
-    </form>
+    </div>
     <!-- /ko -->
     <!-- Step 2 Verify Message before send -->
     <!-- ko if: secondStep -->
-    <div class="row spacer-20">
-        <div class="col-sm-12">
-            The following message will be sent to <span data-bind="text: message().to()"></span>
+    <div class="row spacer-10">
+        <div class="col-sm-2">TO:</div>
+        <div class="col-sm-10 border" data-bind="text: message().to()"></div>
+    </div>
+    <div class="row spacer-10">
+        <div class="col-sm-2">Subject:</div>
+        <div class="col-sm-10 border" data-bind="text: message().subject()"></div>
+    </div>
+    <div class="row spacer-10">
+        <div class="col-sm-2">Message:</div>
+        <div class="col-sm-10 border" data-bind="html: message().body()"></div>
+    </div>
+
+    <div class="row spacer-10">
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-custom" data-bind="click: editMessage">Back</button>
         </div>
-    </div>
-    <div class="row spacer-10">
-        <div class="col-sm-12">Subject: <span data-bind="text: message().subject()"></span></div>
-    </div>
-    <div class="row spacer-10">
-        <div class="col-sm-12" data-bind="html: message().body()"></div>
-    </div>
-    <div class="row spacer-10">
-        <form data-bind="submit: sendMessage">
-            <button type="submit" class="btn btn-custom">Send</button>
-        </form>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-custom" data-bind="click: sendMessage">Send Email</button>
+        </div>
     </div>
 
     <!-- /ko -->
     <!-- Step 3 Send messaage to the server -->
     <!-- ko if: thirdStep -->
-    <div>
-        Send the message
+    <div class="row spacer-10">
+        <button type="submit" class="btn btn-custom" data-bind="click: newMessage">Create another Email</button>
     </div>
     <!-- /ko -->
 </div>
