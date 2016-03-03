@@ -4,12 +4,8 @@ define(['knockout', 'text!./message-center-page.html', 'tinymce','../data-object
     var self = this;
 
     self.message = ko.observable(new MessageDO());
-    /*
-    self.to = ko.observable();
-    self.subject = ko.observable();
-    self.body = ko.observable();
-    */
-    self.toList = ko.observableArray(['ALL MEMBERS', 'BOARD MEMBERS', 'OFFICERS', 'RANGE OFFICERS']);
+
+    self.toList = ko.observableArray(['ALL MEMBERS', 'BOARD MEMBERS', 'BOARD OFFICERS', 'RANGE OFFICERS']);
     self.status = ko.observable();
     self.step = ko.observable(1);
 
@@ -26,7 +22,12 @@ define(['knockout', 'text!./message-center-page.html', 'tinymce','../data-object
     });
 
     self.verifyMessage = function() {
-      self.step(self.step()+1);
+      if (self.message().isComplete()) {
+        self.status('');
+        self.step(self.step() + 1);
+      } else {
+        self.status("Please fill in the Subject and Message");
+      }
     };
 
     self.sendMessage = function() {
@@ -35,8 +36,8 @@ define(['knockout', 'text!./message-center-page.html', 'tinymce','../data-object
             self.status("Message successfully sent");
             self.step(self.step()+1);
           },
-          function() {
-            self.status("Error sending message");
+          function(err) {
+            self.status("The site is unable to process your message at this time.");
           });
     };
 

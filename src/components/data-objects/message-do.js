@@ -10,7 +10,14 @@ define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) 
         self.to = ko.observable();
         self.subject = ko.observable();
         self.body = ko.observable();
-        self.toList = ko.observableArray(['ALL MEMBERS', 'BOARD MEMBERS', 'OFFICERS', 'RANGE OFFICERS']);
+
+        /* returns true if to, subject and body are not empty */
+        self.isComplete = ko.computed(function() {
+            var subject = (self.subject() || '').trim();
+            var body = ($(self.body()).text() || '').trim();
+
+            return ((subject.length > 0) && (body.length > 0));
+        });
 
     }
     MessageDO.inheritsFrom(DataObject);
