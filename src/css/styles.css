@@ -242,7 +242,9 @@ body {
 	padding-top: 10px;
 	color: #FFB612;
 }
-
+td,th {
+	font-size: 14px !important;
+}
 a.footer-link {
 	color: #ffffff;
 }
