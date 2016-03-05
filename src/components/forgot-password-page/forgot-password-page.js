@@ -13,7 +13,7 @@ define(["knockout", "text!./forgot-password-page.html"], function(ko, template) 
 
     ForgotPassword.prototype.sendRequest = function() {
         var self = this;
-        var data = {username: ko.unwrap(self.emailAddress.toLowerCase()), code: ko.unwrap(self.gateCode)};
+        var data = {username: ko.unwrap(self.emailAddress).toLowerCase(), code: ko.unwrap(self.gateCode)};
 
         if ((! data.username) || (data.username == '')) {
             self.showIncompleteMessage(true);

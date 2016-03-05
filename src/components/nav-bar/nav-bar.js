@@ -55,7 +55,7 @@ define(['knockout', 'text!./nav-bar.html'], function(ko, template) {
 
 
         self.submitLogin = function () {
-            var data = {username: ko.unwrap(self.login.toLowerCase()), password: ko.unwrap(self.password)};
+            var data = {username: ko.unwrap(self.login).toLowerCase(), password: ko.unwrap(self.password)};
 
             $.ajax({
                 url: "/auth/login",
