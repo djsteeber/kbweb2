@@ -17,7 +17,7 @@ define(['knockout', 'moment', '../data-objects/event-do.js'], function(ko, momen
                 return item();
             });
 
-            return rangeList.join(",");
+            return rangeList.join(", ");
         });
 
         self.timeText = ko.computed(function() {

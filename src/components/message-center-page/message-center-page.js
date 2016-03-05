@@ -5,7 +5,8 @@ define(['knockout', 'text!./message-center-page.html', 'tinymce','../data-object
 
     self.message = ko.observable(new MessageDO());
 
-    self.toList = ko.observableArray(['ALL MEMBERS', 'BOARD MEMBERS', 'BOARD OFFICERS', 'RANGE OFFICERS']);
+    /* removed these, because we are not ready to accept them, 'BOARD MEMBERS', 'BOARD OFFICERS', 'RANGE CAPTAINS' */
+    self.toList = ko.observableArray(['ALL MEMBERS']);
     self.status = ko.observable();
     self.step = ko.observable(1);
 
