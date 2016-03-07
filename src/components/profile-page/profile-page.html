@@ -12,14 +12,15 @@
             </div>
             <div class="col-sm-12" data-bind="text: user().phone"></div>
             <div class="col-sm-12" data-bind="text: user().email"></div>
-            <div class="col-sm-12" data-bind="if: user().spouse()">
-                Spouse's Name
-                <span data-bind="text: user().spouse"></span>
+            <div class="col-sm-12" data-bind="if: user().spouse.fullName()">
+                Spouse:
+                <span data-bind="text: user().spouse.fullName"></span>
             </div>
         </div>
         <div class="row spacer-20">
-            <span class="col-sm-6">Work Hours</span>
-            <span class="col-sm-6" data-bind="text: user().workHours"></span>
+            <span class="col-sm-12">Work Hours:
+                <span data-bind="text: user().workHours"></span>
+            </span>
         </div>
     </div>
     <div class="col-sm-6">
