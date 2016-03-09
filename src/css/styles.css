@@ -217,6 +217,10 @@ table.club-event-form td:nth-child(2) {
 	margin-top: 20px;
 }
 
+.spacer-10 {
+	margin-top: 10px;
+}
+
 /* not sure if needed for sticky footer */
 html {
 	position: relative;
@@ -225,6 +229,8 @@ html {
 body {
 	/* Margin bottom by footer height */
 	margin-bottom: 60px !important;
+	font-size: 14px !important;
+
 }
 .footer {
 	position: absolute;
@@ -236,7 +242,9 @@ body {
 	padding-top: 10px;
 	color: #FFB612;
 }
-
+td,th {
+	font-size: 14px !important;
+}
 a.footer-link {
 	color: #ffffff;
 }
@@ -354,6 +362,9 @@ span.fc-time {
 .btn-custom:hover {
 	color: #FFB612;
 }
+.btn-custom:focus {
+	color: #FFB612;
+}
 
 div.calendar-background {
 	background-color: #ffffc4;
@@ -374,4 +385,8 @@ div.full {
 	padding: 36%;
 	box-sizing: border-box;
 	position: relative;
+}
+
+.border {
+	border: solid 1px grey;
 }

@@ -8,7 +8,7 @@ define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) 
         self.name = {firstName: ko.observable(), lastName: ko.observable(), fullName: ko.observable()};
         self.email = ko.observable();
         self.roles = ko.observableArray();
-        self.spouse = ko.observable();
+        self.spouse = {firstName: ko.observable(), lastName: ko.observable(), fullName: ko.observable()};
         self.address = {address: ko.observable(), city:ko.observable(), state: ko.observable(), zip: ko.observable()}
         self.phone = ko.observable();
         self.workHours = ko.observable(); //hours
@@ -28,7 +28,11 @@ define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) 
         }
         self.email(userData.email);
         self.roles(userData.roles);
-        self.spouse(userData.spouse);
+        if (userData.spouse) {
+            self.spouse.firstName(userData.spouse.firstName);
+            self.spouse.lastName(userData.spouse.lastName);
+            self.spouse.fullName(userData.spouse.fullName);
+        }
         if (userData.address) {
             self.address.address(userData.address.address);
             self.address.city(userData.address.city);

@@ -1,4 +1,4 @@
-define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', 'knockout-postbox', 'fullcalendar'], function($, ko, router) {
+define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-projections', 'knockout-postbox', 'fullcalendar'], function($, ko, router, tinymce) {
 
   // Components can be packaged as AMD modules, such as the following:
   ko.components.register('nav-bar', { require: 'components/nav-bar/nav-bar' });
@@ -85,6 +85,58 @@ define(['jquery', 'knockout', './router', 'bootstrap', 'knockout-projections', '
     }
   };
 
+  // tinymce binding, put in a new file
+  ko.bindingHandlers.wysiwyg = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+      var value = valueAccessor();
+      var valueUnwrapped = ko.unwrap(value);
+      var allBindings = allBindingsAccessor();
+      var $element = $(element);
+      $element.attr('id', 'wysiwyg_' + Date.now());
+      if (ko.isObservable(value)) {
+        var isSubscriberChange = false;
+        var isEditorChange = true;
+        $element.html(value());
+        isEditorChange = false;
+
+        //TODO:  Might want to override the plugins / toolbars
+        tinymce.init({
+          selector: '#' + $element.attr('id'),
+          //inline: true, // Is weird as the div control does not auto height expand
+          plugins: [
+            "advlist autolink lists link image charmap preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime table contextmenu paste"
+          ],
+          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+          setup: function (editor) {
+            editor.on('change', function () {
+              if (!isSubscriberChange) {
+                isEditorChange = true;
+                var data = tinymce.get($element.attr('id')).getContent();
+                value(data);
+                isEditorChange = false;
+              }
+            });
+          }
+        });
+        value.subscribe(function (newValue) {
+          if (!isEditorChange) {
+            isSubscriberChange = true;
+            tinymce.get($element.attr('id')).setContent(newValue);
+            //$element.html(newValue);
+            isSubscriberChange = false;
+          }
+        });
+      }
+    }
+  };
+
+
+
   // Start the application
   ko.applyBindings({ route: router.currentRoute });
 });
+
+
+

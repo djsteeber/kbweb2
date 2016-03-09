@@ -15,7 +15,10 @@
     "moment": "~2.11.2",
     "knockout-mapping": "~2.4.1",
     "fullcalendar": "~2.6.0",
-    "fontawesome": "~4.5.0"
+    "fontawesome": "~4.5.0",
+    "summernote": "^0.8.1",
+    "codemirror": "^5.12.0",
+    "knockout-pickadate-tinymce": "knockout-tinymce-binding#^0.1.2"
   },
   "resolutions": {
     "knockout": "~3.3.0-alpha"

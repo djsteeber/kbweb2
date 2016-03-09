@@ -3,6 +3,7 @@ var fs = require('fs'),
     vm = require('vm'),
     merge = require('deeply'),
     chalk = require('chalk'),
+    async = require('async'),
     es = require('event-stream');
 
 // Gulp and plugins
@@ -21,6 +22,8 @@ var SSH_CONFIG = {
     privateKey: fs.readFileSync(process.env["HOME"] + '/.ssh/id_rsa')
 };
 
+//TODO: read the tinymce plugins from a directory scan
+
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require.config.js') + '; require;');
     requireJsOptimizerConfig = merge(requireJsRuntimeConfig, {
@@ -28,10 +31,45 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
         baseUrl: './src',
         name: 'app/startup',
         paths: {
-            requireLib: 'bower_modules/requirejs/require'
+            requireLib: 'bower_modules/requirejs/require',
+            "tinymce-themes":       "bower_modules/tinymce/themes/modern/theme",
+            "tinymce-advlist":      "bower_modules/tinymce/plugins/advlist/plugin",
+            "tinymce-autolink":     "bower_modules/tinymce/plugins/autolink/plugin",
+            "tinymce-lists":        "bower_modules/tinymce/plugins/lists/plugin",
+            "tinymce-link":         "bower_modules/tinymce/plugins/link/plugin",
+            "tinymce-image":        "bower_modules/tinymce/plugins/image/plugin",
+            "tinymce-charmap":      "bower_modules/tinymce/plugins/charmap/plugin",
+            "tinymce-preview":      "bower_modules/tinymce/plugins/preview/plugin",
+            "tinymce-anchor":       "bower_modules/tinymce/plugins/anchor/plugin",
+            "tinymce-sr":           "bower_modules/tinymce/plugins/searchreplace/plugin",
+            "tinymce-vb":           "bower_modules/tinymce/plugins/visualblocks/plugin",
+            "tinymce-code":         "bower_modules/tinymce/plugins/code/plugin",
+            "tinymce-fullscreen":   "bower_modules/tinymce/plugins/fullscreen/plugin",
+            "tinymce-insertdt":     "bower_modules/tinymce/plugins/insertdatetime/plugin",
+            "tinymce-table":        "bower_modules/tinymce/plugins/table/plugin",
+            "tinymce-contextmenu":  "bower_modules/tinymce/plugins/contextmenu/plugin",
+            "tinymce-paste":        "bower_modules/tinymce/plugins/paste/plugin"
+
         },
         include: [
             'requireLib',
+            "tinymce-themes",
+            "tinymce-advlist",
+            "tinymce-autolink",
+            "tinymce-lists",
+            "tinymce-link",
+            "tinymce-image",
+            "tinymce-charmap",
+            "tinymce-preview",
+            "tinymce-anchor",
+            "tinymce-sr",
+            "tinymce-vb",
+            "tinymce-code",
+            "tinymce-fullscreen",
+            "tinymce-insertdt",
+            "tinymce-table",
+            "tinymce-contextmenu",
+            "tinymce-paste",
             'components/nav-bar/nav-bar',
             'components/upcoming-events/upcoming-events',
             'components/announcements/announcements',
@@ -57,13 +95,8 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'members-stuff': ['components/members-page/members-page', 'components/message-center-page/message-center-page',
                 'components/forgot-password-page/forgot-password-page', 'components/profile-page/profile-page',
                 'components/change-password/change-password'],
-            //'club-event-stuff': ['components/club-event/club-event'],
             'shoot-page-stuff': ['components/shoot-page/shoot-page'],
             'viewer-page-stuff': ['components/viewer-page/viewer-page']
-            // If you want parts of the site to load on demand, remove them from the 'include' list
-            // above, and group them into bundles here.
-            // 'bundle-name': [ 'some/module', 'another/module' ],
-            // 'another-bundle-name': [ 'yet-another-module' ]
         }
     });
 
@@ -80,9 +113,12 @@ gulp.task('css', function () {
             .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
         appCss = gulp.src('src/css/*.css'),
         fcCSS = gulp.src('src/bower_modules/fullcalendar/dist/fullcalendar.css'),
-        combinedCss = es.concat(bowerCss, fcCSS, appCss).pipe(concat('css.css')),
+        tmcCSS = gulp.src('src/bower_modules/tinymce/skins/lightgray/*.css')
+            .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
+        combinedCss = es.concat(tmcCSS, bowerCss, fcCSS, appCss).pipe(concat('css.css')),
+        tmFontFiles = gulp.src('./src/bower_modules/tinymce/skins/lightgray/fonts/*', { base: './src/bower_modules/tinymce/skins/lightgray/' }),
         fontFiles = gulp.src('./src/bower_modules/components-bootstrap/fonts/*', { base: './src/bower_modules/components-bootstrap/' });
-    return es.concat(combinedCss, fontFiles)
+    return es.concat(combinedCss, fontFiles, tmFontFiles)
         .pipe(gulp.dest('./dist/'));
 });
 
@@ -96,29 +132,42 @@ gulp.task('html', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('copy-static', function() {
-    gulp.src('./src/img/*.*')
+gulp.task('copy-img', function() {
+    return gulp.src('./src/img/*.*')
         .pipe(gulp.dest('./dist/img/'));
-    gulp.src('./src/misc_docs/*.*')
+});
+
+gulp.task('copy-docs', function() {
+    return gulp.src('./src/misc_docs/*.*')
         .pipe(gulp.dest('./dist/misc_docs/'));
-    gulp.src('./src/misc_docs/shoots/*.png')
-        .pipe(gulp.dest('./dist/misc_docs/shoots/'));
-    gulp.src('./src/misc_docs/shoots/*.jpg')
+});
+
+gulp.task('copy-shoots-png', function() {
+    return gulp.src('./src/misc_docs/shoots/*.png')
         .pipe(gulp.dest('./dist/misc_docs/shoots/'));
 });
 
+gulp.task('copy-shoots-jpg', function() {
+    return gulp.src('./src/misc_docs/shoots/*.jpg')
+        .pipe(gulp.dest('./dist/misc_docs/shoots/'));
+});
+
+gulp.task('copy-static', ['copy-img', 'copy-docs', 'copy-shoots-png', 'copy-shoots-jpg'], function(callback) {
+    return callback();
+});
+
+
+
 // Removes all files from ./dist/
-gulp.task('clean', function() {
-    gulp.src('./dist/**/*', { read: false })
-        .pipe(clean({force: true}));
-    gulp.src('./stage/*', { read: false })
-        .pipe(clean({force: true}));
+gulp.task('clean',  function() {
+    return gulp.src(['./dist/*', './stage/*'], {read: false})
+        .pipe(clean({force:true}));
 });
 
 
 
 gulp.task('default', ['html', 'js', 'css', 'copy-static'], function(callback) {
-    callback();
+    return callback();
     console.log('\nPlaced optimized files in ' + chalk.magenta('dist/\n'));
 });
 
@@ -126,7 +175,7 @@ gulp.task('package', ['html', 'js', 'css', 'copy-static'], function(callback) {
     var tar = require('gulp-tar');
     var gzip = require('gulp-gzip');
 
-  	gulp.src('./dist/**/*')
+  	return gulp.src('./dist/**/*')
         .pipe(tar('kbweb.tar'))
         .pipe(gzip())
         .pipe(gulp.dest('./stage/'));
@@ -151,7 +200,6 @@ gulp.task('ship', function(callback) {
 
 // TODO:  Make a deploy script and ship it up to the server
 // TODO:    can do more granular checking if the file exists, before blowing away kbweb directory
-
 gulp.task('deploy', function(callback) {
     var GulpSSH = require('gulp-ssh');
 

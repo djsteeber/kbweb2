@@ -1,41 +1,58 @@
-define(['knockout','tinyMCE', 'text!./message-center-page.html'], function(ko, tinyMCE, templateMarkup) {
+define(['knockout', 'text!./message-center-page.html', 'tinymce','../data-objects/message-do.js'], function(ko, templateMarkup, tinymce, MessageDO) {
 
   function MessageCenterPage(params) {
     var self = this;
-    self.to = ko.observable();
-    self.subject = ko.observable();
-    self.body = ko.observable('sometext');
-    self.toList = ko.observableArray(['ALL MEMBERS', 'BOARD MEMBERS', 'RANGE OFFICERS']);
-    self.response = ko.observable();
-    self.messageSent = ko.observable(false);
 
+    self.message = ko.observable(new MessageDO());
 
-    this.onSubmit = function() {
-      var data = {to : ko.unwrap(self.to), subject: ko.unwrap(self.subject), body: ko.unwrap(self.body)};
+    /* removed these, because we are not ready to accept them, 'BOARD MEMBERS', 'BOARD OFFICERS', 'RANGE CAPTAINS' */
+    self.toList = ko.observableArray(['ALL MEMBERS']);
+    self.status = ko.observable();
+    self.step = ko.observable(1);
 
-      $.ajax({
-        url : "/rest/messages",
-        type: "POST",
-        data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        //dataType   : "json",
-        processData: false,
-        success    : function(returnData){
-          self.response(JSON.stringify(returnData));
-          self.messageSent(true);
-        },
-        fail: function(jx, returnData) {
-          self.response(JSON.stringify(returnData));
-        }
-      });
-    }
-/*
-    tinyMCE.init({
-      selector: ".editibleArea"
-
+    self.firstStep = ko.computed(function() {
+      return self.step()==1;
     });
-    */
+
+    self.secondStep = ko.computed(function() {
+      return self.step()==2;
+    });
+
+    self.thirdStep = ko.computed(function() {
+      return self.step()==3;
+    });
+
+    self.verifyMessage = function() {
+      if (self.message().isComplete()) {
+        self.status('');
+        self.step(self.step() + 1);
+      } else {
+        self.status("Please fill in the Subject and Message");
+      }
+    };
+
+    self.sendMessage = function() {
+      self.message().save(
+          function() {
+            self.status("Message successfully sent");
+            self.step(self.step()+1);
+          },
+          function(err) {
+            self.status("The site is unable to process your message at this time.");
+          });
+    };
+
+    self.newMessage = function() {
+      self.message().init();
+      self.status('');
+      self.step(1);
+    };
+    self.editMessage = function() {
+      self.status('');
+      self.step(1);
+    };
   }
+
 
   return { viewModel: MessageCenterPage, template: templateMarkup };
 
