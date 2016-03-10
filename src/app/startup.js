@@ -49,6 +49,8 @@ define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-proj
 
   ko.components.register('upcoming-events', { require: 'components/upcoming-events/upcoming-events' });
 
+  ko.components.register('events-list', { require: 'components/events-list/events-list' });
+
   ko.components.register('profile-page', { require: 'components/profile-page/profile-page' });
 
   ko.components.register('forgot-password-page', { require: 'components/forgot-password-page/forgot-password-page' });
