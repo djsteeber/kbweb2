@@ -1,5 +1,6 @@
 define(["knockout", "text!./upcoming-events.html", '../data-objects/shoot-do.js'], function(ko, templateMarkup, ShootDO) {
 
+    /* @deprecated TODO need to replace this with events-list */
     function UpcomingEvents(params) {
         var self = this;
 

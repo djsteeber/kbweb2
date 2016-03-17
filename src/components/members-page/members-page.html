@@ -3,12 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <h3>Work Parties</h3>
-            <p>
-                Here is the remaining work party schedule.  Work starts at 8:00am and goes until approximately 12:00pm,
-                unless otherwise stated.
-            </p>
-
+            <events-list params="title: 'Work Parties', eventType: 'WORKPARTY', current:true, showEmpty:true"></events-list>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
             <document-list params="documentType:'membership', title: 'Membership Documents'"></document-list>
