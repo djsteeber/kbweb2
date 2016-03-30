@@ -81,9 +81,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'components/data-objects/date-time-do.js',
             'components/data-objects/schedule-do.js',
             'components/data-objects/event-do.js',
-            'components/data-objects/shoot-do.js',
-            'components/data-objects/meeting-do.js',
-            'components/data-objects/work-party-do.js'
+            'components/data-objects/shoot-do.js'
         ],
         insertRequire: ['app/startup'],
         bundles: {

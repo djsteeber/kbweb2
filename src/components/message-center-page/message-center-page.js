@@ -1,12 +1,26 @@
 define(['knockout', 'text!./message-center-page.html', 'tinymce','../data-objects/message-do.js'], function(ko, templateMarkup, tinymce, MessageDO) {
 
   function MessageCenterPage(params) {
+
+    var SelectItem = function(label, value) {
+      this.label = label;
+      this.value = value;
+    };
+
     var self = this;
 
     self.message = ko.observable(new MessageDO());
+    self.to = ko.observable();
 
     /* removed these, because we are not ready to accept them, 'BOARD MEMBERS', 'BOARD OFFICERS', 'RANGE CAPTAINS' */
-    self.toList = ko.observableArray(['ALL MEMBERS']);
+
+    /* might want to make this a rest call to get the list */
+    self.toList = ko.observableArray([
+      new SelectItem('All Members', 'MEMBER'),
+      new SelectItem('Board Members', 'BOARD'),
+      new SelectItem('Officers', 'OFFICER'),
+      new SelectItem('Website Administrators', 'ADMIN')
+      ]);
     self.status = ko.observable();
     self.step = ko.observable(1);
 
@@ -32,6 +46,8 @@ define(['knockout', 'text!./message-center-page.html', 'tinymce','../data-object
     };
 
     self.sendMessage = function() {
+      // set the selected item to the message
+      self.message().to(self.to().value);
       self.message().save(
           function() {
             self.status("Message successfully sent");

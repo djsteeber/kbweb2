@@ -17,7 +17,8 @@
             <div class="col-sm-12">
                 <fieldset>
                     <label for="to" class="form-control-label">To:</label>
-                    <select id="to" class="form-control" data-bind="options: toList, value: message().to"></select>
+                    <select id="to" class="form-control"
+                            data-bind="options: toList, optionsText: 'label', value: to"></select>
                 </fieldset>
             </div>
         </div>
@@ -50,7 +51,7 @@
     <h3>Verify the Message</h3>
     <div class="row spacer-10">
         <div class="col-sm-2">TO:</div>
-        <div class="col-sm-10 border" data-bind="text: message().to()"></div>
+        <div class="col-sm-10 border" data-bind="text: to().label"></div>
     </div>
     <div class="row spacer-10">
         <div class="col-sm-2">Subject:</div>
