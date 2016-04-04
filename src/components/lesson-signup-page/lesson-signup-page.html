@@ -1,0 +1,57 @@
+<div data-bind="text: message()"></div>
+
+<div class="container">
+    <!-- Step 1:  Ask for email Address -->
+    <!-- ko if: step() == 1 -->
+    <form data-bind="submit: checkEmail">
+        <div class="form-group">
+            <label for="emailcheck">Email Address</label>
+            <input id="emailcheck" data-bind="value: email"/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-custom">Next</button>
+        </div>
+    </form>
+    <!-- /ko -->
+    <!-- End Step 1 -->
+    <!-- Step 2:  Do something -->
+    <!-- ko if: step() == 2 -->
+    <form data-bind="submit: submitSignup">
+        <div class="form-group">
+            Contact Information
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" placeholder="Full Name"/>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" placeholder="Email Address" data-bind="value: email"/>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone #</label>
+            <input id="phone" placeholder="Phone Number"/>
+        </div>
+        <div class="form-group">
+            Archer
+        </div>
+        <div class="form-group">
+            <label for="archer1.name">Name</label>
+            <input id="archer1.name" placeholder="Archer #1 Name"/>
+            <label for="archer1.age">Age</label>
+            <input id="archer1.age"  placeholder="Archer's Age, or Adult"/>
+        </div>
+
+        // list of archers
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-custom">Next</button>
+        </div>
+    </form>
+    <!-- /ko -->
+    <!-- End Step 2 -->
+
+
+
+</div>

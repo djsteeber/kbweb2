@@ -16,8 +16,7 @@ var require = {
         "moment":               "bower_modules/moment/moment",
         "fullcalendar":         "bower_modules/fullcalendar/dist/fullcalendar"
         
-        //"summernote":           "bower_modules/summernote/dist/summernote",
-        //"codemirror":           "bower_modules/codemirror/lib/codemirror"
+
         //TODO move data object definitions here, maybe?
     },
     deps: ['knockout', 'mapping'],
@@ -35,6 +34,6 @@ var require = {
                 this.tinymce.DOM.events.domLoaded = true;
                 return this.tinymce;
             }
-        },
+        }
     }
 };

@@ -27,6 +27,8 @@ define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-proj
 
   ko.components.register('message-center-page', { require: 'components/message-center-page/message-center-page' });
 
+  ko.components.register('lesson-signup-page', { require: 'components/lesson-signup-page/lesson-signup-page' });
+
   ko.components.register('user-admin-page', { require: 'components/user-admin-page/user-admin-page' });
 
   ko.components.register('club-board', { require: 'components/club-board/club-board' });

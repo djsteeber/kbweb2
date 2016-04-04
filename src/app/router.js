@@ -20,6 +20,7 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
             { url: 'membership',     params: { page: 'membership-page' } },
             { url: 'directions',     params: { page: 'directions-page' } },
             { url: 'members',     params: { page: 'members-page' } },
+            { url: 'lesson-signup',     params: { page: 'lesson-signup-page' } },
             { url: 'message-center',     params: { page: 'message-center-page' } },
             { url: 'shoot/{id}',    params: {page: 'shoot-page'}},
             { url: 'viewer-page/{src*}',    params: {page: 'viewer-page'}},

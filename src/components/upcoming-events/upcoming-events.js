@@ -19,6 +19,8 @@ define(["knockout", "text!./upcoming-events.html", '../data-objects/shoot-do.js'
             //window.location.href = "#shoot-page/" + id;
         };
 
+        self.footerLink = ko.observable(params.footerLink);
+
     }
 
     return { viewModel: UpcomingEvents, template: templateMarkup };

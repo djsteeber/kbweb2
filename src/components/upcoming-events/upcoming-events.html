@@ -37,7 +37,9 @@
             </ul>
         </div>
         <div class="panel-footer">
-            <a href="#events" class="nostyle">More Shoots ...</a>
+            <!-- ko if: footerLink -->
+            <a data-bind="attr: {href: footerLink()}, text: footerLinkLabel()" class="nostyle">More Shoots ...</a>
+            <!-- /ko -->
         </div>
     </div>
 

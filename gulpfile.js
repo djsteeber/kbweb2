@@ -77,6 +77,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             'components/home-page/home-page',
             'components/document-list/document-list',
             'components/data-objects/data-object.js',
+            'components/data-objects/lesson-signup-do.js',
             'components/data-objects/announcement-do.js',
             'components/data-objects/date-time-do.js',
             'components/data-objects/schedule-do.js',

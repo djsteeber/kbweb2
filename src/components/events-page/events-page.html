@@ -1,31 +1,12 @@
 <h2>Shoots</h2>
 
-<div class="btn-group margin-10">
-    <div data-bind="click: function(){ switchView('calendar')}" class="btn btn-custom">Calendar View</div>
-    <div data-bind="click: function(){ switchView('list')}" class="btn btn-custom">List View</div>
-</div>
 
-
-<div class="row" data-bind="if: tabView() == 'calendar'">
-    <div class="col-sm-12 col-md-9 col-lg-8">
+<div class="row">
+    <div class="col-sm-6">
+        <upcoming-events params="sort:'schedule.date'"/>
+    </div>
+    <div class="col-sm-6">
         <div data-bind="fullCalendar: calendarViewModel" class="calendar-background"></div>
     </div>
 </div>
-<div class="no-more-tables col-md-12" data-bind="if: tabView() == 'list'">
-    <table class="table table-bordered table-striped table-condensed table-hover">
-        <thead>
-        <tr>
-            <th class="col-md-3 col-heading">Name</th>
-            <th class="col-md-3 col-heading">Date</th>
-            <th class="col-md-2 col-heading">Type</th>
-        </tr>
-        </thead>
-        <tbody data-bind="foreach:shootsList()">
-        <tr>
-            <td data-title="Name"><a data-bind="attr: {href: '#shoot/' + id()}, text: name"></a></td>
-            <td data-title="Date" data-bind="text: dateText"></td>
-            <td data-title="Type" data-bind="text: shootType"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+
