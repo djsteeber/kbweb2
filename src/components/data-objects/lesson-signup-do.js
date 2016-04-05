@@ -1,4 +1,4 @@
-define(['knockout', '../data-objects/data-object'], function(ko, DataObject) {
+define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) {
 
     // need to move these to a date object
     function LessonSignupDO() {

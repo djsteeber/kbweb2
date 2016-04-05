@@ -103,7 +103,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
 // Discovers all AMD dependencies, concatenates together all required .js files, minifies them
 gulp.task('js', function () {
     return rjs(requireJsOptimizerConfig)
-        .pipe(uglify({ preserveComments: 'some' }))
+        .pipe(uglify({ preserveComments: 'some' }))  // remove this line if needing to debug packages js
         .pipe(gulp.dest('./dist/'));
 });
 
