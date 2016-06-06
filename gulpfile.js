@@ -87,7 +87,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
         ],
         insertRequire: ['app/startup'],
         bundles: {
-            'about-stuff': ['components/about-page/about-page', 'components/club-board/club-board'] //TODO: remove club-board
+            'about-stuff': ['components/about-page/about-page', 'components/club-board/club-board'],
             'benefit-stuff': ['text!components/benefit-page/benefit.html'],
             'lessons-stuff': ['components/lessons-page/lessons-page'],
             'events-stuff': ['components/events-page/events-page'],
@@ -181,7 +181,6 @@ gulp.task('package', ['html', 'js', 'css', 'copy-static'], function(callback) {
         .pipe(gzip())
         .pipe(gulp.dest('./stage/'));
 });
-
 
 
 
