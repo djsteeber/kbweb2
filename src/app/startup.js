@@ -41,6 +41,8 @@ define(['jquery', 'knockout', './router', 'tinymce', 'bootstrap', 'knockout-proj
 
   ko.components.register('club-event', { require: 'components/club-event/club-event' });
 
+  ko.components.register('member-role-list', { require: 'components/member-role-list/member-role-list' });
+
   ko.components.register('shoot-page', { require: 'components/shoot-page/shoot-page' });
 
   ko.components.register('document-list', { require: 'components/document-list/document-list' });

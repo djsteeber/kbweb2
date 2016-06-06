@@ -3,7 +3,7 @@ define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) 
     function UserDO() {
         var self = this;
 
-        self.restEndPoint = '/rest/meetings';
+        self.restEndPoint = '/rest/users';
         self.login = ko.observable();
         self.name = {firstName: ko.observable(), lastName: ko.observable(), fullName: ko.observable()};
         self.email = ko.observable();
@@ -13,6 +13,11 @@ define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) 
         self.phone = ko.observable();
         self.workHours = ko.observable(); //hours
         self.exempt = ko.observable();
+        self.clubPosition = ko.observable();
+        self.board = ko.observable();
+        self.rangeCaptain = ko.observable();
+        self.bartender  = ko.observable();
+        self.officer = ko.observable();
     }
     UserDO.inheritsFrom(DataObject);
 
@@ -42,7 +47,35 @@ define(['knockout', '../data-objects/data-object.js'], function(ko, DataObject) 
         self.phone(userData.phone);
         self.workHours(userData.hours);  // may need to convert to int
         self.exempt(userData.exempt); // may need to convert to boolean
+
+        self.clubPosition = ko.observable(userData.clubPosition || userData.clubPostion);
+        self.board = ko.observable(userData.board);
+        self.rangeCaptain = ko.observable(userData.rangeCaptain);
+        self.bartender  = ko.observable(userData.bartender);
+        self.officer = ko.observable(userData.officer);
+
+
     };
+
+
+
+    UserDO.prototype.createQuery = function(params) {
+        var reqData  ={};
+        if (params) {
+            if (params.limit) {
+                reqData.limit = (typeof params.limit == 'string') ? parseInt(params.limit) : params.limit;
+            }
+            if (params.skip) {
+                reqData.skip = params.skip;
+            }
+            if (params.q) {
+                reqData.q = params.q;
+            }
+        }
+
+        return reqData;
+    };
+
 
     UserDO.prototype.loadSelf = function() {
         var self = this;

@@ -1,0 +1,39 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" data-toggle="collapse" data-target="#upcoming-events-panel-body">
+        <h4 class="panel-title carot">
+            <span data-bind="text: role()"></span>
+        </h4>
+    </div>
+
+    <div id="upcoming-events-panel-body" class=" no-padding panel-collapse collapse in">
+        <div class="panel-body no-margin no-padding">
+
+            <ul class="list-unstyled list-group no-margin" data-bind="foreach: userList">
+                <li class="list-group-item list-highlight">
+                    <div class="list-group-item-text">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-heading event-list-heading">
+                                <span class="pull-left"  data-bind="text: name.fullName"/>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-text">
+                                <span class="pull-right" data-bind="text: clubPosition"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-text">
+                                <span class="pull-left" data-bind="text: email"></span>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 list-group-item-text">
+                                <span class="small pull-right">
+                                    <span data-bind="text: phone"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>

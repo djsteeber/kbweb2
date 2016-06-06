@@ -72,6 +72,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             "tinymce-paste",
             'components/nav-bar/nav-bar',
             'components/upcoming-events/upcoming-events',
+            'components/member-role-list/member-role-list',
             'components/announcements/announcements',
             'components/events-list/events-list',
             'components/home-page/home-page',
@@ -86,7 +87,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
         ],
         insertRequire: ['app/startup'],
         bundles: {
-            'about-stuff': ['components/about-page/about-page', 'components/club-board/club-board'],
+            'about-stuff': ['components/about-page/about-page', 'components/club-board/club-board'] //TODO: remove club-board
             'benefit-stuff': ['text!components/benefit-page/benefit.html'],
             'lessons-stuff': ['components/lessons-page/lessons-page'],
             'events-stuff': ['components/events-page/events-page'],
